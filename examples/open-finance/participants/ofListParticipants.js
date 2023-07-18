@@ -4,7 +4,7 @@ const options = require('../../credentials')
 const efipay = new EfiPay(options)
 
 let params = {
-	nome: 'efipay.',
+	nome: '',
 }
 
 efipay.ofListParticipants(params, [])

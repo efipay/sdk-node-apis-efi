@@ -5,7 +5,7 @@ const efipay = new EfiPay(options)
 
 let params = {
 	inicio: '2022-01-01',
-	fim: '2022-06-30',
+	fim: '2025-06-30',
 }
 
 efipay.ofListPixPayment(params, [])
