@@ -1,7 +1,7 @@
 const Endpoints = require('./lib/endpoints')
 const constants = require('./lib/constants')
 
-class Gerencianet {
+class EfiPay {
 	constructor(options) {
 
 		if (options.pix_cert) {
@@ -15,7 +15,7 @@ class Gerencianet {
 		})
 
 		Object.keys(methods).forEach(function (api) {
-			Gerencianet.prototype[api] = function (params, body) {
+			EfiPay.prototype[api] = function (params, body) {
 				let endpoints = new Endpoints(options, constants)
 				return endpoints.run(api, params, body)
 			}
@@ -23,4 +23,4 @@ class Gerencianet {
 	}
 }
 
-module.exports = Gerencianet
+module.exports = EfiPay

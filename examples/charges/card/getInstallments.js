@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
@@ -6,9 +6,9 @@ let params = {
 	total: 5000,
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.getInstallments(params)
+efipay.getInstallments(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})

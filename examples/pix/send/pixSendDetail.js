@@ -1,13 +1,13 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
 	e2eid: '',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixSendDetail(params, [])
+efipay.pixSendDetail(params, [])
 	.then((resposta) => {
 		console.log(resposta)
 	})

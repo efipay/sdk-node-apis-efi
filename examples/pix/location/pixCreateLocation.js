@@ -1,13 +1,13 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let body = {
 	tipoCob: 'cob',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixCreateLocation([], body)
+efipay.pixCreateLocation([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 //Informe no body somente os dados que deseja atualizar
@@ -24,9 +24,9 @@ let params = {
 	txid: 'dt9BHlyzrb5jrFNAdfEDVpHgiOmDbVqVxd', // Informe o TxId da cobrança
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixUpdateDueCharge(params, body)
+efipay.pixUpdateDueCharge(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

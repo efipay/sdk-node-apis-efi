@@ -1,14 +1,14 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
 let body = {
 	redirectURL: 'https:/suaUrl.com.br/redirect',
 	webhookURL: 'https://suaUrl.com.br/webhook',
 }
 
-gerencianet.ofConfigUpdate([], body)
+efipay.ofConfigUpdate([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

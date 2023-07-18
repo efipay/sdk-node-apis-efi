@@ -1,7 +1,7 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
 let params = {
 	codBarras: '',
@@ -13,7 +13,7 @@ let body = {
 	descricao: 'Pagamento de boleto, teste API Pagamentos',
 }
 
-gerencianet.payRequestBarCode(params, body)
+efipay.payRequestBarCode(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

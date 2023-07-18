@@ -1,7 +1,7 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
 let body = {
 	pagador: {
@@ -23,7 +23,7 @@ let body = {
 	infoPagador: 'Cobrança referente ao pedido X',
 }
 
-gerencianet.ofStartPixPayment([], body)
+efipay.ofStartPixPayment([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

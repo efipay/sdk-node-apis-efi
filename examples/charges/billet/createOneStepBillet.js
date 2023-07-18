@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let body = {
@@ -7,7 +7,7 @@ let body = {
 			expire_at: '2024-09-20',
 			customer: {
 				name: 'Gorbadoc Oldbuck',
-				email: 'oldbuck@gerencianet.com.br',
+				email: 'oldbuck@efipay.com.br',
 				cpf: '94271564656',
 				birth: '1977-01-15',
 				phone_number: '5144916523',
@@ -30,9 +30,9 @@ let body = {
 	],
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.createOneStepCharge([], body)
+efipay.createOneStepCharge([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

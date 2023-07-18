@@ -1,14 +1,14 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
 let params = {
 	dataInicio: '2022-01-01',
-	dataFim: '2022-06-30',
+	dataFim: '2024-06-30',
 }
 
-gerencianet.payListPayments(params, [])
+efipay.payListPayments(params, [])
 	.then((resposta) => {
 		console.log(resposta)
 	})

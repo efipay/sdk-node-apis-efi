@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 //Informe no body somente os dados que deseja atualizar
@@ -13,7 +13,7 @@ let body = {
 	valor: {
 		original: '123.45',
 	},
-	chave: 'SUACHAVEPIX', // Informe sua chave Pix cadastrada na gerencianet	
+	chave: 'SUACHAVEPIX', // Informe sua chave Pix cadastrada na efipay.	
 	infoAdicionais: [
 		{
 			nome: 'Pagamento em',
@@ -30,9 +30,9 @@ let params = {
 	txid: 'dt9BHlyzrb5jrFNAdfEDVpHgiOmDbVqVxd', // Informe o TxId da cobrança
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixUpdateCharge(params, body)
+efipay.pixUpdateCharge(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

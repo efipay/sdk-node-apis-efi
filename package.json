@@ -1,13 +1,15 @@
 {
-	"name": "gn-api-sdk-node",
-	"description": "Module for integration with Gerencianet API",
-	"version": "3.0.4",
-	"author": "Gerencianet - Consultoria Tecnica | Palloma Brito | João Vitor Oliveira",
+	"name": "sdk-node-apis-efi",
+	"description": "Module for integration with Efi Bank API",
+	"version": "1.0.0",
+	"author": "Efi Bank - Consultoria Tecnica | João Vitor Oliveira",
 	"license": "MIT",
-	"repository": "gerencianet/gn-api-sdk-node",
-	"homepage": "https://github.com/gerencianet/gn-api-sdk-node",
+	"repository": "efipay/sdk-node-apis-efi",
+	"homepage": "https://github.com/efipay/sdk-node-apis-efi",
 	"keywords": [
-		"gerencianet",
+		"efi",
+		"efi pay",
+		"efi bank",
 		"pagamentos",
 		"payment",
 		"sdk",
@@ -22,7 +24,7 @@
 		"Open Finance"
 	],
 	"dependencies": {
-		"axios": "^1.2.1",
+		"axios": "^1.2.2",
 		"randomstring": "^1.2.2"
 	},
 	"scripts": {

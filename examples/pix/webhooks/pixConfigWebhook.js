@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 let options = require('../../credentials')
 
 options['validateMtls'] = false
@@ -11,9 +11,9 @@ let params = {
 	chave: 'SUACHAVEPIX',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixConfigWebhook(params, body)
+efipay.pixConfigWebhook(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

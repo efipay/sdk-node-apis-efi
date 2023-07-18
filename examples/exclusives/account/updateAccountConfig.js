@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let body = {
@@ -17,9 +17,9 @@ let body = {
 	},
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.updateAccountConfig([], body)
+efipay.updateAccountConfig([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

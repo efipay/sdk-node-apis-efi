@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let body = {
@@ -12,7 +12,7 @@ let body = {
 	valor: {
 		original: '123.45',
 	},
-	chave: 'SUACHAVEPIX', // Informe sua chave Pix cadastrada na gerencianet	
+	chave: 'SUACHAVEPIX', // Informe sua chave Pix cadastrada na efipay.	
 	infoAdicionais: [
 		{
 			nome: 'Pagamento em',
@@ -25,9 +25,9 @@ let body = {
 	],
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixCreateImmediateCharge([], body)
+efipay.pixCreateImmediateCharge([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

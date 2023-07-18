@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
@@ -9,9 +9,9 @@ let body = {
 	description: 'This carnet is about a service',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.createCarnetHistory(params, body)
+efipay.createCarnetHistory(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

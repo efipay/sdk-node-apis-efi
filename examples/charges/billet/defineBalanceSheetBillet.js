@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
@@ -59,7 +59,7 @@ let body = {
 								align: 'left',
 								color: '#000000',
 								style: 'normal',
-								text: 'Confira na documentação da Gerencianet todas as configurações possíveis de um boleto balancete.',
+								text: 'Confira na documentação da efipay. todas as configurações possíveis de um boleto balancete.',
 								colspan: 4,
 							},
 						],
@@ -70,9 +70,9 @@ let body = {
 	],
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.defineBalanceSheetBillet(params, body)
+efipay.defineBalanceSheetBillet(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

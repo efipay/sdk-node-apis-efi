@@ -1,13 +1,13 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
 	token: '252948279264ee47e117cb099ef81',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.getNotification(params)
+efipay.getNotification(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})

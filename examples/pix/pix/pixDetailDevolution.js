@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
@@ -6,9 +6,9 @@ let params = {
 	id: '607dc88bb83bf',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixDetailDevolution(params)
+efipay.pixDetailDevolution(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})

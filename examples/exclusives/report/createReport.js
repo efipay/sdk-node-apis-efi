@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let body = {
@@ -23,9 +23,9 @@ let body = {
 	},
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.createReport([], body)
+efipay.createReport([], body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

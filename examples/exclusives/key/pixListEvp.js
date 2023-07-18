@@ -1,9 +1,9 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.pixListEvp()
+efipay.pixListEvp()
 	.then((resposta) => {
 		console.log(resposta)
 	})

@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let params = {
@@ -10,9 +10,9 @@ let body = {
 	custom_id: 'my_new_id',
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
-gerencianet.updateCarnetMetadata(params, body)
+efipay.updateCarnetMetadata(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

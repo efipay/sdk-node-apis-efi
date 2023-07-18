@@ -107,18 +107,6 @@ describe('Endpoints Tests', () => {
 				data: expect.anything(),
 				httpsAgent: expect.anything(),
 			}
-		},
-		{
-			description: 'shoud get the request params [listPlans][SUBSCRIPTION]',
-			name: 'listPlans',
-			route: '/plans',
-			params: [],
-			expected: {
-				method: 'get',
-				url: 'https://api.gerencianet.com.br/v1/plans',
-				headers: expect.anything(),
-				data: undefined,
-			}
 		}
 	])('TEST $# : $description', async ({ name, route, params, expected }) => {
 		let endpoints = new Endpoints(options, constants)

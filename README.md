@@ -1,15 +1,14 @@
-# gn-api-sdk-node
+<h1 align="center">SDK Node.js para APIs Efí Pay</h1>
 
-> A nodejs module for integration of your backend with the payment services provided by [Gerencianet](http://gerencianet.com.br).
+![Banner APIs Efí Pay](https://gnetbr.com/BJgSIUhlYs)
 
-> Um módulo nodejs para integrar seu backend com os serviços de pagamento da [Gerencianet](http://gerencianet.com.br).
 
-[![NPM](https://nodei.co/npm/gn-api-sdk-node.png?downloads=true&stars=true)](https://nodei.co/npm/gn-api-sdk-node/)
+> Um módulo nodejs para integrar seu backend com os serviços de pagamento da [Efí](http://sejaefi.com.br).
 
 ## Instalação
 
 ```bash
-$ npm install gn-api-sdk-node
+$ npm install sdk-node-apis-efi
 ```
 
 ## Uso Básico
@@ -17,7 +16,7 @@ $ npm install gn-api-sdk-node
 Importe o módulo:
 
 ```js
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 ```
 
 Insira suas credenciais e defina se deseja usar o sandbox ou não.
@@ -37,7 +36,7 @@ module.exports = {
 Instancie o módulo passando as options:
 
 ```js
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 ```
 
 Crie uma cobrança:
@@ -53,8 +52,7 @@ let chargeInput = {
 	],
 }
 
-gerencianet
-	.createCharge({}, chargeInput)
+efipay.createCharge({}, chargeInput)
 	.then((resposta) => {
 		console.log(resposta)
 	})
@@ -68,8 +66,8 @@ gerencianet
 Para executar os exemplos, clone este repo e instale as dependências:
 
 ```bash
-$ git clone git@github.com:gerencianet/gn-api-sdk-node.git
-$ cd gn-api-sdk-node/examples
+$ git clone git@github.com:efipay/sdk-node-apis-efi.git
+$ cd sdk-node-apis-efi/examples
 $ npm install
 ```
 
@@ -94,11 +92,7 @@ $ node createCharge.js
 
 ## Documentação
 
-A documentação completa com todos os endpoints disponíveis você encontra em: https://dev.gerencianet.com.br/.
-
-## Changelog
-
-[CHANGELOG](https://github.com/gerencianet/gn-api-sdk-node/tree/master/CHANGELOG.md)
+A documentação completa com todos os endpoints disponíveis você encontra em: https://dev.sejaefi.com.br/.
 
 ## License
 

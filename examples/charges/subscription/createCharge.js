@@ -1,4 +1,4 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
 let planBody = {
@@ -17,17 +17,17 @@ let subscriptionBody = {
 	],
 }
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
 function createSubscription(response) {
 	let params = {
 		id: response.data.plan_id,
 	}
 
-	return gerencianet.createSubscription(params, subscriptionBody)
+	return efipay.createSubscription(params, subscriptionBody)
 }
 
-gerencianet.createPlan({}, planBody)
+efipay.createPlan({}, planBody)
 	.then(createSubscription)
 	.then((resposta) => {
 		console.log(resposta)

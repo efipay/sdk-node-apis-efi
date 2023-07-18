@@ -1,13 +1,13 @@
-const Gerencianet = require('gn-api-sdk-node')
+const EfiPay = require('sdk-node-apis-efi')
 const options = require('../../credentials')
 
-const gerencianet = new Gerencianet(options)
+const efipay = new EfiPay(options)
 
 let params = {
-	nome: 'Gerencianet',
+	nome: 'efipay.',
 }
 
-gerencianet.ofListParticipants(params, [])
+efipay.ofListParticipants(params, [])
 	.then((resposta) => {
 		console.log(resposta)
 	})

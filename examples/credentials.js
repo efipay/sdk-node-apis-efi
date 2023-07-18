@@ -2,7 +2,7 @@ module.exports = {
 	// PRODUÇÃO = false
 	// HOMOLOGAÇÃO = true
 	sandbox: false,
-	client_id: 'seuClientId',
-	client_secret: 'seuClientSecret',
-	certificate: 'caminhoAteOCertificadoPix',
+	client_id: 'seu_client_id',
+	client_secret: 'seu_client_secret',
+	certificate: 'caminho/ate/seu/certificado.p12',
 }
