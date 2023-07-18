@@ -9,7 +9,7 @@ let options = {
 	client_secret: 'Client_Secret',
 	certificate: 'Certificado_Pix',
 	authRoute: { route: '/oauth/token', method: 'post' },
-	baseUrl: 'https://api-pix.gerencianet.com.br',
+	baseUrl: 'https://pix.api.efipay.com.br',
 }
 
 jest.spyOn(Endpoints.prototype, 'req').mockImplementationOnce(() => {
@@ -102,7 +102,7 @@ describe('Endpoints Tests', () => {
 			params: [],
 			expected: {
 				method: 'get',
-				url: 'https://api-pix.gerencianet.com.br/v2/gn/config',
+				url: 'https://pix.api.efipay.com.br/v2/gn/config',
 				headers: expect.anything(),
 				data: expect.anything(),
 				httpsAgent: expect.anything(),
