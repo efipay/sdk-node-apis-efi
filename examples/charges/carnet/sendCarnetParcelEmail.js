@@ -12,7 +12,7 @@ let body = {
 
 const efipay = new EfiPay(options)
 
-efipay.resendParcel(params, body)
+efipay.sendCarnetParcelEmail(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})
