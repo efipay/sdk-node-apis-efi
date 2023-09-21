@@ -1,7 +1,7 @@
 {
 	"name": "sdk-node-apis-efi",
 	"description": "Module for integration with Efi Bank API",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": "Efi Bank - Consultoria Tecnica | João Vitor Oliveira",
 	"license": "MIT",
 	"repository": "efipay/sdk-node-apis-efi",
