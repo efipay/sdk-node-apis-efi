@@ -1,10 +1,9 @@
 ---
 name: Solicitar Funcionalidade
 about: Sugira uma ideia para este projeto
-title: "[NEW FEATURE]"
+title: '[NEW FEATURE]'
 labels: enhancement
 assignees: joao-oliveira-efi
-
 ---
 
 **Sua solicitação de recurso está relacionada a um problema? Por favor descreva.**
