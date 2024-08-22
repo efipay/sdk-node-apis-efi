@@ -7,9 +7,10 @@ let params = {
 
 const efipay = new EfiPay(options)
 
-efipay.pixSendDetailId(params, [])
+// O método pixSendDetailId indica os campos que devem ser enviados e que serão retornados
+efipay.pixSendDetailId(params, {})
     .then((resposta) => {
-        console.log(resposta)
+        console.log(resposta) // Aqui você tera acesso a resposta da API e os campos retornados de forma intuitiva
     })
     .catch((error) => {
         console.log(error)

@@ -22,8 +22,10 @@ let body = {
 
 const efipay = new EfiPay(options)
 
-efipay.oneStepSubscriptionLink(params, body).then((resposta) => {
-	console.log(resposta)
-}).catch((error) => {
-	console.log(error)
-})
+// O método oneStepSubscriptionLink indica os campos que devem ser enviados e que serão retornados
+efipay.oneStepSubscriptionLink(params, body)
+	.then((resposta) => {
+		console.log(resposta) // Aqui você tera acesso a resposta da API e os campos retornados de forma intuitiva
+	}).catch((error) => {
+		console.log(error)
+	})

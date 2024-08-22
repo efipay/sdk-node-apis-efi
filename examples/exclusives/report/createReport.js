@@ -25,7 +25,7 @@ let body = {
 
 const efipay = new EfiPay(options)
 
-efipay.createReport([], body)
+efipay.createReport({}, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

@@ -19,6 +19,7 @@ let subscriptionBody = {
 
 const efipay = new EfiPay(options)
 
+
 function createSubscription(response) {
 	let params = {
 		id: response.data.plan_id,
@@ -27,10 +28,11 @@ function createSubscription(response) {
 	return efipay.createSubscription(params, subscriptionBody)
 }
 
+// O método createPlan indica os campos que devem ser enviados e que serão retornados
 efipay.createPlan({}, planBody)
 	.then(createSubscription)
 	.then((resposta) => {
-		console.log(resposta)
+		console.log(resposta) // Aqui você tera acesso a resposta da API e os campos retornados de forma intuitiva
 	})
 	.catch((error) => {
 		console.log(error)

@@ -17,6 +17,8 @@ Importe o módulo:
 
 ```js
 const EfiPay = require('sdk-node-apis-efi')
+// ou
+import EfiPay from 'sdk-node-apis-efi'
 ```
 
 Insira suas credenciais e defina se deseja usar o sandbox ou não.
@@ -30,6 +32,7 @@ module.exports = {
 	client_id: 'seuClientId',
 	client_secret: 'seuClientSecret',
 	certificate: 'caminho/Ate/O/Certificado/Pix',
+	cert_base64: false, // Indica se o certificado está em base64 ou não
 }
 ```
 
@@ -81,6 +84,7 @@ module.exports = {
 	client_id: 'seuClientId',
 	client_secret: 'seuClientSecret',
 	certificate: 'caminhoAteOCertificadoPix',
+	cert_base64: false, // Indica se o certificado está em base64 ou não
 }
 ```
 

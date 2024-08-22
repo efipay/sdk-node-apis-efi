@@ -8,7 +8,7 @@ let body = {
 	webhookURL: 'https://suaUrl.com.br/webhook',
 }
 
-efipay.ofConfigUpdate([], body)
+efipay.ofConfigUpdate({}, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

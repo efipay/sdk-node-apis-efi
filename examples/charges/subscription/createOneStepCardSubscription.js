@@ -38,8 +38,10 @@ let body = {
 
 const efipay = new EfiPay(options)
 
-efipay.oneStepSubscription(params, body).then((resposta) => {
-	console.log(resposta)
-}).catch((error) => {
-	console.log(error)
-})
+// O método oneStepSubscription indica os campos que devem ser enviados e que serão retornados
+efipay.oneStepSubscription(params, body)
+	.then((resposta) => {
+		console.log(resposta) // Aqui você tera acesso a resposta da API e os campos retornados de forma intuitiva
+	}).catch((error) => {
+		console.log(error)
+	})

@@ -1,19 +1,22 @@
-const fs = require('fs')
-const https = require('https')
-const sdkPackage = require('../package.json')
-const axios = require('axios')
-const randomstring = require('randomstring')
+// @ts-nocheck
+import fs from 'fs'
+import https from 'https'
+import sdkPackage from '../../package.json'
+import axios from 'axios'
+import randomstring from 'randomstring'
 
 class Endpoints {
 	constructor(options, constants) {
 		this.options = options
 		this.auth = null
 		this.constants = constants
+		this.authError = null
 		this.axiosInstance = axios.create()
 	}
 
 	run(name, params, body) {
 		let endpoint
+
 		if (this.constants.APIS.DEFAULT.ENDPOINTS.hasOwnProperty(name)) {
 			endpoint = this.constants.APIS.DEFAULT.ENDPOINTS[name]
 			this.baseUrl = this.options.sandbox ? this.constants.APIS.DEFAULT.URL.SANDBOX : this.constants.APIS.DEFAULT.URL.PRODUCTION
@@ -29,23 +32,48 @@ class Endpoints {
 			})
 
 			try {
-				if (this.options.pemKey) {
-					this.agent = new https.Agent({
-						cert: fs.readFileSync(this.options.certificate),
-						key: fs.readFileSync(this.options.pemKey),
-						passphrase: '',
-					})
-				} else {
-					this.agent = new https.Agent({
-						pfx: fs.readFileSync(this.options.certificate),
-						passphrase: '',
-					})
+				if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
+					if (this.options.pemKey) {
+						this.agent = new https.Agent({
+							cert: fs.readFileSync(this.options.certificate),
+							key: fs.readFileSync(this.options.pemKey),
+							passphrase: '',
+						})
+					} else {
+						this.agent = new https.Agent({
+							pfx: fs.readFileSync(this.options.certificate),
+							passphrase: '',
+						})
+					}
+				} else if (this.options.cert_base64 === true) {
+
+					if (this.options.pemKey) {
+						this.agent = new https.Agent({
+							cert: Buffer.from(this.options.certificate, 'base64'),
+							key: Buffer.from(this.options.pemKey, 'base64'),
+							passphrase: '',
+						})
+					} else {
+						this.agent = new https.Agent({
+							pfx: Buffer.from(this.options.certificate, 'base64'),
+							passphrase: '',
+						})
+					}
 				}
 			} catch (error) {
-				if (this.options.pemKey)
+
+				if (this.options.pemKey && (this.options.cert_base64 === undefined || this.options.cert_base64 === false)) {
 					throw `FALHA AO LER O CERTIFICADO OU A CHAVE, VERIFIQUE O CAMINHO INFORMADO:\n CAMINHO DO CERTIFICADO: ${this.options.certificate} \n CAMINHO DA CHAVE: ${this.options.pemKey}`
-				else
+				} else if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
 					throw `FALHA AO LER O CERTIFICADO, VERIFIQUE O CAMINHO INFORMADO: ${this.options.certificate}`
+				}
+
+				if (this.options.pemKey && this.options.cert_base64 === true) {
+					throw `FALHA AO LER O CERTIFICADO OU A CHAVE, VERIFIQUE O CONTEÚDO INFORMADO DO CERTIFICADO E DA CHAVE`
+				} else if (this.options.cert_base64 === true) {
+					throw `FALHA AO LER O CERTIFICADO, VERIFIQUE O CONTEÚDO INFORMADO`
+				}
+
 			}
 		}
 		this.params = params
@@ -60,7 +88,7 @@ class Endpoints {
 		this.axiosInstance.interceptors.request.use(
 			async (config) => {
 				if (!this.auth || this.isExpired()) {
-					await this.authenticate()
+					this.authError = await this.authenticate()
 				}
 
 				config.headers = {
@@ -86,7 +114,29 @@ class Endpoints {
 				return res.data
 			})
 			.catch((error) => {
-				throw error.response.data
+				if (this.authError) {
+					throw this.authError.response.data
+				} else {
+					switch (this.baseUrl) {
+						case this.constants.APIS.DEFAULT.URL.PRODUCTION:
+						case this.constants.APIS.DEFAULT.URL.SANDBOX:
+							throw error.response.data
+						case this.constants.APIS.PIX.URL.PRODUCTION:
+						case this.constants.APIS.PIX.URL.SANDBOX:
+							throw error.response.data
+						case this.constants.APIS.OPENFINANCE.URL.PRODUCTION:
+						case this.constants.APIS.OPENFINANCE.URL.SANDBOX:
+							throw error.response.data
+						case this.constants.APIS.PAGAMENTOS.URL.PRODUCTION:
+						case this.constants.APIS.PAGAMENTOS.URL.SANDBOX:
+							throw error.response.data
+						case this.constants.APIS.CONTAS.URL.PRODUCTION:
+						case this.constants.APIS.CONTAS.URL.SANDBOX:
+							throw error.response.data
+						default:
+							throw error.response.data
+					}
+				}
 			})
 	}
 
@@ -126,7 +176,7 @@ class Endpoints {
 				this.auth.authDate = new Date().getTime() / 1000
 			})
 			.catch((error) => {
-				throw error.data
+				return error
 			})
 	}
 
@@ -195,4 +245,4 @@ class Endpoints {
 	}
 }
 
-module.exports = Endpoints
+export default Endpoints

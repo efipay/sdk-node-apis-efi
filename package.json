@@ -1,8 +1,16 @@
 {
 	"name": "sdk-node-apis-efi",
+	"main": "dist/cjs/index.cjs",
+	"types": "dist/types/index.d.ts",
+	"exports": {
+		".": {
+			"require": "./dist/cjs/index.cjs",
+			"import": "./dist/cjs/index.cjs"
+		}
+	},
 	"description": "Module for integration with Efi Bank API",
-	"version": "1.1.2",
-	"author": "Efi Bank - Consultoria Tecnica | João Vitor Oliveira",
+	"version": "1.2.3",
+	"author": "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas",
 	"license": "MIT",
 	"repository": "efipay/sdk-node-apis-efi",
 	"homepage": "https://github.com/efipay/sdk-node-apis-efi",
@@ -29,10 +37,18 @@
 	},
 	"scripts": {
 		"start": "node app.js",
+		"build": "rollup -c && tsc --project tsconfig.json",
 		"test": "./node_modules/.bin/jest",
 		"test-cov": "./node_modules/.bin/jest --coverage"
 	},
 	"devDependencies": {
-		"prettier": "^3.0.3"
+		"@babel/core": "^7.14.6",
+		"@babel/preset-env": "^7.14.5",
+		"@rollup/plugin-babel": "^5.3.0",
+		"@rollup/plugin-json": "^6.1.0",
+		"prettier": "^3.0.3",
+		"rollup": "^2.52.3",
+		"typescript": "^4.3.5",
+		"undici": "^6.19.2"
 	}
 }

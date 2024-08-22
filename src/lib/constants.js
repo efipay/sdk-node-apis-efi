@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	APIS: {
 		DEFAULT: {
 			URL: {
@@ -70,6 +70,10 @@ module.exports = {
 					route: '/carnet/:id/parcel/:parcel',
 					method: 'put',
 				},
+				updateCarnetParcels: {
+					route: '/carnet/:id/parcels',
+					method: 'put',
+				},
 				updateCarnetMetadata: {
 					route: '/carnet/:id/metadata',
 					method: 'put',
@@ -93,6 +97,14 @@ module.exports = {
 				createSubscription: {
 					route: '/plan/:id/subscription',
 					method: 'post',
+				},
+				createOneStepSubscription: {
+					route: '/plan/:id/subscription/one-step',
+					method: 'post',
+				},
+				createOneStepSubscriptionLink: {
+					route: '/plan/:id/subscription/one-step/link',
+					method: 'post'
 				},
 				detailSubscription: {
 					route: '/subscription/:id',
@@ -158,6 +170,10 @@ module.exports = {
 					route: '/plan/:id',
 					method: 'put',
 				},
+				updateSubscription: {
+					route: '/subscription/:id',
+					method: 'put'
+				},
 				createSubscriptionHistory: {
 					route: '/subscription/:id/history',
 					method: 'post',
@@ -177,6 +193,18 @@ module.exports = {
 				createOneStepCharge: {
 					route: '/charge/one-step',
 					method: 'post',
+				},
+				cardPaymentRetry: {
+					route: '/charge/:id/retry',
+					method: 'post'
+				},
+				refundCard: {
+					route: '/charge/card/:id/refund',
+					method: 'post'
+				},
+				listCharges: {
+					route: '/charges',
+					method: 'get'
 				},
 			},
 		},
@@ -362,6 +390,30 @@ module.exports = {
 					route: '/v2/gn/pix/enviados/id-envio/:idEnvio',
 					method: 'get',
 				},
+				pixCreateDueChargeBatch: {
+					route: '/v2/lotecobv/:id',
+					method: 'put',
+				},
+				pixUpdateDueChargeBatch: {
+					route: '/v2/lotecobv/:id',
+					method: 'patch',
+				},
+				pixDetailDueChargeBatch: {
+					route: '/v2/lotecobv/:id',
+					method: 'get',
+				},
+				pixListDueChargeBatch: {
+					route: '/v2/lotecobv',
+					method: 'get',
+				},
+				medDefense: {
+					route: '/v2/gn/infracoes/:idInfracao/defesa',
+					method: 'post',
+				},
+				medList: {
+					route: '/v2/gn/infracoes',
+					method: 'get',
+				}
 			},
 		},
 		OPENFINANCE: {
@@ -398,6 +450,38 @@ module.exports = {
 					route: '/pagamentos/pix/:identificadorPagamento/devolver',
 					method: 'post',
 				},
+				ofCancelSchedulePix: {
+					route: '/pagamentos-agendados/pix/:identificadorPagamento/cancelar',
+					method: 'patch',
+				},
+				ofListSchedulePixPayment: {
+					route: '/pagamentos-agendados/pix',
+					method: 'get',
+				},
+				ofStartSchedulePixPayment: {
+					route: '/pagamentos-agendados/pix',
+					method: 'post'
+				},
+				ofDevolutionSchedulePix: {
+					route: '/pagamentos-agendados/pix/:identificadorPagamento/devolver',
+					method: 'post',
+				},
+				ofStartRecurrencyPixPayment: {
+					route: '/pagamentos-recorrentes/pix',
+					method: 'post',
+				},
+				ofListRecurrencyPixPayment: {
+					route: '/pagamentos-recorrentes/pix',
+					method: 'get',
+				},
+				ofCancelRecurrencyPix: {
+					route: '/pagamentos-recorrentes/pix/:identificadorPagamento/cancelar',
+					method: 'patch',
+				},
+				ofDevolutionRecurrencyPix: {
+					route: '/pagamentos-recorrentes/pix/:identificadorPagamento/devolver',
+					method: 'post',
+				}
 			},
 		},
 		PAGAMENTOS: {

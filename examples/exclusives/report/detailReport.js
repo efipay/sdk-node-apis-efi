@@ -7,7 +7,7 @@ let params = {
 
 const efipay = new EfiPay(options)
 
-efipay.detailReport(params, [])
+efipay.detailReport(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})

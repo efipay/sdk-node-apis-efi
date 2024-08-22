@@ -7,7 +7,7 @@ let params = {
 	nome: '',
 }
 
-efipay.ofListParticipants(params, [])
+efipay.ofListParticipants(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})
