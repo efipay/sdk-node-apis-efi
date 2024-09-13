@@ -28,7 +28,7 @@ export class CobrancasMethods {
      *   shippings?: Array<{
      *     name: string,
      *     value: number,
-     *     payee_code: string
+     *     payee_code?: string
      *   }>,
      *   metadata?: {
      *     custom_id?: string,
@@ -161,7 +161,7 @@ export class CobrancasMethods {
         shippings?: Array<{
             name: string;
             value: number;
-            payee_code: string;
+            payee_code?: string;
         }>;
         metadata?: {
             custom_id?: string;
@@ -295,7 +295,7 @@ export class CobrancasMethods {
      *   shippings?: Array<{
      *     name: string,
      *     value: number,
-     *     payee_code: string
+     *     payee_code?: string
      *   }>,
      *   metadata?: {
      *     custom_id?: string,
@@ -327,7 +327,7 @@ export class CobrancasMethods {
         shippings?: Array<{
             name: string;
             value: number;
-            payee_code: string;
+            payee_code?: string;
         }>;
         metadata?: {
             custom_id?: string;
@@ -814,8 +814,8 @@ export class CobrancasMethods {
      *  begin_date: string,
      *  end_date: string,
      *  charge_type: 'billet' | 'card' | 'carnet' | 'subscription',
-     *  status?: 'new' | 'waiting' | 'link' | 'paid' | 'unpaid' | 'canceled' | 'identified',
-     *  date_of?: 'creation' | 'payment' | 'due',
+     *  status?: 'new' | 'waiting' | 'link' | 'paid' | 'unpaid' | 'canceled' | 'identified' | 'settled'
+     *  date_of?: 'creation' | 'payment' | 'expired',
      *  customer_document?: string,
      *  custom_id?: string,
      *  value?: number,
@@ -827,104 +827,59 @@ export class CobrancasMethods {
      * @returns {Promise<{
      *  code: number,
      *  data: Arrat<{
-     *     charge_id: number,
+     *     id: number,
      *     total: number,
      *     status: string,
-     *     reason?: string,
      *     custom_id: string | null,
      *     created_at: string,
-     *     notification_url: string | null,
-     *     items: Array<{
-     *       name: string,
-     *       value: number,
-     *       amount: number
-     *     }>,
-     *     shippings?: Array<{
-     *       name: string,
-     *       value: number,
-     *       payee_code: string
-     *     }>,
-     *     history: Array<{
-     *       message: string,
-     *       created_at: string
-     *     }>,
-     *     customer?: {
-     *       name: string | null,
-     *       cpf: string | null,
-     *       birth?: string,
-     *       email?: string,
-     *       phone_number?: string,
-     *       address?: {
-     *         street: string,
-     *         number: string,
-     *         complement: string | null,
-     *         neighborhood: string,
-     *         city: string,
-     *         state: string,
-     *         zipcode: string
-     *       }
+     *     customer: {
+     *       phone_number: string | null,
+     *       cnpj?: string,
+     *       cpf?: string
+     *       name?: string
+     *       corporate_name?: string
      *     },
      *     payment?: {
-     *       method: string,
-     *       created_at: string,
-     *       message: string | null,
-     *       banking_billet?: {
+     *       payment_method: string,
+     *       paid_at: string | null,
+     *       pix?: {
+     *         qrcode: string,
+     *         qrcode_image: string
+     *      }
+     *      banking_billet?: {
      *         barcode: string,
-     *         pix?: {
-     *           qrcode: string,
-     *           qrcode_image: string
-     *         },
      *         link: string,
+     *         expire_at: string
      *         pdf: {
      *           charge: string
-     *         },
-     *         expire_at: string
-     *       },
-     *       credit_card?: {
-     *         mask: string,
-     *         installments: number,
-     *         installment_value: number,
-     *         address: {
-     *           street: string,
-     *           number: string,
-     *           complement: string | null,
-     *           neighborhood: string,
-     *           city: string,
-     *           state: string,
-     *           zipcode: string
      *         }
      *       },
      *       carnet?: {
      *         parcel: number,
      *         barcode: string,
-     *         pix?: {
-     *           qrcode: string,
-     *           qrcode_image: string
-     *         },
-     *         url: string,
-     *         parcel_link: string,
+     *         expire_at: string,
+     *         link: string,
+     *         configurations: {
+     *           days_to_write_off: number,
+     *           interest_type?: 'monthly' | 'daily',
+     *           interest: number,
+     *           fine: number
+     *         }
      *         pdf: {
      *           charge: string
      *         },
-     *         expire_at: string,
-     *         configurations?: {
-     *           days_to_write_off?: number,
-     *           interest_type?: 'monthly' | 'daily',
-     *           interest?: number,
-     *           fine?: number
-     *         }
      *       }
      *     },
      *     link?: {
      *       billet_discount: number | null,
      *       card_discount: number | null,
      *       conditional_discount_value: number | null,
-     *       conditional_discount_type: string | null,
+     *       conditional_discount_type: 'percentage' | 'currency' | null,
      *       conditional_discount_date: string | null,
      *       message: string | null,
      *       expire_at: string,
      *       request_delivery_address: boolean,
-     *       payment_method: string,
+     *       payment_method: 'banking_billet' | 'credit_card' | 'all',
      *       payment_url: string
      *     }
      *   }>
@@ -934,8 +889,8 @@ export class CobrancasMethods {
         begin_date: string;
         end_date: string;
         charge_type: 'billet' | 'card' | 'carnet' | 'subscription';
-        status?: 'new' | 'waiting' | 'link' | 'paid' | 'unpaid' | 'canceled' | 'identified';
-        date_of?: 'creation' | 'payment' | 'due';
+        status?: 'new' | 'waiting' | 'link' | 'paid' | 'unpaid' | 'canceled' | 'identified' | 'settled';
+        date_of?: 'creation' | 'payment' | 'expired';
         customer_document?: string;
         custom_id?: string;
         value?: number;
@@ -945,104 +900,59 @@ export class CobrancasMethods {
     }): Promise<{
         code: number;
         data: Arrat<{
-            charge_id: number;
+            id: number;
             total: number;
             status: string;
-            reason?: string | undefined;
             custom_id: string | null;
             created_at: string;
-            notification_url: string | null;
-            items: Array<{
-                name: string;
-                value: number;
-                amount: number;
-            }>;
-            shippings?: {
-                name: string;
-                value: number;
-                payee_code: string;
-            }[] | undefined;
-            history: Array<{
-                message: string;
-                created_at: string;
-            }>;
-            customer?: {
-                name: string | null;
-                cpf: string | null;
-                birth?: string | undefined;
-                email?: string | undefined;
-                phone_number?: string | undefined;
-                address?: {
-                    street: string;
-                    number: string;
-                    complement: string | null;
-                    neighborhood: string;
-                    city: string;
-                    state: string;
-                    zipcode: string;
-                } | undefined;
-            } | undefined;
+            customer: {
+                phone_number: string | null;
+                cnpj?: string;
+                cpf?: string;
+                name?: string;
+                corporate_name?: string;
+            };
             payment?: {
-                method: string;
-                created_at: string;
-                message: string | null;
+                payment_method: string;
+                paid_at: string | null;
+                pix?: {
+                    qrcode: string;
+                    qrcode_image: string;
+                } | undefined;
                 banking_billet?: {
                     barcode: string;
-                    pix?: {
-                        qrcode: string;
-                        qrcode_image: string;
-                    } | undefined;
                     link: string;
+                    expire_at: string;
                     pdf: {
                         charge: string;
-                    };
-                    expire_at: string;
-                } | undefined;
-                credit_card?: {
-                    mask: string;
-                    installments: number;
-                    installment_value: number;
-                    address: {
-                        street: string;
-                        number: string;
-                        complement: string | null;
-                        neighborhood: string;
-                        city: string;
-                        state: string;
-                        zipcode: string;
                     };
                 } | undefined;
                 carnet?: {
                     parcel: number;
                     barcode: string;
-                    pix?: {
-                        qrcode: string;
-                        qrcode_image: string;
-                    } | undefined;
-                    url: string;
-                    parcel_link: string;
+                    expire_at: string;
+                    link: string;
+                    configurations: {
+                        days_to_write_off: number;
+                        interest_type?: 'monthly' | 'daily';
+                        interest: number;
+                        fine: number;
+                    };
                     pdf: {
                         charge: string;
                     };
-                    expire_at: string;
-                    configurations?: {
-                        days_to_write_off?: number | undefined;
-                        interest_type?: "monthly" | "daily" | undefined;
-                        interest?: number | undefined;
-                        fine?: number | undefined;
-                    } | undefined;
                 } | undefined;
             } | undefined;
             link?: {
                 billet_discount: number | null;
                 card_discount: number | null;
                 conditional_discount_value: number | null;
-                conditional_discount_type: string | null;
+                conditional_discount_type: 'percentage' | 'currency' | null;
                 conditional_discount_date: string | null;
                 message: string | null;
                 expire_at: string;
                 request_delivery_address: boolean;
-                payment_method: string;
+                payment_method: 'banking_billet' | 'credit_card' | 'all';
                 payment_url: string;
             } | undefined;
         }>;
@@ -2024,7 +1934,7 @@ export class CobrancasMethods {
      *   shippings?: Array<{
      *     name: string,
      *     value: number,
-     *     payee_code: string
+     *     payee_code?: string
      *   }>,
      *   metadata?: {
      *     custom_id?: string,
@@ -2152,7 +2062,7 @@ export class CobrancasMethods {
         shippings?: Array<{
             name: string;
             value: number;
-            payee_code: string;
+            payee_code?: string;
         }>;
         metadata?: {
             custom_id?: string;
@@ -2283,7 +2193,7 @@ export class CobrancasMethods {
      *   shippings?: Array<{
      *     name: string,
      *     value: number,
-     *     payee_code: string
+     *     payee_code?: string
      *   }>,
      *   metadata?: {
      *     custom_id?: string,
@@ -2318,7 +2228,7 @@ export class CobrancasMethods {
         shippings?: Array<{
             name: string;
             value: number;
-            payee_code: string;
+            payee_code?: string;
         }>;
         metadata?: {
             custom_id?: string;
@@ -2657,7 +2567,7 @@ export class CobrancasMethods {
      *   shippings?: Array<{
      *     name: string,
      *     value: number,
-     *     payee_code: string
+     *     payee_code?: string
      *   }>,
      *   metadata?: {
      *     custom_id?: string,
@@ -2714,7 +2624,7 @@ export class CobrancasMethods {
         shippings?: Array<{
             name: string;
             value: number;
-            payee_code: string;
+            payee_code?: string;
         }>;
         metadata?: {
             custom_id?: string;

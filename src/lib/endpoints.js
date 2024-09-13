@@ -63,15 +63,14 @@ class Endpoints {
 			} catch (error) {
 
 				if (this.options.pemKey && (this.options.cert_base64 === undefined || this.options.cert_base64 === false)) {
-					throw `FALHA AO LER O CERTIFICADO OU A CHAVE, VERIFIQUE O CAMINHO INFORMADO:\n CAMINHO DO CERTIFICADO: ${this.options.certificate} \n CAMINHO DA CHAVE: ${this.options.pemKey}`
+					console.error(`Falha ao ler o certificado ou a chave, verifique o caminho informado:\nCaminho do certificado: ${this.options.certificate}\nCaminho da chave: ${this.options.pemKey}`);
 				} else if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
-					throw `FALHA AO LER O CERTIFICADO, VERIFIQUE O CAMINHO INFORMADO: ${this.options.certificate}`
+					console.error(`Falha ao ler o certificado, verifique o caminho informado: ${this.options.certificate}`);
 				}
-
 				if (this.options.pemKey && this.options.cert_base64 === true) {
-					throw `FALHA AO LER O CERTIFICADO OU A CHAVE, VERIFIQUE O CONTEÚDO INFORMADO DO CERTIFICADO E DA CHAVE`
+					console.error(`Falha ao ler o certificado ou a chave, verifique o conteúdo informado do certificado e da chave`);
 				} else if (this.options.cert_base64 === true) {
-					throw `FALHA AO LER O CERTIFICADO, VERIFIQUE O CONTEÚDO INFORMADO`
+					console.error(`Falha ao ler o certificado, verifique o conteúdo informado`);
 				}
 
 			}
@@ -115,7 +114,20 @@ class Endpoints {
 			})
 			.catch((error) => {
 				if (this.authError) {
-					throw this.authError.response.data
+					const error = this.authError?.response?.data || this.authError?.cause || this.authError;
+
+					switch (error.message) {
+
+						case 'socket hang up': throw 'Verifique o atributo sandbox e certificate, e garanta que eles estejam corretamente atribuidos para o ambiente desejado'
+
+						case 'header too long': throw 'Verifique se o certificado foi enviado no formato correto'
+
+						case 'wrong tag':
+						case 'error:0909006C:PEM routines:get_name:no start line':
+							throw 'Foi enviando um certificado .pem porém não foi enviado o atributo pemKey corretamente, tente enviar o mesmo valor para ambos'
+
+						default: throw error
+					}
 				} else {
 					switch (this.baseUrl) {
 						case this.constants.APIS.DEFAULT.URL.PRODUCTION:

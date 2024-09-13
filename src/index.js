@@ -21,10 +21,8 @@ export default class EfiPay extends AllMethods {
 	constructor(options) {
 		super()
 		if (options.pix_cert) {
-			console.warn('')
-			console.warn('O parâmetro "pix_cert" foi preterido, utilize "certificate" no lugar')
-			console.warn('')
-			options.certificate = options.pix_cert
+			console.warn('⚠️  WARNING:\nO parâmetro "pix_cert" foi preterido, utilize "certificate" no lugar.');
+			options.certificate = options.pix_cert;
 		}
 
 		let methods = {}
