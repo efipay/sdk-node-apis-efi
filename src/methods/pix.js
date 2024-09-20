@@ -78,7 +78,7 @@ export class PixMethods extends CobrancasMethods {
      *   calendario: {
      *     expiracao: number
      *   },
-     *   devedor: {
+     *   devedor?: {
      *     cpf?: string,
      *     cnpj?: string,
      *     nome: string
