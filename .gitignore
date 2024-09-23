@@ -4,5 +4,3 @@ npm-debug.log
 coverage/
 .idea/
 *.p12
-examples/open-accounts/
-examples/pix/split/
