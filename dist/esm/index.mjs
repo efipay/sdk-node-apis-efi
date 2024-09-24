@@ -570,7 +570,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.3";
+var version = "1.2.6";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -773,7 +773,7 @@ class Endpoints {
       method: 'POST',
       url: this.baseUrl + this.authRoute.route,
       headers: {
-        'api-sdk': 'node-' + sdkPackage.version
+        'api-sdk': 'efi-node-' + sdkPackage.version
       },
       data: {
         grant_type: 'client_credentials'

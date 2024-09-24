@@ -165,7 +165,7 @@ class Endpoints {
 			method: 'POST',
 			url: this.baseUrl + this.authRoute.route,
 			headers: {
-				'api-sdk': 'node-' + sdkPackage.version,
+				'api-sdk': 'efi-node-' + sdkPackage.version,
 			},
 			data: {
 				grant_type: 'client_credentials',
