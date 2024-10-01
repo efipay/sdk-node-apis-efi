@@ -706,25 +706,13 @@ export class PixMethods extends CobrancasMethods {
      * } } body
      * 
      * @returns {Promise<{
+     *   idEnvio: string,
+     *   e2eId: string,
      *   valor: string,
-     *   pagador: {
-     *     chave: string,
-     *     infoPagador?: string
-     *   },
-     *   favorecido: {
-     *     chave?: string,
-     *     contaBanco?: {
-     *       nome: string,
-     *       cpf?: string,
-     *       cnpj?: string,
-     *       codigoBanco: string,
-     *       agencia: string,
-     *       conta: string,
-     *       tipoConta: string
-     *     },
-     *     cpf?: string,
-     *     cnpj?: string
+     *   horario: {
+     *      solicitacao: string
      *   }
+     *   status: string
      * }>}
      */
     pixSend(params, body) { }

@@ -579,7 +579,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.6";
+var version = "1.2.7";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -3480,25 +3480,13 @@ class PixMethods extends CobrancasMethods {
    * } } body
    * 
    * @returns {Promise<{
+   *   idEnvio: string,
+   *   e2eId: string,
    *   valor: string,
-   *   pagador: {
-   *     chave: string,
-   *     infoPagador?: string
-   *   },
-   *   favorecido: {
-   *     chave?: string,
-   *     contaBanco?: {
-   *       nome: string,
-   *       cpf?: string,
-   *       cnpj?: string,
-   *       codigoBanco: string,
-   *       agencia: string,
-   *       conta: string,
-   *       tipoConta: string
-   *     },
-   *     cpf?: string,
-   *     cnpj?: string
+   *   horario: {
+   *      solicitacao: string
    *   }
+   *   status: string
    * }>}
    */
   pixSend(params, body) {}
