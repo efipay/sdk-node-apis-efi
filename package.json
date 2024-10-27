@@ -5,7 +5,8 @@
 	"exports": {
 		".": {
 			"require": "./dist/cjs/index.cjs",
-			"import": "./dist/cjs/index.cjs"
+			"import": "./dist/cjs/index.cjs",
+			"types": "./dist/types/index.d.ts"
 		}
 	},
 	"description": "Module for integration with Efi Bank API",
