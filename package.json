@@ -5,11 +5,12 @@
 	"exports": {
 		".": {
 			"require": "./dist/cjs/index.cjs",
-			"import": "./dist/cjs/index.cjs"
+			"import": "./dist/cjs/index.cjs",
+			"types": "./dist/types/index.d.ts"
 		}
 	},
 	"description": "Module for integration with Efi Bank API",
-	"version": "1.2.8",
+	"version": "1.2.9",
 	"author": "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas",
 	"license": "MIT",
 	"repository": "efipay/sdk-node-apis-efi",
