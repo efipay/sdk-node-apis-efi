@@ -899,7 +899,7 @@ export class CobrancasMethods {
         offset?: number;
     }): Promise<{
         code: number;
-        data: Arrat<{
+        data: Array<{
             id: number;
             total: number;
             status: string;
