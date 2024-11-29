@@ -271,7 +271,7 @@ export default {
 					method: 'get',
 				},
 				pixSend: {
-					route: '/v2/gn/pix/:idEnvio',
+					route: '/v3/gn/pix/:idEnvio',
 					method: 'put',
 				},
 				pixSendDetail: {
@@ -481,6 +481,10 @@ export default {
 				ofDevolutionRecurrencyPix: {
 					route: '/pagamentos-recorrentes/pix/:identificadorPagamento/devolver',
 					method: 'post',
+				},
+				ofReplaceRecurrencyPixParcel: {
+					route: '/pagamentos-recorrentes/pix/:identificadorPagamento/substituir/:endToEndId',
+					method: 'patch'
 				}
 			},
 		},
