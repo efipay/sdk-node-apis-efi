@@ -613,7 +613,7 @@ export class OpenFinanceMethods extends PixMethods {
     /**
      * **PATCH /v1/pagamentos-recorrentes/pix/:identificadorPagamento/cancelar**
      *
-     * Cancelar um pagamento recorrente
+     * Este endpoint é utilizado para cancelar um pagamento recorrente. Deve receber como entrada um identificadorPagamento ou EndToEndId válido no parametro.
      *
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
      *
@@ -641,7 +641,7 @@ export class OpenFinanceMethods extends PixMethods {
     /**
      * **POST /v1/pagamentos-recorrentes/pix/:identificadorPagamento/devolver**
      *
-     * Efetuar uma devolução de um pagamento recorrente
+     * Este endpoint é utilizado para realizar a devolução de um pagamento recorrente. Deve receber como entrada um endToEndId válido e o valor a ser devolvido no corpo da requisição.
      *
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
      *
@@ -671,5 +671,34 @@ export class OpenFinanceMethods extends PixMethods {
         dataCriacao: string;
         status: string;
     }>>;
+    /**
+     * **PATCH /v1/pagamentos-recorrentes/pix/:identificadorPagamento/substituir/:endToEndId**
+     *
+     * Este endpoint é uma ferramenta para substituição de parcelas para pagamentos recorrentes. Este endpoint deve receber um identificadorPagamento e um endToEndId válido como parâmetros. Também é possivel informar o campo valor no body da requisição para especificar um valor para a nova parcela, se não informado o sistema entende que a nova parcela terá o mesmo valor da pacela anterior.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{
+     *  identificadorPagamento: string
+     *  endToEndId: string
+     *  }} params
+     * @param {{
+     *  valor: string
+     * }} body
+     *
+     * @returns { Promise<{
+     *  identificadorPagamento: string,
+     *  redirectURI: string,
+     * }>}
+     */
+    ofReplaceRecurrencyPixParcel(params: {
+        identificadorPagamento: string;
+        endToEndId: string;
+    }, body: {
+        valor: string;
+    }): Promise<{
+        identificadorPagamento: string;
+        redirectURI: string;
+    }>;
 }
 import { PixMethods } from "./pix";

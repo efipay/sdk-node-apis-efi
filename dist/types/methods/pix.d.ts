@@ -1167,7 +1167,7 @@ export class PixMethods extends CobrancasMethods {
         }>;
     }>;
     /**
-     * **PUT /v2/gn/pix/:idEnvio**
+     * **PUT /v3/gn/pix/:idEnvio**
      *
      * Realiza o envio de Pix.
      *
