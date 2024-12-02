@@ -584,7 +584,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.9";
+var version = "1.2.10";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
