@@ -826,7 +826,7 @@ export class CobrancasMethods {
      *
      * @returns {Promise<{
      *  code: number,
-     *  data: Arrat<{
+     *  data: Array<{
      *     id: number,
      *     total: number,
      *     status: string,
@@ -899,7 +899,7 @@ export class CobrancasMethods {
         offset?: number;
     }): Promise<{
         code: number;
-        data: Arrat<{
+        data: Array<{
             id: number;
             total: number;
             status: string;
@@ -918,7 +918,7 @@ export class CobrancasMethods {
                 pix?: {
                     qrcode: string;
                     qrcode_image: string;
-                } | undefined;
+                };
                 banking_billet?: {
                     barcode: string;
                     link: string;
@@ -926,7 +926,7 @@ export class CobrancasMethods {
                     pdf: {
                         charge: string;
                     };
-                } | undefined;
+                };
                 carnet?: {
                     parcel: number;
                     barcode: string;
@@ -941,8 +941,8 @@ export class CobrancasMethods {
                     pdf: {
                         charge: string;
                     };
-                } | undefined;
-            } | undefined;
+                };
+            };
             link?: {
                 billet_discount: number | null;
                 card_discount: number | null;
@@ -954,7 +954,7 @@ export class CobrancasMethods {
                 request_delivery_address: boolean;
                 payment_method: 'banking_billet' | 'credit_card' | 'all';
                 payment_url: string;
-            } | undefined;
+            };
         }>;
     }>;
     /**

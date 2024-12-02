@@ -584,7 +584,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.10";
+var version = "1.2.11";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -1330,7 +1330,7 @@ class CobrancasMethods {
    * 
    * @returns {Promise<{
    *  code: number,
-   *  data: Arrat<{
+   *  data: Array<{
    *     id: number,
    *     total: number,
    *     status: string,
