@@ -1,4 +1,4 @@
-export class CobrancasMethods {
+export class CobrancasMethods extends ExtratosMethods {
     /**
      * **POST /v1/charge/one-step**
      *
@@ -3191,3 +3191,4 @@ export class CobrancasMethods {
         }>;
     }>;
 }
+import { ExtratosMethods } from "./extratos";

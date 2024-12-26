@@ -556,5 +556,41 @@ export default {
 				},
 			},
 		},
+		EXTRATOS: {
+			URL: {
+				PRODUCTION: 'https://extratos.api.efipay.com.br/v1',
+				SANDBOX: 'https://extratos-h.api.efipay.com.br/v1',
+			},
+			ENDPOINTS: {
+				authorize: {
+					route: '/oauth/token',
+					method: 'post',
+				},
+				listStatementFiles: {
+					route: '/extrato-cnab/arquivos',
+					method: 'get',
+				},
+				getStatementFile: {
+					route: '/extrato-cnab/download/:nome_arquivo',
+					method: 'get',
+				},
+				listStatementRecurrences: {
+					route: '/extrato-cnab/agendamentos',
+					method: 'get',
+				},
+				createStatementRecurrency: {
+					route: '/extrato-cnab/agendar',
+					method: 'post',
+				},
+				updateStatementRecurrency: {
+					route: '/extrato-cnab/agendar/:identificador',
+					method: 'patch',
+				},
+				createSftpKey: {
+					route: '/extrato-cnab/gerar-chaves',
+					method: 'post',
+				}
+			}
+		}
 	},
 }

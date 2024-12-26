@@ -1,5 +1,7 @@
 // @ts-nocheck
-export class CobrancasMethods {
+import { ExtratosMethods } from "./extratos";
+
+export class CobrancasMethods extends ExtratosMethods {
 
     /**
      * **POST /v1/charge/one-step**

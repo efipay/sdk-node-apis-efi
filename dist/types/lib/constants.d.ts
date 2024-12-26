@@ -832,6 +832,61 @@ declare namespace _default {
             }
             export { ENDPOINTS_4 as ENDPOINTS };
         }
+        namespace EXTRATOS {
+            export namespace URL_5 {
+                const PRODUCTION_5: string;
+                export { PRODUCTION_5 as PRODUCTION };
+                const SANDBOX_5: string;
+                export { SANDBOX_5 as SANDBOX };
+            }
+            export { URL_5 as URL };
+            export namespace ENDPOINTS_5 {
+                export namespace authorize_5 {
+                    const route_129: string;
+                    export { route_129 as route };
+                    const method_129: string;
+                    export { method_129 as method };
+                }
+                export { authorize_5 as authorize };
+                export namespace listStatementFiles {
+                    const route_130: string;
+                    export { route_130 as route };
+                    const method_130: string;
+                    export { method_130 as method };
+                }
+                export namespace getStatementFile {
+                    const route_131: string;
+                    export { route_131 as route };
+                    const method_131: string;
+                    export { method_131 as method };
+                }
+                export namespace listStatementRecurrences {
+                    const route_132: string;
+                    export { route_132 as route };
+                    const method_132: string;
+                    export { method_132 as method };
+                }
+                export namespace createStatementRecurrency {
+                    const route_133: string;
+                    export { route_133 as route };
+                    const method_133: string;
+                    export { method_133 as method };
+                }
+                export namespace updateStatementRecurrency {
+                    const route_134: string;
+                    export { route_134 as route };
+                    const method_134: string;
+                    export { method_134 as method };
+                }
+                export namespace createSftpKey {
+                    const route_135: string;
+                    export { route_135 as route };
+                    const method_135: string;
+                    export { method_135 as method };
+                }
+            }
+            export { ENDPOINTS_5 as ENDPOINTS };
+        }
     }
 }
 export default _default;

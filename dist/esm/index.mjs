@@ -560,6 +560,42 @@ var constants = {
           method: 'get'
         }
       }
+    },
+    EXTRATOS: {
+      URL: {
+        PRODUCTION: 'https://extratos.api.efipay.com.br/v1',
+        SANDBOX: 'https://extratos-h.api.efipay.com.br/v1'
+      },
+      ENDPOINTS: {
+        authorize: {
+          route: '/oauth/token',
+          method: 'post'
+        },
+        listStatementFiles: {
+          route: '/extrato-cnab/arquivos',
+          method: 'get'
+        },
+        getStatementFile: {
+          route: '/extrato-cnab/download/:nome_arquivo',
+          method: 'get'
+        },
+        listStatementRecurrences: {
+          route: '/extrato-cnab/agendamentos',
+          method: 'get'
+        },
+        createStatementRecurrency: {
+          route: '/extrato-cnab/agendar',
+          method: 'post'
+        },
+        updateStatementRecurrency: {
+          route: '/extrato-cnab/agendar/:identificador',
+          method: 'patch'
+        },
+        createSftpKey: {
+          route: '/extrato-cnab/gerar-chaves',
+          method: 'post'
+        }
+      }
     }
   }
 };
@@ -575,7 +611,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.12";
+var version = "1.2.13";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -863,7 +899,121 @@ class Endpoints {
 }
 
 // @ts-nocheck
-class CobrancasMethods {
+class ExtratosMethods {
+  /**
+   * **GET /v1/extrato-cnab/arquivos**
+   * 
+   * Consultar arquivos gerados
+   * 
+   * Este endpoint é utilizado para consultar os arquivos CNAB gerados e associados a uma conta específica.
+   * 
+   * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
+   * 
+   * @returns { Promise <{
+   *  Array<{
+   *      data_geracao: string,
+   *      nome: string
+   *  }>
+   * }>}
+   */
+  listStatementFiles() {}
+
+  /**
+   * **GET /v1/extrato-cnab/download/:nome_arquivo**
+   * 
+   * Solicitar Download do extrato
+   * 
+   * Este endpoint é utilizado para Endpoint para solicitar download do extrato.
+   * 
+   * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
+   * 
+   * @param { { nome_arquivo: string } } params
+   * 
+   * @returns { Promise<string> }
+   */
+  getStatementFile(params) {}
+
+  /**
+   * **GET /v1/extrato-cnab/agendamentos**
+   * 
+   * Consultar recorrências cadastradas
+   * 
+   * Este endpoint é utilizado para consultar os agendamentos de recorrências cadastradas em uma conta específica.
+   * 
+   * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
+   * 
+   * @returns { Promise<{
+   *  Array<{
+   *      status: string,
+   *      periodicidade: string,
+   *      envia_email: boolean,
+   *      comprimir_arquivos: boolean,
+   *      data_criacao: string
+   *  }>
+   * }>}
+   * 
+   */
+  listStatementRecurrences() {}
+
+  /**
+   * **POST /v1/extrato-cnab/agendar**
+   * 
+   * Criar recorrência
+   * 
+   * Este endpoint é utilizado para criar uma nova recorrência.
+   * 
+   * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
+   * 
+   * @param { {} } params 
+   * @param { {
+   *  periodicidade: string,
+   *  enviar_email: boolean,
+   *  comprimir_arquivos: boolean    
+   * } } body 
+   * 
+   * @returns { Promise<void> }
+   */
+  createStatementRecurrency(params, body) {}
+
+  /**
+   * **PATCH /v1/extrato-cnab/agendar/:identificador**
+   * 
+   * Revisar recorrência
+   * 
+   * Este endpoint é utilizado para atualizar ou modificar uma recorrência existente a partir do identificador. 
+   * 
+   * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
+   * 
+   * @param { { identificador: string } } params 
+   * @param {{
+   *      periodicidade: string,
+   *      status: string,
+   *      envia_email: boolean,
+   *      comprimir_arquivos: boolean,
+   * }} body 
+   * 
+   * @returns { Promise<void> }
+   */
+  updateStatementRecurrency(params, body) {}
+
+  /**
+   * **POST /v1/extrato-cnab/gerar-chaves**
+   * 
+   * Gerar chave
+   * 
+   * Este endpoint é utilizado para gerar uma chave associada a uma conta específica.
+   * 
+   * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
+   * 
+   * @returns { Promise<{
+   *  privateKey: string
+   * }>}
+   */
+  createSftpKey() {}
+}
+
+// @ts-nocheck
+class CobrancasMethods extends ExtratosMethods {
   /**
    * **POST /v1/charge/one-step**
    * 
