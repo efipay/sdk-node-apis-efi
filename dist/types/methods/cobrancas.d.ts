@@ -83,7 +83,7 @@ export class CobrancasMethods extends ExtratosMethods {
      *         email: string,
      *         phone_number?: string,
      *         birth?: string,
-     *         address: {
+     *         address?: {
      *           street: string,
      *           number: string,
      *           neighborhood: string,
@@ -102,7 +102,7 @@ export class CobrancasMethods extends ExtratosMethods {
      *         type: 'percentage' | 'currency',
      *         value: number
      *       },
-     *       billing_address: {
+     *       billing_address?: {
      *         street: string,
      *         number: string,
      *         neighborhood: string,
@@ -216,7 +216,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     email: string;
                     phone_number?: string;
                     birth?: string;
-                    address: {
+                    address?: {
                         street: string;
                         number: string;
                         neighborhood: string;
@@ -235,7 +235,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     type: 'percentage' | 'currency';
                     value: number;
                 };
-                billing_address: {
+                billing_address?: {
                     street: string;
                     number: string;
                     neighborhood: string;

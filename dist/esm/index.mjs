@@ -611,7 +611,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.13";
+var version = "1.2.14";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -1098,7 +1098,7 @@ class CobrancasMethods extends ExtratosMethods {
    *         email: string,
    *         phone_number?: string,
    *         birth?: string,
-   *         address: {
+   *         address?: {
    *           street: string,
    *           number: string,
    *           neighborhood: string,
@@ -1117,7 +1117,7 @@ class CobrancasMethods extends ExtratosMethods {
    *         type: 'percentage' | 'currency',
    *         value: number
    *       },
-   *       billing_address: {
+   *       billing_address?: {
    *         street: string,
    *         number: string,
    *         neighborhood: string,
