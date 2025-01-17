@@ -6,6 +6,7 @@ import axios from 'axios'
 import randomstring from 'randomstring'
 
 class Endpoints {
+
 	constructor(options, constants) {
 		this.options = options
 		this.auth = null
@@ -232,7 +233,14 @@ class Endpoints {
 		query = getQueryString()
 
 		let headers = new Object()
-		headers['x-skip-mtls-checking'] = !this.options.validateMtls
+
+		if (endpoint.route === this.constants.APIS.PIX.ENDPOINTS.pixConfigWebhook.route && endpoint.method === this.constants.APIS.PIX.ENDPOINTS.pixConfigWebhook.method) {
+
+			this.options.validateMtls = this.options.validateMtls || this.options.validate_mtls
+
+			headers['x-skip-mtls-checking'] = !this.options.validateMtls
+
+		}
 
 		if (this.options.partner_token) {
 			headers['partner-token'] = this.options.partner_token

@@ -14,6 +14,8 @@ export default class EfiPay extends AllMethods {
 	 * @param {string} [options.partner_token] - Token de parceiro caso tenha.
 	 * @param {string} [options.certificate] - Caminho para o certificado
 	 * @param {boolean} [options.cert_base64] - Indica se será enviado o certificado em base64
+	 * @param {boolean} [options.validate_mtls] - Indica se será utilizado mTLS ou não no webhook
+	 * @param {boolean} [options.validateMtls] - Indica se será utilizado mTLS ou não no webhook 
 	 * 
 	 * @param {string} [options.pix_cert] - # PRETERIDO # Caminho para o certificado
 	 * @param {string} [options.pemKey] - Caminho para a chave privada, caso opte por enviar o certificado em PEM.

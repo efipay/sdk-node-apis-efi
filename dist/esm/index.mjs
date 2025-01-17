@@ -418,6 +418,18 @@ var constants = {
         medList: {
           route: '/v2/gn/infracoes',
           method: 'get'
+        },
+        pixQrCodeDetail: {
+          route: '/v2/gn/qrcodes/detalhar',
+          method: 'post'
+        },
+        pixQrCodePay: {
+          route: '/v2/gn/pix/:idEnvio/qrcode',
+          method: 'put'
+        },
+        pixResendWebhook: {
+          route: '/v2/gn/webhook/reenviar',
+          method: 'post'
         }
       }
     },
@@ -611,7 +623,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.14";
+var version = "1.2.15";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -875,7 +887,10 @@ class Endpoints {
     updateRoute();
     query = getQueryString();
     let headers = new Object();
-    headers['x-skip-mtls-checking'] = !this.options.validateMtls;
+    if (endpoint.route === this.constants.APIS.PIX.ENDPOINTS.pixConfigWebhook.route && endpoint.method === this.constants.APIS.PIX.ENDPOINTS.pixConfigWebhook.method) {
+      this.options.validateMtls = this.options.validateMtls || this.options.validate_mtls;
+      headers['x-skip-mtls-checking'] = !this.options.validateMtls;
+    }
     if (this.options.partner_token) {
       headers['partner-token'] = this.options.partner_token;
     }
@@ -4942,6 +4957,37 @@ class PixMethods extends CobrancasMethods {
    * } | string>}
    */
   detailReport(params) {}
+
+  /**
+   * **POST /v2/gn/webhook/reenviar**
+   * 
+   * Reenviar webhook Pix
+   * 
+   * Endpoint que permite reenviar webhook pix.
+   * 
+   * É possível solicitar o reenvio de Webhooks para transações que ocorreram a partir do dia 27/12 às 10:00 da manhã.
+   * 
+   * O reenvio de webhook para uma transação fica disponível por um prazo máximo de 30 dias.
+   * 
+   * A tentativa de reenvio ocorre uma vez para cada webhook, NÃO existe reagendamentos como ocorre no envio normal. Caso o servidor do cliente esteja inoperante, o cliente terá que solicitar novamente o reenvio.
+   * 
+   * Nos casos de webhooks de devoluções (recebimento e envio) ocorre o reenvio de um webhook com todo o array de devolução ao invés de um webhook por devolução. Por exemplo, se você realizar duas devoluções relacionadas a um mesmo endToEndId, no envio, você receberá dois webhooks distintos. Porém, ao solicitar o reenvio, receberá apenas um webhook.
+   * 
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+   * 
+   * Obs: Se o extrato ainda não tiver sido processado, a resposta será sucesso(202) e o retorno será semelhante ao que é retornado na solicitação, informando em qual etapa de processamento está a solicitação.
+   * 
+   * @param { {} } params
+   * @param { {
+   *  tipo:  'PIX_RECEBIDO' | 'PIX_ENVIADO' | 'DEVOLUCAO_RECEBIDA' | 'DEVOLUCAO_ENVIADA',
+   *  e2eId: Array<string>
+   * } } body 
+   * 
+   * @returns { Promise<void> }
+   * 
+   */
+  pixResendWebhook(params, body) {}
 }
 
 // @ts-nocheck
@@ -5810,6 +5856,8 @@ class EfiPay extends AllMethods {
    * @param {string} [options.partner_token] - Token de parceiro caso tenha.
    * @param {string} [options.certificate] - Caminho para o certificado
    * @param {boolean} [options.cert_base64] - Indica se será enviado o certificado em base64
+   * @param {boolean} [options.validate_mtls] - Indica se será utilizado mTLS ou não no webhook
+   * @param {boolean} [options.validateMtls] - Indica se será utilizado mTLS ou não no webhook 
    * 
    * @param {string} [options.pix_cert] - # PRETERIDO # Caminho para o certificado
    * @param {string} [options.pemKey] - Caminho para a chave privada, caso opte por enviar o certificado em PEM.

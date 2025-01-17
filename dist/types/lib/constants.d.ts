@@ -616,6 +616,24 @@ declare namespace _default {
                     const method_99: string;
                     export { method_99 as method };
                 }
+                export namespace pixQrCodeDetail {
+                    const route_100: string;
+                    export { route_100 as route };
+                    const method_100: string;
+                    export { method_100 as method };
+                }
+                export namespace pixQrCodePay {
+                    const route_101: string;
+                    export { route_101 as route };
+                    const method_101: string;
+                    export { method_101 as method };
+                }
+                export namespace pixResendWebhook {
+                    const route_102: string;
+                    export { route_102 as route };
+                    const method_102: string;
+                    export { method_102 as method };
+                }
             }
             export { ENDPOINTS_1 as ENDPOINTS };
         }
@@ -629,101 +647,101 @@ declare namespace _default {
             export { URL_2 as URL };
             export namespace ENDPOINTS_2 {
                 export namespace authorize_2 {
-                    const route_100: string;
-                    export { route_100 as route };
-                    const method_100: string;
-                    export { method_100 as method };
-                }
-                export { authorize_2 as authorize };
-                export namespace ofListParticipants {
-                    const route_101: string;
-                    export { route_101 as route };
-                    const method_101: string;
-                    export { method_101 as method };
-                }
-                export namespace ofStartPixPayment {
-                    const route_102: string;
-                    export { route_102 as route };
-                    const method_102: string;
-                    export { method_102 as method };
-                }
-                export namespace ofListPixPayment {
                     const route_103: string;
                     export { route_103 as route };
                     const method_103: string;
                     export { method_103 as method };
                 }
-                export namespace ofConfigUpdate {
+                export { authorize_2 as authorize };
+                export namespace ofListParticipants {
                     const route_104: string;
                     export { route_104 as route };
                     const method_104: string;
                     export { method_104 as method };
                 }
-                export namespace ofConfigDetail {
+                export namespace ofStartPixPayment {
                     const route_105: string;
                     export { route_105 as route };
                     const method_105: string;
                     export { method_105 as method };
                 }
-                export namespace ofDevolutionPix {
+                export namespace ofListPixPayment {
                     const route_106: string;
                     export { route_106 as route };
                     const method_106: string;
                     export { method_106 as method };
                 }
-                export namespace ofCancelSchedulePix {
+                export namespace ofConfigUpdate {
                     const route_107: string;
                     export { route_107 as route };
                     const method_107: string;
                     export { method_107 as method };
                 }
-                export namespace ofListSchedulePixPayment {
+                export namespace ofConfigDetail {
                     const route_108: string;
                     export { route_108 as route };
                     const method_108: string;
                     export { method_108 as method };
                 }
-                export namespace ofStartSchedulePixPayment {
+                export namespace ofDevolutionPix {
                     const route_109: string;
                     export { route_109 as route };
                     const method_109: string;
                     export { method_109 as method };
                 }
-                export namespace ofDevolutionSchedulePix {
+                export namespace ofCancelSchedulePix {
                     const route_110: string;
                     export { route_110 as route };
                     const method_110: string;
                     export { method_110 as method };
                 }
-                export namespace ofStartRecurrencyPixPayment {
+                export namespace ofListSchedulePixPayment {
                     const route_111: string;
                     export { route_111 as route };
                     const method_111: string;
                     export { method_111 as method };
                 }
-                export namespace ofListRecurrencyPixPayment {
+                export namespace ofStartSchedulePixPayment {
                     const route_112: string;
                     export { route_112 as route };
                     const method_112: string;
                     export { method_112 as method };
                 }
-                export namespace ofCancelRecurrencyPix {
+                export namespace ofDevolutionSchedulePix {
                     const route_113: string;
                     export { route_113 as route };
                     const method_113: string;
                     export { method_113 as method };
                 }
-                export namespace ofDevolutionRecurrencyPix {
+                export namespace ofStartRecurrencyPixPayment {
                     const route_114: string;
                     export { route_114 as route };
                     const method_114: string;
                     export { method_114 as method };
                 }
-                export namespace ofReplaceRecurrencyPixParcel {
+                export namespace ofListRecurrencyPixPayment {
                     const route_115: string;
                     export { route_115 as route };
                     const method_115: string;
                     export { method_115 as method };
+                }
+                export namespace ofCancelRecurrencyPix {
+                    const route_116: string;
+                    export { route_116 as route };
+                    const method_116: string;
+                    export { method_116 as method };
+                }
+                export namespace ofDevolutionRecurrencyPix {
+                    const route_117: string;
+                    export { route_117 as route };
+                    const method_117: string;
+                    export { method_117 as method };
+                }
+                export namespace ofReplaceRecurrencyPixParcel {
+                    const route_118: string;
+                    export { route_118 as route };
+                    const method_118: string;
+                    export { method_118 as method };
                 }
             }
             export { ENDPOINTS_2 as ENDPOINTS };
@@ -738,35 +756,35 @@ declare namespace _default {
             export { URL_3 as URL };
             export namespace ENDPOINTS_3 {
                 export namespace authorize_3 {
-                    const route_116: string;
-                    export { route_116 as route };
-                    const method_116: string;
-                    export { method_116 as method };
-                }
-                export { authorize_3 as authorize };
-                export namespace payDetailBarCode {
-                    const route_117: string;
-                    export { route_117 as route };
-                    const method_117: string;
-                    export { method_117 as method };
-                }
-                export namespace payRequestBarCode {
-                    const route_118: string;
-                    export { route_118 as route };
-                    const method_118: string;
-                    export { method_118 as method };
-                }
-                export namespace payDetailPayment {
                     const route_119: string;
                     export { route_119 as route };
                     const method_119: string;
                     export { method_119 as method };
                 }
-                export namespace payListPayments {
+                export { authorize_3 as authorize };
+                export namespace payDetailBarCode {
                     const route_120: string;
                     export { route_120 as route };
                     const method_120: string;
                     export { method_120 as method };
+                }
+                export namespace payRequestBarCode {
+                    const route_121: string;
+                    export { route_121 as route };
+                    const method_121: string;
+                    export { method_121 as method };
+                }
+                export namespace payDetailPayment {
+                    const route_122: string;
+                    export { route_122 as route };
+                    const method_122: string;
+                    export { method_122 as method };
+                }
+                export namespace payListPayments {
+                    const route_123: string;
+                    export { route_123 as route };
+                    const method_123: string;
+                    export { method_123 as method };
                 }
             }
             export { ENDPOINTS_3 as ENDPOINTS };
@@ -781,53 +799,53 @@ declare namespace _default {
             export { URL_4 as URL };
             export namespace ENDPOINTS_4 {
                 export namespace authorize_4 {
-                    const route_121: string;
-                    export { route_121 as route };
-                    const method_121: string;
-                    export { method_121 as method };
-                }
-                export { authorize_4 as authorize };
-                export namespace createAccount {
-                    const route_122: string;
-                    export { route_122 as route };
-                    const method_122: string;
-                    export { method_122 as method };
-                }
-                export namespace getAccountCertificate {
-                    const route_123: string;
-                    export { route_123 as route };
-                    const method_123: string;
-                    export { method_123 as method };
-                }
-                export namespace getAccountCredentials {
                     const route_124: string;
                     export { route_124 as route };
                     const method_124: string;
                     export { method_124 as method };
                 }
-                export namespace accountConfigWebhook {
+                export { authorize_4 as authorize };
+                export namespace createAccount {
                     const route_125: string;
                     export { route_125 as route };
                     const method_125: string;
                     export { method_125 as method };
                 }
-                export namespace accountDeleteWebhook {
+                export namespace getAccountCertificate {
                     const route_126: string;
                     export { route_126 as route };
                     const method_126: string;
                     export { method_126 as method };
                 }
-                export namespace accountDetailWebhook {
+                export namespace getAccountCredentials {
                     const route_127: string;
                     export { route_127 as route };
                     const method_127: string;
                     export { method_127 as method };
                 }
-                export namespace accountListWebhook {
+                export namespace accountConfigWebhook {
                     const route_128: string;
                     export { route_128 as route };
                     const method_128: string;
                     export { method_128 as method };
+                }
+                export namespace accountDeleteWebhook {
+                    const route_129: string;
+                    export { route_129 as route };
+                    const method_129: string;
+                    export { method_129 as method };
+                }
+                export namespace accountDetailWebhook {
+                    const route_130: string;
+                    export { route_130 as route };
+                    const method_130: string;
+                    export { method_130 as method };
+                }
+                export namespace accountListWebhook {
+                    const route_131: string;
+                    export { route_131 as route };
+                    const method_131: string;
+                    export { method_131 as method };
                 }
             }
             export { ENDPOINTS_4 as ENDPOINTS };
@@ -842,47 +860,47 @@ declare namespace _default {
             export { URL_5 as URL };
             export namespace ENDPOINTS_5 {
                 export namespace authorize_5 {
-                    const route_129: string;
-                    export { route_129 as route };
-                    const method_129: string;
-                    export { method_129 as method };
-                }
-                export { authorize_5 as authorize };
-                export namespace listStatementFiles {
-                    const route_130: string;
-                    export { route_130 as route };
-                    const method_130: string;
-                    export { method_130 as method };
-                }
-                export namespace getStatementFile {
-                    const route_131: string;
-                    export { route_131 as route };
-                    const method_131: string;
-                    export { method_131 as method };
-                }
-                export namespace listStatementRecurrences {
                     const route_132: string;
                     export { route_132 as route };
                     const method_132: string;
                     export { method_132 as method };
                 }
-                export namespace createStatementRecurrency {
+                export { authorize_5 as authorize };
+                export namespace listStatementFiles {
                     const route_133: string;
                     export { route_133 as route };
                     const method_133: string;
                     export { method_133 as method };
                 }
-                export namespace updateStatementRecurrency {
+                export namespace getStatementFile {
                     const route_134: string;
                     export { route_134 as route };
                     const method_134: string;
                     export { method_134 as method };
                 }
-                export namespace createSftpKey {
+                export namespace listStatementRecurrences {
                     const route_135: string;
                     export { route_135 as route };
                     const method_135: string;
                     export { method_135 as method };
+                }
+                export namespace createStatementRecurrency {
+                    const route_136: string;
+                    export { route_136 as route };
+                    const method_136: string;
+                    export { method_136 as method };
+                }
+                export namespace updateStatementRecurrency {
+                    const route_137: string;
+                    export { route_137 as route };
+                    const method_137: string;
+                    export { method_137 as method };
+                }
+                export namespace createSftpKey {
+                    const route_138: string;
+                    export { route_138 as route };
+                    const method_138: string;
+                    export { method_138 as method };
                 }
             }
             export { ENDPOINTS_5 as ENDPOINTS };

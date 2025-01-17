@@ -413,7 +413,20 @@ export default {
 				medList: {
 					route: '/v2/gn/infracoes',
 					method: 'get',
+				},
+				pixQrCodeDetail: {
+					route: '/v2/gn/qrcodes/detalhar',
+					method: 'post'
+				},
+				pixQrCodePay: {
+					route: '/v2/gn/pix/:idEnvio/qrcode',
+					method: 'put'
+				},
+				pixResendWebhook: {
+					route: '/v2/gn/webhook/reenviar',
+					method: 'post'
 				}
+
 			},
 		},
 		OPENFINANCE: {
