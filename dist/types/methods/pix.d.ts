@@ -1238,13 +1238,13 @@ export class PixMethods extends CobrancasMethods {
         status: string;
     }>;
     /**
-     * **GET /v2/gn/pix/enviados/:e2eId**
+     * **GET /v2/gn/pix/enviados/:e2eid**
      *
      * Consulta os dados de uma transferência Pix enviada.
      *
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
      *
-     * @param { { e2eId: string } } params
+     * @param { { e2eid: string } } params
      *
      * @returns {Promise<{
      *   endToEndId: string,
@@ -1274,7 +1274,7 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixSendDetail(params: {
-        e2eId: string;
+        e2eid: string;
     }): Promise<{
         endToEndId: string;
         idEnvio: string;
@@ -1375,8 +1375,10 @@ export class PixMethods extends CobrancasMethods {
      * @param { {
      *   inicio: string,
      *   fim: string,
-     *   status: string,
-     *   devolucaoPresente: boolean
+     *   status?: string,
+     *   devolucaoPresente?: boolean,
+     *   "paginacao.itensPorPagina"?: number,
+     *   "paginacao.paginaAtual"?: number
      * } } params
      *
      * @returns {Promise<Array<{
@@ -1409,8 +1411,10 @@ export class PixMethods extends CobrancasMethods {
     pixSendList(params: {
         inicio: string;
         fim: string;
-        status: string;
-        devolucaoPresente: boolean;
+        status?: string;
+        devolucaoPresente?: boolean;
+        "paginacao.itensPorPagina"?: number;
+        "paginacao.paginaAtual"?: number;
     }): Promise<Array<{
         endToEndId: string;
         idEnvio: string;
@@ -1600,7 +1604,9 @@ export class PixMethods extends CobrancasMethods {
      *   txIdPresente?: boolean,
      *   devolucaoPresente?: boolean,
      *   cpf?: string,
-     *   cnpj?: string
+     *   cnpj?: string,
+     *   "paginacao.itensPorPagina"?: number,
+     *   "paginacao.paginaAtual"?: number
      * } } params
      *
      * @returns {Promise<{
@@ -1641,6 +1647,8 @@ export class PixMethods extends CobrancasMethods {
         devolucaoPresente?: boolean;
         cpf?: string;
         cnpj?: string;
+        "paginacao.itensPorPagina"?: number;
+        "paginacao.paginaAtual"?: number;
     }): Promise<{
         parametros: {
             inicio: string;
@@ -3324,7 +3332,7 @@ export class PixMethods extends CobrancasMethods {
      * @param { {} } params
      * @param { {
      *  tipo:  'PIX_RECEBIDO' | 'PIX_ENVIADO' | 'DEVOLUCAO_RECEBIDA' | 'DEVOLUCAO_ENVIADA',
-     *  e2eId: Array<string>
+     *  e2eids: Array<string>
      * } } body
      *
      * @returns { Promise<void> }
@@ -3332,7 +3340,7 @@ export class PixMethods extends CobrancasMethods {
      */
     pixResendWebhook(params: {}, body: {
         tipo: 'PIX_RECEBIDO' | 'PIX_ENVIADO' | 'DEVOLUCAO_RECEBIDA' | 'DEVOLUCAO_ENVIADA';
-        e2eId: Array<string>;
+        e2eids: Array<string>;
     }): Promise<void>;
 }
 import { CobrancasMethods } from "./cobrancas";
