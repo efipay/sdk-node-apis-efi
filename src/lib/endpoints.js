@@ -154,6 +154,9 @@ class Endpoints {
 	}
 
 	isExpired() {
+		if (!this.options.cache) {
+			return true
+		}
 		let current_time = new Date().getTime() / 1000
 		if (current_time > this.auth.authDate + this.auth.expires_in) {
 			return true

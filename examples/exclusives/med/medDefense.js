@@ -12,8 +12,8 @@ let body = {
     justificativa: "Justificativa"
 }
 
-// O método medDefebse indica os campos que devem ser enviados e que serão retornados
-efipay.medDefebse(params, body)
+// O método medDefense indica os campos que devem ser enviados e que serão retornados
+efipay.medDefense(params, body)
     .then((resposta) => {
         console.log(resposta) // Aqui você tera acesso a resposta da API e os campos retornados de forma intuitiva
     })

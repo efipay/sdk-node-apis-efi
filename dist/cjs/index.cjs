@@ -632,7 +632,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.16";
+var version = "1.2.17";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -824,6 +824,9 @@ class Endpoints {
     });
   }
   isExpired() {
+    if (!this.options.cache) {
+      return true;
+    }
     let current_time = new Date().getTime() / 1000;
     if (current_time > this.auth.authDate + this.auth.expires_in) {
       return true;
@@ -5871,12 +5874,16 @@ class EfiPay extends AllMethods {
    * @param {boolean} [options.cert_base64] - Indica se será enviado o certificado em base64
    * @param {boolean} [options.validate_mtls] - Indica se será utilizado mTLS ou não no webhook
    * @param {boolean} [options.validateMtls] - Indica se será utilizado mTLS ou não no webhook 
+   * @param {boolean} [options.cache] - Inidica se você deseja usar cache no token de autenticação, por padrão `true`
    * 
    * @param {string} [options.pix_cert] - # PRETERIDO # Caminho para o certificado
    * @param {string} [options.pemKey] - Caminho para a chave privada, caso opte por enviar o certificado em PEM.
   */
   constructor(options) {
     super();
+    if (options.cache === undefined) {
+      options.cache = true;
+    }
     if (options.pix_cert) {
       console.warn('⚠️  WARNING:\nO parâmetro "pix_cert" foi preterido, utilize "certificate" no lugar.');
       options.certificate = options.pix_cert;

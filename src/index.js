@@ -16,12 +16,16 @@ export default class EfiPay extends AllMethods {
 	 * @param {boolean} [options.cert_base64] - Indica se será enviado o certificado em base64
 	 * @param {boolean} [options.validate_mtls] - Indica se será utilizado mTLS ou não no webhook
 	 * @param {boolean} [options.validateMtls] - Indica se será utilizado mTLS ou não no webhook 
+	 * @param {boolean} [options.cache] - Inidica se você deseja usar cache no token de autenticação, por padrão `true`
 	 * 
 	 * @param {string} [options.pix_cert] - # PRETERIDO # Caminho para o certificado
 	 * @param {string} [options.pemKey] - Caminho para a chave privada, caso opte por enviar o certificado em PEM.
 	*/
 	constructor(options) {
 		super()
+		if (options.cache === undefined) {
+			options.cache = true
+		}
 		if (options.pix_cert) {
 			console.warn('⚠️  WARNING:\nO parâmetro "pix_cert" foi preterido, utilize "certificate" no lugar.');
 			options.certificate = options.pix_cert;
