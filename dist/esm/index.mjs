@@ -623,7 +623,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.17";
+var version = "1.2.18";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -3781,9 +3781,11 @@ class PixMethods extends CobrancasMethods {
    * 
    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
    * 
+   * @param { { } } params 
+   * 
    * @param { {
    *   pixCopiaECola: string
-   * } } params 
+   * } } body 
    * 
    * @returns {Promise<{
    *   tipoCob: string,
@@ -3810,7 +3812,7 @@ class PixMethods extends CobrancasMethods {
    *   solicitacaoPagador: string
    * }>}
    */
-  pixQrCodeDetail(params) {}
+  pixQrCodeDetail(params, body) {}
   /**
    * **PUT /v2/gn/pix/:idEnvio/qrcode**
    * 
