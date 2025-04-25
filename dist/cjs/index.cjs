@@ -439,6 +439,10 @@ var constants = {
         pixResendWebhook: {
           route: '/v2/gn/webhook/reenviar',
           method: 'post'
+        },
+        pixGetReceipt: {
+          route: '/v2/gn/pix/comprovantes',
+          method: 'get'
         }
       }
     },
@@ -632,7 +636,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.18";
+var version = "1.2.19";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -5006,6 +5010,26 @@ class PixMethods extends CobrancasMethods {
    * 
    */
   pixResendWebhook(params, body) {}
+
+  /**
+   * **GET /v2/gn/pix/comprovantes**
+   * 
+   * Obter comprovantes
+   * 
+   * Endpoint com a finalidade de obter comprovantes de transações Pix realizadas via API.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+   * 
+   * @param { {
+   *  e2eid?: string,
+   *  idEnvio?: string,
+   *  rtrId?: string,
+   *  txid?: string 
+   * } } params 
+   * 
+   * @returns { Promise<Buffer> }
+   */
+  pixGetReceipt(params) {}
 }
 
 // @ts-nocheck

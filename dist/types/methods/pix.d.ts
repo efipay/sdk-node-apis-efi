@@ -3344,5 +3344,29 @@ export class PixMethods extends CobrancasMethods {
         tipo: 'PIX_RECEBIDO' | 'PIX_ENVIADO' | 'DEVOLUCAO_RECEBIDA' | 'DEVOLUCAO_ENVIADA';
         e2eids: Array<string>;
     }): Promise<void>;
+    /**
+     * **GET /v2/gn/pix/comprovantes**
+     *
+     * Obter comprovantes
+     *
+     * Endpoint com a finalidade de obter comprovantes de transações Pix realizadas via API.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+     *
+     * @param { {
+     *  e2eid?: string,
+     *  idEnvio?: string,
+     *  rtrId?: string,
+     *  txid?: string
+     * } } params
+     *
+     * @returns { Promise<Buffer> }
+     */
+    pixGetReceipt(params: {
+        e2eid?: string;
+        idEnvio?: string;
+        rtrId?: string;
+        txid?: string;
+    }): Promise<Buffer>;
 }
 import { CobrancasMethods } from "./cobrancas";

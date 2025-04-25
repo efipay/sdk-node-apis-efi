@@ -425,6 +425,10 @@ export default {
 				pixResendWebhook: {
 					route: '/v2/gn/webhook/reenviar',
 					method: 'post'
+				},
+				pixGetReceipt: {
+					route: '/v2/gn/pix/comprovantes',
+					method: 'get'
 				}
 
 			},
