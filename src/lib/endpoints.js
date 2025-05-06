@@ -102,6 +102,10 @@ class Endpoints {
 					config.headers['x-idempotency-key'] = randomstring.generate({ length: 72, charset: 'alphanumeric' })
 				}
 
+				if (endpoint.route === '/v2/gn/pix/comprovantes') {
+					config.responseType = 'arraybuffer';
+				}
+
 				return config
 			},
 			(error) => {

@@ -784,6 +784,9 @@ class Endpoints {
           charset: 'alphanumeric'
         });
       }
+      if (endpoint.route === '/v2/gn/pix/comprovantes') {
+        config.responseType = 'arraybuffer';
+      }
       return config;
     }, error => {
       Promise.reject(error);
