@@ -502,6 +502,22 @@ export default {
 				ofReplaceRecurrencyPixParcel: {
 					route: '/pagamentos-recorrentes/pix/:identificadorPagamento/substituir/:endToEndId',
 					method: 'patch'
+				},
+				ofCreateBiometricEnrollment: {
+					route: '/jsr/vinculos',
+					method: 'post'
+				},
+				ofListBiometricEnrollment: {
+					route: '/jsr/vinculos',
+					method: 'get'
+				},
+				ofCreateBiometricPixPayment: {
+					route: '/jsr/pagamentos/pix',
+					method: 'post'
+				},
+				ofListBiometricPixPayment: {
+					route: '/jsr/pagamentos/pix',
+					method: 'get'
 				}
 			},
 		},

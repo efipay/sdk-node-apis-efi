@@ -515,6 +515,22 @@ var constants = {
         ofReplaceRecurrencyPixParcel: {
           route: '/pagamentos-recorrentes/pix/:identificadorPagamento/substituir/:endToEndId',
           method: 'patch'
+        },
+        ofCreateBiometricEnrollment: {
+          route: '/jsr/vinculos',
+          method: 'post'
+        },
+        ofListBiometricEnrollment: {
+          route: '/jsr/vinculos',
+          method: 'get'
+        },
+        ofCreateBiometricPixPayment: {
+          route: '/jsr/pagamentos/pix',
+          method: 'post'
+        },
+        ofListBiometricPixPayment: {
+          route: '/jsr/pagamentos/pix',
+          method: 'get'
         }
       }
     },
@@ -636,7 +652,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.19";
+var version = "1.2.21";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -5509,6 +5525,139 @@ class OpenFinanceMethods extends PixMethods {
    * }>}
    */
   ofReplaceRecurrencyPixParcel(params, body) {}
+
+  /**
+   * **POST /v1/jsr/vinculos**
+   * 
+   * Este endpoint permite a criação de um novo vínculo na jornada sem redirecionamento, possibilitando o registro de vínculos com diferentes detentoras de conta. Esses vínculos poderão ser utilizados posteriormente para a iniciação de pagamentos, promovendo maior flexibilidade no processo. O corpo da requisição deve incluir informações essenciais sobre o pagador: CPF ou CNPJ e o idParticipante da instituição detentora onde a conta do pagador está localizada.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params 
+   * 
+   * @param {{
+   *  pagador: {
+   *    idParticipante: string
+   *    cpf: string
+   *    cnpj?: string  
+   *  }
+   * }} body 
+   * 
+   * @returns { Promise<{
+   *  identificadorVinculo: string,
+   *  redirectURI: string,
+   * }>}
+   */
+  ofCreateBiometricEnrollment(params, body) {}
+
+  /**
+   * **GET /v1/jsr/vinculos**
+   * 
+   * Esse endpoint recupera todos os vínculos associados ao usuário informado. Este endpoint permite consultar os vínculos utilizando o CPF obrigatório e, opcionalmente, o CNPJ para filtrar resultados. A resposta contém uma lista de vínculos que podem ser utilizados para operações futuras, como a iniciação de pagamentos e gestão dos mesmos. 
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{
+   *  cpf: string,
+   *  cnpj?: string
+   * }} params 
+   * @param {{}} body
+   * 
+   * @returns { Promise<{
+   *  vinculos: Array<{
+   *      identificador: string,
+   *      dataAutorizacao: string,
+   *      dataExpiracao: string,
+   *      limiteDiario: string,
+   *      limiteTransacao: string,
+   *      conta: {
+   *          numero: string,
+   *          agencia: string,
+   *          ispb: string,
+   *          tipo: string
+   *      },
+   *      participante: {
+   *          identificador: string,
+   *          nome: string,
+   *          descricao: string,
+   *          logo: string
+   *      }
+   *  }>
+   * }>} 
+   */
+  ofListBiometricEnrollment(params, body) {}
+
+  /**
+   * **POST /v1/jsr/pagamentos/pix**
+   * 
+   * Este endpoint permite a criação de um novo pagamento na jornada sem redirecionamento. 
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params 
+   * @param {{
+   *  identificadorVinculo: string,
+   *  favorecido: {
+   *      contaBanco?: {
+   *          nome: string,
+   *          documento: string,
+   *          codigoBanco: string,
+   *          agencia: string,
+   *          conta: string,
+   *          tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+   *      },
+   *      chave?: string
+   *  },
+   *  pagamento: {
+   *      valor: string,
+   *      codigoBanco?: string,
+   *      infoPagador?: string,
+   *      idProprio?: string,
+   *      qrCode?: string,
+   *      identificadorTransacao?: string,
+   *  }
+   * }} body
+   * 
+   * @returns { Promise<{
+   *  identificadorPagamento: string,
+   *  redirectURI: string,
+   * }>}
+   */
+  ofCreateBiometricPixPayment(params, body) {}
+
+  /**
+   * **GET /v1/jsr/pagamentos/pix**
+   * 
+   * O endpoint em questão é uma ferramenta de pesquisa. Ele permite que o usuário busque por um pagamento específico, por pagamentos que possuem um status especifico ou por pagamentos que atendem ou não um critério dentro de um determinado período.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{
+   *  inicio: string,
+   *  fim: string,
+   *  status?: 'pendente' | 'rejeitado' | 'aceito' | 'expirado' | 'cancelado',
+   *  identificador?: string
+   * }} params 
+   * @param {{}} body
+   * 
+   * @returns { Promise<{
+   *  vinculos: Array<{
+   *      identificadorPagamento: string,
+   *      endToEndId: string,
+   *      valor: string,
+   *      status: 'pendente' | 'rejeitado' | 'aceito' | 'expirado',
+   *      dataCriacao: string,
+   *      idProprio: string,
+   *      devolucoes?: Array<{
+   *          identificadorDevolucao: string,
+   *          valor: string,
+   *          status: 'pendente' | 'rejeitado' | 'aceito',
+   *          dataCriacao: string
+   *      }>
+   *  }>
+   * }>} 
+   */
+  ofListBiometricPixPayment(params, body) {}
 }
 
 // @ts-nocheck
