@@ -63,7 +63,7 @@ export class OpenFinanceMethods extends PixMethods {
      * @param { { 
      *  nome?: string,
      *  organizacao?: boolean,
-     *  modalidade?: 'imediato' | 'recorrente' | 'agendado',
+     *  modalidade?: string,
      *  tipoPessoa?: 'PJ' | 'PF'
      *  } } params 
      * 

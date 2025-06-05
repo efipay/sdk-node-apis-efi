@@ -78,7 +78,7 @@ export class OpenFinanceMethods extends PixMethods {
      * @param { {
      *  nome?: string,
      *  organizacao?: boolean,
-     *  modalidade?: 'imediato' | 'recorrente' | 'agendado',
+     *  modalidade?: string,
      *  tipoPessoa?: 'PJ' | 'PF'
      *  } } params
      *
@@ -100,7 +100,7 @@ export class OpenFinanceMethods extends PixMethods {
     ofListParticipants(params: {
         nome?: string;
         organizacao?: boolean;
-        modalidade?: 'imediato' | 'recorrente' | 'agendado';
+        modalidade?: string;
         tipoPessoa?: 'PJ' | 'PF';
     }): Promise<{
         participantes: Array<{

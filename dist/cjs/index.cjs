@@ -531,6 +531,30 @@ var constants = {
         ofListBiometricPixPayment: {
           route: '/jsr/pagamentos/pix',
           method: 'get'
+        },
+        ofCreateAutomaticEnrollment: {
+          route: '/pagamentos-automaticos/adesao',
+          method: 'post'
+        },
+        ofListAutomaticEnrollment: {
+          route: '/pagamentos-automaticos/adesao',
+          method: 'get'
+        },
+        ofUpdateAutomaticEnrollment: {
+          route: '/pagamentos-automaticos/adesao',
+          method: 'patch'
+        },
+        ofCreateAutomaticPixPayment: {
+          route: '/pagamentos-automaticos/pix',
+          method: 'post'
+        },
+        ofListAutomaticPixPayment: {
+          route: '/pagamentos-automaticos/pix',
+          method: 'get'
+        },
+        ofCancelAutomaticPixPayment: {
+          route: '/pagamentos-automaticos/pix',
+          method: 'patch'
         }
       }
     },
@@ -652,7 +676,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.21";
+var version = "1.2.22";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -5113,7 +5137,7 @@ class OpenFinanceMethods extends PixMethods {
    * @param { { 
    *  nome?: string,
    *  organizacao?: boolean,
-   *  modalidade?: 'imediato' | 'recorrente' | 'agendado',
+   *  modalidade?: string,
    *  tipoPessoa?: 'PJ' | 'PF'
    *  } } params 
    * 

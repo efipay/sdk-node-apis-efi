@@ -518,6 +518,30 @@ export default {
 				ofListBiometricPixPayment: {
 					route: '/jsr/pagamentos/pix',
 					method: 'get'
+				},
+				ofCreateAutomaticEnrollment: {
+					route: '/pagamentos-automaticos/adesao',
+					method: 'post'
+				},
+				ofListAutomaticEnrollment: {
+					route: '/pagamentos-automaticos/adesao',
+					method: 'get'
+				},
+				ofUpdateAutomaticEnrollment: {
+					route: '/pagamentos-automaticos/adesao',
+					method: 'patch'
+				},
+				ofCreateAutomaticPixPayment: {
+					route: '/pagamentos-automaticos/pix',
+					method: 'post'
+				},
+				ofListAutomaticPixPayment: {
+					route: '/pagamentos-automaticos/pix',
+					method: 'get'
+				},
+				ofCancelAutomaticPixPayment: {
+					route: '/pagamentos-automaticos/pix',
+					method: 'patch'
 				}
 			},
 		},
