@@ -1,5 +1,5 @@
 const EfiPay = require('sdk-node-apis-efi')
-const options = require('../../credentials')
+const options = require('../../../credentials')
 
 let params = {
 	chave: 'SUACHAVEPIX',
@@ -7,7 +7,7 @@ let params = {
 
 const efipay = new EfiPay(options)
 
-efipay.pixDetailWebhook(params)
+efipay.pixDeleteWebhook(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})

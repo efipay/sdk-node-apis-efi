@@ -1,19 +1,18 @@
 const EfiPay = require('sdk-node-apis-efi')
-let options = require('../../credentials')
-
+const options = require('../../credentials')
 
 let body = {
-    tipo: 'PIX_RECEBIDO',
-    e2eids: [
-        "E09089356202501151648API44aff264",
-        "E09089356202501151647API77209f1c"
-    ]
+    status: "CANCELADA"
 }
 
 
+let params = {
+    idSolicRec: 'RN1234567820240115abcdefghijk',
+}
+
 const efipay = new EfiPay(options)
 
-efipay.pixResendWebhook({}, body)
+efipay.pixUpdateRequestRecurrenceAutomatic(params, body)
     .then((resposta) => {
         console.log(resposta)
     })

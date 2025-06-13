@@ -1,14 +1,13 @@
 const EfiPay = require('sdk-node-apis-efi')
-const options = require('../../credentials')
+const options = require('../../../credentials')
 
 let params = {
-	inicio: '2022-01-22T16:01:35Z',
-	fim: '2022-11-30T20:10:00Z',
+	chave: 'SUACHAVEPIX',
 }
 
 const efipay = new EfiPay(options)
 
-efipay.pixListWebhook(params)
+efipay.pixDetailWebhook(params)
 	.then((resposta) => {
 		console.log(resposta)
 	})

@@ -1,5 +1,11 @@
 const EfiPay = require('sdk-node-apis-efi')
-const options = require('../../credentials')
+let options = require('../../../credentials')
+
+options['validateMtls'] = false
+
+let body = {
+	webhookUrl: 'https://exemplo-pix/webhook',
+}
 
 let params = {
 	chave: 'SUACHAVEPIX',
@@ -7,7 +13,7 @@ let params = {
 
 const efipay = new EfiPay(options)
 
-efipay.pixDeleteWebhook(params)
+efipay.pixConfigWebhook(params, body)
 	.then((resposta) => {
 		console.log(resposta)
 	})

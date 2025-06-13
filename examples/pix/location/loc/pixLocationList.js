@@ -1,5 +1,5 @@
 const EfiPay = require('sdk-node-apis-efi')
-const options = require('../../credentials')
+const options = require('../../../credentials')
 
 let params = {
 	inicio: '2022-01-22T16:01:35Z',

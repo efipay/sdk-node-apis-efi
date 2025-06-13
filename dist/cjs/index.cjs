@@ -440,9 +440,101 @@ var constants = {
           route: '/v2/gn/webhook/reenviar',
           method: 'post'
         },
-        pixGetReceipt: {
+        pixgetReceipt: {
           route: '/v2/gn/pix/comprovantes',
           method: 'get'
+        },
+        pixDetailRecurrenceAutomatic: {
+          route: '/v2/rec/:idRec',
+          method: 'get'
+        },
+        pixUpdateRecurrenceAutomatic: {
+          route: '/v2/rec/:idRec',
+          method: 'patch'
+        },
+        pixListRecurrenceAutomatic: {
+          route: '/v2/rec',
+          method: 'get'
+        },
+        pixCreateRecurrenceAutomatic: {
+          route: '/v2/rec',
+          method: 'post'
+        },
+        pixCreateRequestRecurrenceAutomatic: {
+          route: '/v2/solicrec',
+          method: 'post'
+        },
+        pixDetailRequestRecurrenceAutomatic: {
+          route: '/v2/solicrec/:idSolicRec',
+          method: 'get'
+        },
+        pixUpdateRequestRecurrenceAutomatic: {
+          route: '/v2/solicrec/:idSolicRec',
+          method: 'patch'
+        },
+        pixCreateAutomaticChargeTxid: {
+          route: '/v2/cobr/:txid',
+          method: 'put'
+        },
+        pixUpdateAutomaticCharge: {
+          route: '/v2/cobr/:txid',
+          method: 'patch'
+        },
+        pixDetailAutomaticCharge: {
+          route: '/v2/cobr/:txid',
+          method: 'get'
+        },
+        pixCreateAutomaticCharge: {
+          route: '/v2/cobr',
+          method: 'post'
+        },
+        pixListAutomaticCharge: {
+          route: '/v2/cobr',
+          method: 'get'
+        },
+        pixRetryRequestAutomaticCharge: {
+          route: '/v2/cobr/:txid/retentativa/:data',
+          method: 'post'
+        },
+        pixCreateLocationRecurrenceAutomatic: {
+          route: '/v2/locrec',
+          method: 'post'
+        },
+        pixListLocationRecurrenceAutomatic: {
+          route: '/v2/locrec',
+          method: 'get'
+        },
+        pixDetailLocationRecurrenceAutomatic: {
+          route: '/v2/locrec/:id',
+          method: 'get'
+        },
+        pixUnlinkLocationRecurrenceAutomatic: {
+          route: '/v2/locrec/:id/:idRec',
+          method: 'delete'
+        },
+        pixConfigWebhookRecurrenceAutomatic: {
+          route: '/v2/webhookrec',
+          method: 'put'
+        },
+        pixListWebhookRecurrenceAutomatic: {
+          route: '/v2/webhookrec',
+          method: 'get'
+        },
+        pixDeleteWebhookRecurrenceAutomatic: {
+          route: '/v2/webhookrec',
+          method: 'delete'
+        },
+        pixConfigWebhookAutomaticCharge: {
+          route: '/v2/webhookcobr',
+          method: 'put'
+        },
+        pixListWebhookAutomaticCharge: {
+          route: '/v2/webhookcobr',
+          method: 'get'
+        },
+        pixDeleteWebhookAutomaticCharge: {
+          route: '/v2/webhookcobr',
+          method: 'delete'
         }
       }
     },
@@ -458,23 +550,23 @@ var constants = {
         },
         ofListParticipants: {
           route: '/participantes/',
-          method: 'GET'
+          method: 'get'
         },
         ofStartPixPayment: {
           route: '/pagamentos/pix',
-          method: 'POST'
+          method: 'post'
         },
         ofListPixPayment: {
           route: '/pagamentos/pix',
-          method: 'GET'
+          method: 'get'
         },
         ofConfigUpdate: {
           route: '/config',
-          method: 'PUT'
+          method: 'put'
         },
         ofConfigDetail: {
           route: '/config',
-          method: 'GET'
+          method: 'get'
         },
         ofDevolutionPix: {
           route: '/pagamentos/pix/:identificadorPagamento/devolver',
@@ -570,19 +662,19 @@ var constants = {
         },
         payDetailBarCode: {
           route: '/codBarras/:codBarras',
-          method: 'GET'
+          method: 'get'
         },
         payRequestBarCode: {
           route: '/codBarras/:codBarras',
-          method: 'POST'
+          method: 'post'
         },
         payDetailPayment: {
           route: '/:idPagamento',
-          method: 'GET'
+          method: 'get'
         },
         payListPayments: {
           route: '/resumo',
-          method: 'GET'
+          method: 'get'
         }
       }
     },
@@ -676,7 +768,7 @@ var exports$1 = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.22";
+var version = "1.2.23";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
