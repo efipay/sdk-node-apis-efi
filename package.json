@@ -10,7 +10,7 @@
 		}
 	},
 	"description": "Module for integration with Efi Bank API",
-	"version": "1.2.24",
+	"version": "1.2.25",
 	"author": "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas",
 	"license": "MIT",
 	"repository": "efipay/sdk-node-apis-efi",

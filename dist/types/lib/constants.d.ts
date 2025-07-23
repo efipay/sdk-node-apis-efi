@@ -634,7 +634,7 @@ declare namespace _default {
                     const method_102: string;
                     export { method_102 as method };
                 }
-                export namespace pixgetReceipt {
+                export namespace pixGetReceipt {
                     const route_103: string;
                     export { route_103 as route };
                     const method_103: string;
@@ -911,41 +911,47 @@ declare namespace _default {
                     const method_146: string;
                     export { method_146 as method };
                 }
-                export namespace ofCreateAutomaticEnrollment {
+                export namespace ofRevokeBiometricEnrollment {
                     const route_147: string;
                     export { route_147 as route };
                     const method_147: string;
                     export { method_147 as method };
                 }
-                export namespace ofListAutomaticEnrollment {
+                export namespace ofCreateAutomaticEnrollment {
                     const route_148: string;
                     export { route_148 as route };
                     const method_148: string;
                     export { method_148 as method };
                 }
-                export namespace ofUpdateAutomaticEnrollment {
+                export namespace ofListAutomaticEnrollment {
                     const route_149: string;
                     export { route_149 as route };
                     const method_149: string;
                     export { method_149 as method };
                 }
-                export namespace ofCreateAutomaticPixPayment {
+                export namespace ofUpdateAutomaticEnrollment {
                     const route_150: string;
                     export { route_150 as route };
                     const method_150: string;
                     export { method_150 as method };
                 }
-                export namespace ofListAutomaticPixPayment {
+                export namespace ofCreateAutomaticPixPayment {
                     const route_151: string;
                     export { route_151 as route };
                     const method_151: string;
                     export { method_151 as method };
                 }
-                export namespace ofCancelAutomaticPixPayment {
+                export namespace ofListAutomaticPixPayment {
                     const route_152: string;
                     export { route_152 as route };
                     const method_152: string;
                     export { method_152 as method };
+                }
+                export namespace ofCancelAutomaticPixPayment {
+                    const route_153: string;
+                    export { route_153 as route };
+                    const method_153: string;
+                    export { method_153 as method };
                 }
             }
             export { ENDPOINTS_2 as ENDPOINTS };
@@ -960,35 +966,35 @@ declare namespace _default {
             export { URL_3 as URL };
             export namespace ENDPOINTS_3 {
                 export namespace authorize_3 {
-                    const route_153: string;
-                    export { route_153 as route };
-                    const method_153: string;
-                    export { method_153 as method };
-                }
-                export { authorize_3 as authorize };
-                export namespace payDetailBarCode {
                     const route_154: string;
                     export { route_154 as route };
                     const method_154: string;
                     export { method_154 as method };
                 }
-                export namespace payRequestBarCode {
+                export { authorize_3 as authorize };
+                export namespace payDetailBarCode {
                     const route_155: string;
                     export { route_155 as route };
                     const method_155: string;
                     export { method_155 as method };
                 }
-                export namespace payDetailPayment {
+                export namespace payRequestBarCode {
                     const route_156: string;
                     export { route_156 as route };
                     const method_156: string;
                     export { method_156 as method };
                 }
-                export namespace payListPayments {
+                export namespace payDetailPayment {
                     const route_157: string;
                     export { route_157 as route };
                     const method_157: string;
                     export { method_157 as method };
+                }
+                export namespace payListPayments {
+                    const route_158: string;
+                    export { route_158 as route };
+                    const method_158: string;
+                    export { method_158 as method };
                 }
             }
             export { ENDPOINTS_3 as ENDPOINTS };
@@ -1003,53 +1009,53 @@ declare namespace _default {
             export { URL_4 as URL };
             export namespace ENDPOINTS_4 {
                 export namespace authorize_4 {
-                    const route_158: string;
-                    export { route_158 as route };
-                    const method_158: string;
-                    export { method_158 as method };
-                }
-                export { authorize_4 as authorize };
-                export namespace createAccount {
                     const route_159: string;
                     export { route_159 as route };
                     const method_159: string;
                     export { method_159 as method };
                 }
-                export namespace getAccountCertificate {
+                export { authorize_4 as authorize };
+                export namespace createAccount {
                     const route_160: string;
                     export { route_160 as route };
                     const method_160: string;
                     export { method_160 as method };
                 }
-                export namespace getAccountCredentials {
+                export namespace getAccountCertificate {
                     const route_161: string;
                     export { route_161 as route };
                     const method_161: string;
                     export { method_161 as method };
                 }
-                export namespace accountConfigWebhook {
+                export namespace getAccountCredentials {
                     const route_162: string;
                     export { route_162 as route };
                     const method_162: string;
                     export { method_162 as method };
                 }
-                export namespace accountDeleteWebhook {
+                export namespace accountConfigWebhook {
                     const route_163: string;
                     export { route_163 as route };
                     const method_163: string;
                     export { method_163 as method };
                 }
-                export namespace accountDetailWebhook {
+                export namespace accountDeleteWebhook {
                     const route_164: string;
                     export { route_164 as route };
                     const method_164: string;
                     export { method_164 as method };
                 }
-                export namespace accountListWebhook {
+                export namespace accountDetailWebhook {
                     const route_165: string;
                     export { route_165 as route };
                     const method_165: string;
                     export { method_165 as method };
+                }
+                export namespace accountListWebhook {
+                    const route_166: string;
+                    export { route_166 as route };
+                    const method_166: string;
+                    export { method_166 as method };
                 }
             }
             export { ENDPOINTS_4 as ENDPOINTS };
@@ -1064,47 +1070,47 @@ declare namespace _default {
             export { URL_5 as URL };
             export namespace ENDPOINTS_5 {
                 export namespace authorize_5 {
-                    const route_166: string;
-                    export { route_166 as route };
-                    const method_166: string;
-                    export { method_166 as method };
-                }
-                export { authorize_5 as authorize };
-                export namespace listStatementFiles {
                     const route_167: string;
                     export { route_167 as route };
                     const method_167: string;
                     export { method_167 as method };
                 }
-                export namespace getStatementFile {
+                export { authorize_5 as authorize };
+                export namespace listStatementFiles {
                     const route_168: string;
                     export { route_168 as route };
                     const method_168: string;
                     export { method_168 as method };
                 }
-                export namespace listStatementRecurrences {
+                export namespace getStatementFile {
                     const route_169: string;
                     export { route_169 as route };
                     const method_169: string;
                     export { method_169 as method };
                 }
-                export namespace createStatementRecurrency {
+                export namespace listStatementRecurrences {
                     const route_170: string;
                     export { route_170 as route };
                     const method_170: string;
                     export { method_170 as method };
                 }
-                export namespace updateStatementRecurrency {
+                export namespace createStatementRecurrency {
                     const route_171: string;
                     export { route_171 as route };
                     const method_171: string;
                     export { method_171 as method };
                 }
-                export namespace createSftpKey {
+                export namespace updateStatementRecurrency {
                     const route_172: string;
                     export { route_172 as route };
                     const method_172: string;
                     export { method_172 as method };
+                }
+                export namespace createSftpKey {
+                    const route_173: string;
+                    export { route_173 as route };
+                    const method_173: string;
+                    export { method_173 as method };
                 }
             }
             export { ENDPOINTS_5 as ENDPOINTS };

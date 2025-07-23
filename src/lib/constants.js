@@ -426,7 +426,7 @@ export default {
 					route: '/v2/gn/webhook/reenviar',
 					method: 'post'
 				},
-				pixgetReceipt: {
+				pixGetReceipt: {
 					route: '/v2/gn/pix/comprovantes',
 					method: 'get'
 				},
@@ -495,7 +495,7 @@ export default {
 					method: 'get'
 				},
 				pixUnlinkLocationRecurrenceAutomatic: {
-					route: '/v2/locrec/:id/:idRec',
+					route: '/v2/locrec/:id/idRec',
 					method: 'delete'
 				},
 				pixConfigWebhookRecurrenceAutomatic: {
@@ -598,20 +598,24 @@ export default {
 					method: 'patch'
 				},
 				ofCreateBiometricEnrollment: {
-					route: '/jsr/vinculos',
+					route: '/pagamentos-biometria/vinculos',
 					method: 'post'
 				},
 				ofListBiometricEnrollment: {
-					route: '/jsr/vinculos',
+					route: '/pagamentos-biometria/vinculos',
 					method: 'get'
 				},
 				ofCreateBiometricPixPayment: {
-					route: '/jsr/pagamentos/pix',
+					route: '/pagamentos-biometria/pix',
 					method: 'post'
 				},
 				ofListBiometricPixPayment: {
-					route: '/jsr/pagamentos/pix',
+					route: '/pagamentos-biometria/pix',
 					method: 'get'
+				},
+				ofRevokeBiometricEnrollment: {
+				    route: '/pagamentos-biometria/vinculos',
+					method: 'patch'	
 				},
 				ofCreateAutomaticEnrollment: {
 					route: '/pagamentos-automaticos/adesao',

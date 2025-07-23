@@ -3368,5 +3368,1755 @@ export class PixMethods extends CobrancasMethods {
         rtrId?: string;
         txid?: string;
     }): Promise<Buffer>;
+    /**
+     * **GET /v2/rec/:idRec**
+     *
+     * Endpoint para consultar recorrência de Pix Automático.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+     *
+     * @param {{
+     *  idRec: string
+     * }} params
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  status: string,
+     *  valor: {
+     *      valorRec?: string,
+     *      valorMinimoRecebedor?: string
+     *  },
+     *  vinculo: {
+     *      contrato: string,
+     *      devedor: {
+     *        cpf?: string,
+     *        cnpj?: string,
+     *        nome: string
+     *      },
+     *      objeto?: string,
+     * }
+     * calendario: {
+     *  dataFinal?: string,
+     *  dataInicial: string,
+     *  periodicidade: string,
+     * }
+     * politicaRetentativa: string,
+     * loc?: {
+     *  id: number,
+     *  location: string,
+     *  idRec: string,
+     * },
+     * pagador?: {
+     *  ispbParticipante: string,
+     *  codMun: string,
+     *  cpf?: string,
+     *  cnpj?: string,
+     * },
+     * status: string,
+     * dadosQR?: {
+     *   jornada: string,
+     *   pixCopiaECola: string,
+     * },
+     * encerramento?: {
+     *  cancelamento: {
+     *   solicitante: string,
+     *   codigo: string,
+     *   descricao: string
+     *  }
+     * },
+     * ativacao: {
+     *  tipoJornada: string,
+     *  dadosJornada?: {
+     *   txid: string,
+     *  }
+     * },
+     * atualizacao: Array<{
+     *   status: string,
+     *   data: string,
+     * }>
+     * }>
+     * }
+     */
+    pixDetailRecurrenceAutomatic(params: {
+        idRec: string;
+    }): Promise<{
+        idRec: string;
+        status: string;
+        valor: {
+            valorRec?: string;
+            valorMinimoRecebedor?: string;
+        };
+        vinculo: {
+            contrato: string;
+            devedor: {
+                cpf?: string;
+                cnpj?: string;
+                nome: string;
+            };
+            objeto?: string;
+        };
+        calendario: {
+            dataFinal?: string;
+            dataInicial: string;
+            periodicidade: string;
+        };
+        politicaRetentativa: string;
+        loc?: {
+            id: number;
+            location: string;
+            idRec: string;
+        };
+        pagador?: {
+            ispbParticipante: string;
+            codMun: string;
+            cpf?: string;
+            cnpj?: string;
+        };
+        status: string;
+        dadosQR?: {
+            jornada: string;
+            pixCopiaECola: string;
+        };
+        encerramento?: {
+            cancelamento: {
+                solicitante: string;
+                codigo: string;
+                descricao: string;
+            };
+        };
+        ativacao: {
+            tipoJornada: string;
+            dadosJornada?: {
+                txid: string;
+            };
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * ** PATCH /v2/rec/:idRec**
+     *
+     * Endpoint para revisar recorrência de Pix Automático.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+     *
+     * @param {{
+     *  idRec: string
+     * }} params
+     * @param {{
+     *  loc?: string,
+     *  status?: string,
+     *  vinculo?: {
+     *    devedor: {
+     *      nome: string
+     *   }
+     *  },
+     *  calendario?: {
+     *   dataInicial?: string,
+     *  },
+     *   ativacao?: {
+     *      dadosJornada: {
+     *      txid: string
+     *  }
+     * }
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  status: string,
+     *  valor: {
+     *      valorRec?: string,
+     *      valorMinimoRecebedor?: string
+     *  },
+     *  vinculo: {
+     *      contrato: string,
+     *      devedor: {
+     *        cpf?: string,
+     *        cnpj?: string,
+     *        nome: string
+     *      },
+     *      objeto?: string,
+     * }
+     * calendario: {
+     *  dataFinal?: string,
+     *  dataInicial: string,
+     *  periodicidade: string,
+     * }
+     * politicaRetentativa: string,
+     * loc?: {
+     *  id: number,
+     *  location: string,
+     *  idRec: string,
+     * },
+     * pagador?: {
+     *  ispbParticipante: string,
+     *  codMun: string,
+     *  cpf?: string,
+     *  cnpj?: string,
+     * },
+     * status: string,
+     * dadosQR?: {
+     *   jornada: string,
+     *   pixCopiaECola: string,
+     * },
+     * encerramento?: {
+     *  cancelamento: {
+     *   solicitante: string,
+     *   codigo: string,
+     *   descricao: string
+     *  }
+     * },
+     * ativacao: {
+     *  tipoJornada: string,
+     *  dadosJornada?: {
+     *   txid: string,
+     *  }
+     * },
+     * atualizacao: Array<{
+     *   status: string,
+     *   data: string,
+     * }>}>
+     * }
+     */
+    pixUpdateRecurrenceAutomatic(params: {
+        idRec: string;
+    }, body: {
+        loc?: string;
+        status?: string;
+        vinculo?: {
+            devedor: {
+                nome: string;
+            };
+        };
+        calendario?: {
+            dataInicial?: string;
+        };
+        ativacao?: {
+            dadosJornada: {
+                txid: string;
+            };
+        };
+    }): Promise<{
+        idRec: string;
+        status: string;
+        valor: {
+            valorRec?: string;
+            valorMinimoRecebedor?: string;
+        };
+        vinculo: {
+            contrato: string;
+            devedor: {
+                cpf?: string;
+                cnpj?: string;
+                nome: string;
+            };
+            objeto?: string;
+        };
+        calendario: {
+            dataFinal?: string;
+            dataInicial: string;
+            periodicidade: string;
+        };
+        politicaRetentativa: string;
+        loc?: {
+            id: number;
+            location: string;
+            idRec: string;
+        };
+        pagador?: {
+            ispbParticipante: string;
+            codMun: string;
+            cpf?: string;
+            cnpj?: string;
+        };
+        status: string;
+        dadosQR?: {
+            jornada: string;
+            pixCopiaECola: string;
+        };
+        encerramento?: {
+            cancelamento: {
+                solicitante: string;
+                codigo: string;
+                descricao: string;
+            };
+        };
+        ativacao: {
+            tipoJornada: string;
+            dadosJornada?: {
+                txid: string;
+            };
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **GET /v2/rec**
+     *
+     * Consultar lista de recorrências de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+     *
+     * @param {{
+     *  inicio: string,
+     *  fim: string,
+     *  cpf?: string,
+     *  cnpj?: string,
+     *  locationPresente?: boolean,
+     *  status?: string,
+     *  convenio?: string,
+     *  "paginacao.itensPorPagina"?: number,
+     *  "paginacao.paginaAtual"?: number
+     * }} params
+     *
+     * @returns {Promise<{
+     *  parametros: {
+     *    inicio: string,
+     *    fim: string,
+     *    paginacao: {
+     *     paginaAtual: number,
+     *     itensPorPagina: number,
+     *     quantidadeDePaginas: number,
+     *     quantidadeTotalDeItens: number
+     *    }
+     * },
+     * recs: Array<{
+     *  idRec: string,
+     *  status: string,
+     *  valor: {
+     *      valorRec?: string,
+     *      valorMinimoRecebedor?: string
+     *  },
+     *  vinculo: {
+     *      contrato: string,
+     *      devedor: {
+     *        cpf?: string,
+     *        cnpj?: string,
+     *        nome: string
+     *      },
+     *      objeto?: string,
+     * }
+     * calendario: {
+     *  dataFinal?: string,
+     *  dataInicial: string,
+     *  periodicidade: string,
+     * }
+     * politicaRetentativa: string,
+     * loc?: {
+     *  id: number,
+     *  location: string,
+     *  idRec: string,
+     * },
+     * pagador?: {
+     *  ispbParticipante: string,
+     *  codMun: string,
+     *  cpf?: string,
+     *  cnpj?: string,
+     * },
+     * status: string,
+     * dadosQR?: {
+     *   jornada: string,
+     *   pixCopiaECola: string,
+     * },
+     * encerramento?: {
+     *  cancelamento: {
+     *   solicitante: string,
+     *   codigo: string,
+     *   descricao: string
+     *  }
+     * },
+     * ativacao: {
+     *  tipoJornada: string,
+     *  dadosJornada?: {
+     *   txid: string,
+     *  }
+     * },
+     * atualizacao: Array<{
+     *   status: string,
+     *   data: string,
+     * }>
+     * }>
+     * }>}
+     */
+    pixListRecurrenceAutomatic(params: {
+        inicio: string;
+        fim: string;
+        cpf?: string;
+        cnpj?: string;
+        locationPresente?: boolean;
+        status?: string;
+        convenio?: string;
+        "paginacao.itensPorPagina"?: number;
+        "paginacao.paginaAtual"?: number;
+    }): Promise<{
+        parametros: {
+            inicio: string;
+            fim: string;
+            paginacao: {
+                paginaAtual: number;
+                itensPorPagina: number;
+                quantidadeDePaginas: number;
+                quantidadeTotalDeItens: number;
+            };
+        };
+        recs: Array<{
+            idRec: string;
+            status: string;
+            valor: {
+                valorRec?: string;
+                valorMinimoRecebedor?: string;
+            };
+            vinculo: {
+                contrato: string;
+                devedor: {
+                    cpf?: string;
+                    cnpj?: string;
+                    nome: string;
+                };
+                objeto?: string;
+            };
+            calendario: {
+                dataFinal?: string;
+                dataInicial: string;
+                periodicidade: string;
+            };
+            politicaRetentativa: string;
+            loc?: {
+                id: number;
+                location: string;
+                idRec: string;
+            };
+            pagador?: {
+                ispbParticipante: string;
+                codMun: string;
+                cpf?: string;
+                cnpj?: string;
+            };
+            status: string;
+            dadosQR?: {
+                jornada: string;
+                pixCopiaECola: string;
+            };
+            encerramento?: {
+                cancelamento: {
+                    solicitante: string;
+                    codigo: string;
+                    descricao: string;
+                };
+            };
+            ativacao: {
+                tipoJornada: string;
+                dadosJornada?: {
+                    txid: string;
+                };
+            };
+            atualizacao: Array<{
+                status: string;
+                data: string;
+            }>;
+        }>;
+    }>;
+    /**
+     * **POST /v2/rec**
+     *
+     * Criar recorrência de Pix Automático
+     *
+     * Endpoint para criar recorrência de Pix Automático.
+     *
+     * @param {{}} params
+     * @param {{
+     *  valor: {
+     *      valorRec?: string,
+     *      valorMinimoRecebedor?: string
+     *  },
+     *  vinculo: {
+     *      contrato: string,
+     *      devedor: {
+     *        cpf?: string,
+     *        cnpj?: string,
+     *        nome: string
+     *      },
+     *      objeto?: string,
+     * }
+     * calendario: {
+     *  dataFinal?: string,
+     *  dataInicial: string,
+     *  periodicidade: string,
+     * }
+     * politicaRetentativa: string,
+     * loc?: id,
+     * ativacao?: {
+     *  dadosJornada: {
+     *  txid: string
+     * }
+     * },
+     * recebedor?: {
+     *  convenio: string,
+     * }
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  status: string,
+     *  valor: {
+     *      valorRec?: string,
+     *      valorMinimoRecebedor?: string
+     *  },
+     *  vinculo: {
+     *      contrato: string,
+     *      devedor: {
+     *        cpf?: string,
+     *        cnpj?: string,
+     *        nome: string
+     *      },
+     *      objeto?: string,
+     * }
+     * calendario: {
+     *  dataFinal?: string,
+     *  dataInicial: string,
+     *  periodicidade: string,
+     * }
+     * politicaRetentativa: string,
+     * loc?: {
+     *  id: number,
+     *  location: string,
+     *  idRec: string,
+     * },
+     * pagador?: {
+     *  ispbParticipante: string,
+     *  codMun: string,
+     *  cpf?: string,
+     *  cnpj?: string,
+     * },
+     * status: string,
+     * ativacao: {
+     *  tipoJornada: string,
+     *  dadosJornada?: {
+     *   txid: string,
+     *  }
+     * },
+     * atualizacao: Array<{
+     *   status: string,
+     *   data: string,
+     * }>
+     * }>}
+     */
+    pixCreateRecurrenceAutomatic(params: {}, body: {
+        valor: {
+            valorRec?: string;
+            valorMinimoRecebedor?: string;
+        };
+        vinculo: {
+            contrato: string;
+            devedor: {
+                cpf?: string;
+                cnpj?: string;
+                nome: string;
+            };
+            objeto?: string;
+        };
+        calendario: {
+            dataFinal?: string;
+            dataInicial: string;
+            periodicidade: string;
+        };
+        politicaRetentativa: string;
+        loc?: id;
+        ativacao?: {
+            dadosJornada: {
+                txid: string;
+            };
+        };
+        recebedor?: {
+            convenio: string;
+        };
+    }): Promise<{
+        idRec: string;
+        status: string;
+        valor: {
+            valorRec?: string;
+            valorMinimoRecebedor?: string;
+        };
+        vinculo: {
+            contrato: string;
+            devedor: {
+                cpf?: string;
+                cnpj?: string;
+                nome: string;
+            };
+            objeto?: string;
+        };
+        calendario: {
+            dataFinal?: string;
+            dataInicial: string;
+            periodicidade: string;
+        };
+        politicaRetentativa: string;
+        loc?: {
+            id: number;
+            location: string;
+            idRec: string;
+        };
+        pagador?: {
+            ispbParticipante: string;
+            codMun: string;
+            cpf?: string;
+            cnpj?: string;
+        };
+        status: string;
+        ativacao: {
+            tipoJornada: string;
+            dadosJornada?: {
+                txid: string;
+            };
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **POST /v2/solicrec**
+     *
+     * Criar solicitação de confirmação de recorrência de Pix Automático
+     *
+     * Endpoint para criar uma solicitação de confirmação de recorrência de Pix Automático.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  idRec: string,
+     *  calendario: {
+     *   dataExpiracaoSolicitacao: string,
+     * },
+     * destinatario: {
+     *  cpf?: string,
+     *  cnpj?: string,
+     *  conta: string,
+     *  agencia: string,
+     *  ispbParticipante: string
+     * }
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idSolicRec: string,
+     *  idRec: string,
+     *  calendario: {
+     *  dataExpiracaoSolicitacao: string,
+     * },
+     * status: string,
+     * destinatario: {
+     *  cpf?: string,
+     *  cnpj?: string,
+     *  conta: string,
+     *  agencia: string,
+     *  ispbParticipante: string
+     * },
+     * atualizacao: Array<{
+     *  status: string,
+     * data: string
+     * }>,
+     * recPayload: {
+     *  idRec: string,
+     *  vinculo: {
+     *   contrato: string,
+     *   devedor: {
+     *    cpf?: string,
+     *    cnpj?: string,
+     *    nome: string
+     *  },
+     *  objeto?: string,
+     * },
+     * calendario: {
+     *  dataFinal?: string,
+     * dataInicial: string,
+     * periodicidade: string,
+     * },
+     * recebedor: {
+     *  cnpj: string,
+     *  nome: string
+     * },
+     * valor: {
+     * valorRec?: string,
+     * valorMinimoRecebedor?: string
+     * },
+     * atualizacao: Array<{
+     * status: string,
+     * data: string
+     * }>
+     * }
+     * }>}
+     */
+    pixCreateRequestRecurrenceAutomatic(params: {}, body: {
+        idRec: string;
+        calendario: {
+            dataExpiracaoSolicitacao: string;
+        };
+        destinatario: {
+            cpf?: string;
+            cnpj?: string;
+            conta: string;
+            agencia: string;
+            ispbParticipante: string;
+        };
+    }): Promise<{
+        idSolicRec: string;
+        idRec: string;
+        calendario: {
+            dataExpiracaoSolicitacao: string;
+        };
+        status: string;
+        destinatario: {
+            cpf?: string;
+            cnpj?: string;
+            conta: string;
+            agencia: string;
+            ispbParticipante: string;
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+        recPayload: {
+            idRec: string;
+            vinculo: {
+                contrato: string;
+                devedor: {
+                    cpf?: string;
+                    cnpj?: string;
+                    nome: string;
+                };
+                objeto?: string;
+            };
+            calendario: {
+                dataFinal?: string;
+                dataInicial: string;
+                periodicidade: string;
+            };
+            recebedor: {
+                cnpj: string;
+                nome: string;
+            };
+            valor: {
+                valorRec?: string;
+                valorMinimoRecebedor?: string;
+            };
+            atualizacao: Array<{
+                status: string;
+                data: string;
+            }>;
+        };
+    }>;
+    /**
+     * **GET /v2/solicrec/:idSolicRec**
+     *
+     * Consultar solicitação de confirmação de recorrência de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
+     *
+     * @param {{
+     *  idSolicRec: string
+     * }} params
+     *
+     * @returns {Promise<{
+     *  idSolicRec: string,
+     *  idRec: string,
+     *  calendario: {
+     *  dataExpiracaoSolicitacao: string,
+     * },
+     * status: string,
+     * destinatario: {
+     *  cpf?: string,
+     *  cnpj?: string,
+     *  conta: string,
+     *  agencia: string,
+     *  ispbParticipante: string
+     * },
+     * atualizacao: Array<{
+     *  status: string,
+     * data: string
+     * }>
+     * }>}
+     */
+    pixDetailRequestRecurrenceAutomatic(params: {
+        idSolicRec: string;
+    }): Promise<{
+        idSolicRec: string;
+        idRec: string;
+        calendario: {
+            dataExpiracaoSolicitacao: string;
+        };
+        status: string;
+        destinatario: {
+            cpf?: string;
+            cnpj?: string;
+            conta: string;
+            agencia: string;
+            ispbParticipante: string;
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **PATCH /v2/solicrec/:idSolicRec**
+     *
+     * Revisar solicitação de confirmação de recorrência de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{
+     *  idSolicRec: string
+     * }} params
+     * @param {{
+     *  status: string,
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idSolicRec: string,
+     *  idRec: string,
+     *  calendario: {
+     *  dataExpiracaoSolicitacao: string,
+     * },
+     * status: string,
+     * destinatario: {
+     *  cpf?: string,
+     *  cnpj?: string,
+     *  conta: string,
+     *  agencia: string,
+     *  ispbParticipante: string
+     * },
+     * atualizacao: Array<{
+     *  status: string,
+     * data: string
+     * }>
+     * }>}
+     */
+    pixUpdateRequestRecurrenceAutomatic(params: {
+        idSolicRec: string;
+    }, body: {
+        status: string;
+    }): Promise<{
+        idSolicRec: string;
+        idRec: string;
+        calendario: {
+            dataExpiracaoSolicitacao: string;
+        };
+        status: string;
+        destinatario: {
+            cpf?: string;
+            cnpj?: string;
+            conta: string;
+            agencia: string;
+            ispbParticipante: string;
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **PUT /v2/cobr/:txid**
+     *
+     * Criar cobrança de Pix Automático (com txid)
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{
+     *  txid: string
+     * }} params
+     * @param {{
+     *  idRec: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *   dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string,
+     * },
+     * ajusteDiaUtil: boolean,
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * }
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  txid: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *  criacao: string,
+     *  dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string
+     * },
+     * status: string,
+     * politicaRetentativa: string,
+     * ajusteDiaUtil: boolean,
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * },
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * atualizacao: Array<{
+     *  status: string,
+     *  data: string
+     * }>
+     * }>}
+     */
+    pixCreateAutomaticChargeTxid(params: {
+        txid: string;
+    }, body: {
+        idRec: string;
+        infoAdicional?: string;
+        calendario: {
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        ajusteDiaUtil: boolean;
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+    }): Promise<{
+        idRec: string;
+        txid: string;
+        infoAdicional?: string;
+        calendario: {
+            criacao: string;
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        status: string;
+        politicaRetentativa: string;
+        ajusteDiaUtil: boolean;
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **PATCH /v2/cobr/:txid**
+     *
+     * Revisar cobrança de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{
+     *  txid: string
+     * }} params
+     *
+     * @param {{
+     *  status: string,
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  txid: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *  criacao: string,
+     *  dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string
+     * },
+     * status: string,
+     * politicaRetentativa: string,
+     * ajusteDiaUtil: boolean,
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * },
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * tentativas?: Array<{
+     *  dataLiquidacao: string,
+     *  tipo: string,
+     *  endToEndId: string,
+     *  status: string,
+     * }>,
+     * encerramento: {
+     *  cancelamento: {
+     *   solicitante: string,
+     *   codigo: string,
+     *   descricao: string
+     * }
+     * }
+     * atualizacao: Array<{
+     *  status: string,
+     *  data: string
+     * }>
+     * }>}
+     */
+    pixUpdateAutomaticCharge(params: {
+        txid: string;
+    }, body: {
+        status: string;
+    }): Promise<{
+        idRec: string;
+        txid: string;
+        infoAdicional?: string;
+        calendario: {
+            criacao: string;
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        status: string;
+        politicaRetentativa: string;
+        ajusteDiaUtil: boolean;
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        tentativas?: Array<{
+            dataLiquidacao: string;
+            tipo: string;
+            endToEndId: string;
+            status: string;
+        }>;
+        encerramento: {
+            cancelamento: {
+                solicitante: string;
+                codigo: string;
+                descricao: string;
+            };
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **GET /v2/cobr/:txid**
+     *
+     * Consultar cobrança de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{
+     *  txid: string
+     * }} params
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  txid: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *  criacao: string,
+     *  dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string
+     * },
+     * status: string,
+     * politicaRetentativa: string,
+     * ajusteDiaUtil: boolean,
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * },
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * tentativas?: Array<{
+     *  dataLiquidacao: string,
+     *  tipo: string,
+     *  endToEndId: string,
+     *  status: string,
+     * }>,
+     * encerramento: {
+     *  cancelamento: {
+     *   solicitante: string,
+     *   codigo: string,
+     *   descricao: string
+     * }
+     * }
+     * atualizacao: Array<{
+     *  status: string,
+     *  data: string
+     * }>
+     * }>}
+     */
+    pixDetailAutomaticCharge(params: {
+        txid: string;
+    }): Promise<{
+        idRec: string;
+        txid: string;
+        infoAdicional?: string;
+        calendario: {
+            criacao: string;
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        status: string;
+        politicaRetentativa: string;
+        ajusteDiaUtil: boolean;
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        tentativas?: Array<{
+            dataLiquidacao: string;
+            tipo: string;
+            endToEndId: string;
+            status: string;
+        }>;
+        encerramento: {
+            cancelamento: {
+                solicitante: string;
+                codigo: string;
+                descricao: string;
+            };
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **POST /v2/cobr**
+     *
+     * Criar cobrança de Pix Automático (sem txid)
+     *
+     * @param {{}} params
+     *
+     * @param {{
+     *  idRec: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *   dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string,
+     * },
+     * ajusteDiaUtil: boolean,
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * }
+     * }} body
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  txid: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *  criacao: string,
+     *  dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string
+     * },
+     * status: string,
+     * politicaRetentativa: string,
+     * ajusteDiaUtil: boolean,
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * },
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * atualizacao: Array<{
+     *  status: string,
+     *  data: string
+     * }>
+     * }>}
+     */
+    pixCreateAutomaticCharge(params: {}, body: {
+        idRec: string;
+        infoAdicional?: string;
+        calendario: {
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        ajusteDiaUtil: boolean;
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+    }): Promise<{
+        idRec: string;
+        txid: string;
+        infoAdicional?: string;
+        calendario: {
+            criacao: string;
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        status: string;
+        politicaRetentativa: string;
+        ajusteDiaUtil: boolean;
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **GET /v2/cobr**
+     *
+     * Consultar lista de cobranças de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     *
+     * @param {{
+     *  inicio: string,
+     *  fim: string,
+     *  idRec?: string,
+     *  cpf?: string,
+     *  cnpj?: string,
+     *  status?: string,
+     *  convenio?: string,
+     *  "paginacao.itensPorPagina"?: number,
+     *  "paginacao.paginaAtual"?: number
+     * }} params
+     *
+     * @returns {Promise<{
+     *  parametros: {
+     *   inicio: string,
+     *  fim: string,
+     *  paginacao: {
+     *   paginaAtual: number,
+     *  itensPorPagina: number,
+     *  quantidadeDePaginas: number,
+     *  quantidadeTotalDeItens: number
+     *  }
+     * },
+     * cobsr: Array<{
+     *  idRec: string,
+     *  txid: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *  criacao: string,
+     *  dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string
+     * },
+     * status: string,
+     * politicaRetentativa: string,
+     * ajusteDiaUtil: boolean,
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * },
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * tentativas?: Array<{
+     *  dataLiquidacao: string,
+     *  tipo: string,
+     *  endToEndId: string,
+     *  status: string,
+     * }>,
+     * encerramento: {
+     *  cancelamento: {
+     *   solicitante: string,
+     *   codigo: string,
+     *   descricao: string
+     * }
+     * }
+     * atualizacao: Array<{
+     *  status: string,
+     *  data: string
+     * }>
+     * }>
+     * }>}
+     */
+    pixListAutomaticCharge(params: {
+        inicio: string;
+        fim: string;
+        idRec?: string;
+        cpf?: string;
+        cnpj?: string;
+        status?: string;
+        convenio?: string;
+        "paginacao.itensPorPagina"?: number;
+        "paginacao.paginaAtual"?: number;
+    }): Promise<{
+        parametros: {
+            inicio: string;
+            fim: string;
+            paginacao: {
+                paginaAtual: number;
+                itensPorPagina: number;
+                quantidadeDePaginas: number;
+                quantidadeTotalDeItens: number;
+            };
+        };
+        cobsr: Array<{
+            idRec: string;
+            txid: string;
+            infoAdicional?: string;
+            calendario: {
+                criacao: string;
+                dataDeVencimento: string;
+            };
+            valor: {
+                original: string;
+            };
+            status: string;
+            politicaRetentativa: string;
+            ajusteDiaUtil: boolean;
+            devedor?: {
+                email?: string;
+                logradouro?: string;
+                cidade?: string;
+                uf?: string;
+                cep?: string;
+            };
+            recebedor: {
+                conta: string;
+                tipoConta: string;
+                agencia: string;
+            };
+            tentativas?: Array<{
+                dataLiquidacao: string;
+                tipo: string;
+                endToEndId: string;
+                status: string;
+            }>;
+            encerramento: {
+                cancelamento: {
+                    solicitante: string;
+                    codigo: string;
+                    descricao: string;
+                };
+            };
+            atualizacao: Array<{
+                status: string;
+                data: string;
+            }>;
+        }>;
+    }>;
+    /**
+     *
+     * **POST /v2/cobr/:txid/retentativa/:data**
+     *
+     * Solicitar retentativa de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     *
+     * @param {{
+     *  txid: string,
+     *  data: string
+     * }} params
+     *
+     * @returns {Promise<{
+     *  idRec: string,
+     *  txid: string,
+     *  infoAdicional?: string,
+     *  calendario: {
+     *  criacao: string,
+     *  dataDeVencimento: string,
+     * },
+     * valor: {
+     *  original: string
+     * },
+     * status: string,
+     * politicaRetentativa: string,
+     * ajusteDiaUtil: boolean,
+     * devedor?: {
+     *  email?: string,
+     *  logradouro?: string,
+     *  cidade?: string,
+     *  uf?: string,
+     *  cep?: string,
+     * },
+     * recebedor: {
+     *  conta: string,
+     *  tipoConta: string,
+     *  agencia: string,
+     * },
+     * tentativas?: Array<{
+     *  dataLiquidacao: string,
+     *  tipo: string,
+     *  endToEndId: string,
+     *  status: string,
+     * }>,
+     * atualizacao: Array<{
+     *  status: string,
+     *  data: string
+     * }>
+     * }>}
+     */
+    pixRetryRequestAutomaticCharge(params: {
+        txid: string;
+        data: string;
+    }): Promise<{
+        idRec: string;
+        txid: string;
+        infoAdicional?: string;
+        calendario: {
+            criacao: string;
+            dataDeVencimento: string;
+        };
+        valor: {
+            original: string;
+        };
+        status: string;
+        politicaRetentativa: string;
+        ajusteDiaUtil: boolean;
+        devedor?: {
+            email?: string;
+            logradouro?: string;
+            cidade?: string;
+            uf?: string;
+            cep?: string;
+        };
+        recebedor: {
+            conta: string;
+            tipoConta: string;
+            agencia: string;
+        };
+        tentativas?: Array<{
+            dataLiquidacao: string;
+            tipo: string;
+            endToEndId: string;
+            status: string;
+        }>;
+        atualizacao: Array<{
+            status: string;
+            data: string;
+        }>;
+    }>;
+    /**
+     * **POST /v2/locrec**
+     *
+     * Criar location do payload de recorrência de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     *
+     * @returns {Promise<{
+     *  id: number,
+     *  location: string,
+     *  criacao: string,
+     * }>}
+     */
+    pixCreateLocationRecurrenceAutomatic(): Promise<{
+        id: number;
+        location: string;
+        criacao: string;
+    }>;
+    /**
+     * **GET /v2/locrec**
+     *
+     * Consultar locations de recorrência de Pix Automático cadastradas
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{
+     *  inicio: string,
+     *  fim: string,
+     *  idRecPresente?: boolean,
+     *  convenio?: string,
+     *  "paginacao.itensPorPagina"?: number,
+     *  "paginacao.paginaAtual"?: number
+     * }} params
+     *
+     * @returns {Promise<{
+     *  parametros: {
+     *  inicio: string,
+     * fim: string,
+     * paginacao: {
+     * paginaAtual: number,
+     * itensPorPagina: number,
+     * quantidadeDePaginas: number,
+     * quantidadeTotalDeItens: number
+     * }
+     * },
+     * loc: Array<{
+     *  id: number,
+     *  location: string,
+     *  criacao: string,
+     *  idRec: string,
+     * }>
+     * }>}
+     */
+    pixListLocationRecurrenceAutomatic(params: {
+        inicio: string;
+        fim: string;
+        idRecPresente?: boolean;
+        convenio?: string;
+        "paginacao.itensPorPagina"?: number;
+        "paginacao.paginaAtual"?: number;
+    }): Promise<{
+        parametros: {
+            inicio: string;
+            fim: string;
+            paginacao: {
+                paginaAtual: number;
+                itensPorPagina: number;
+                quantidadeDePaginas: number;
+                quantidadeTotalDeItens: number;
+            };
+        };
+        loc: Array<{
+            id: number;
+            location: string;
+            criacao: string;
+            idRec: string;
+        }>;
+    }>;
+    /**
+     * **GET /v2/locrec/:id**
+     *
+     * Recuperar location do payload de recorrência de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {
+     *  id: string
+     * } params
+     *
+     * @returns {Promise<{
+     *  id: number,
+     *  location: string,
+     *  criacao: string,
+     *  idRec: string
+     * }>}
+     */
+    pixDetailLocationRecurrenceAutomatic(params: any): Promise<{
+        id: number;
+        location: string;
+        criacao: string;
+        idRec: string;
+    }>;
+    /**
+     * **DELETE /v2/locrec/:id/idRec**
+     *
+     * Desvincular uma recorrência de Pix Automático de um location
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{
+     *  id: string
+     * }} params
+     *
+     * @returns {Promise<{
+     *  id: number,
+     *  location: string,
+     *  criacao: string,
+     * }>}
+     */
+    pixUnlinkLocationRecurrenceAutomatic(params: {
+        id: string;
+    }): Promise<{
+        id: number;
+        location: string;
+        criacao: string;
+    }>;
+    /**
+     *
+     * **PUT /v2/webhookrec**
+     *
+     * Configurar o webhook de recorrência de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  webhookUrl: string,
+     * }} body
+     *
+     * @returns {Promise<void>}
+     */
+    pixConfigWebhookRecurrenceAutomatic(params: {}, body: {
+        webhookUrl: string;
+    }): Promise<void>;
+    /**
+     * **GET /v2/webhookrec**
+     *
+     * Exibir informações do webhook de recorrência de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @returns {Promise<{
+     *  webhookUrl: string,
+     *  criacao: string,
+     * }>}
+     */
+    pixListWebhookRecurrenceAutomatic(): Promise<{
+        webhookUrl: string;
+        criacao: string;
+    }>;
+    /**
+     * **DELETE /v2/webhookrec**
+     *
+     * Cancelar o webhook de recorrência de Pix Automático
+     *
+     * @returns {Promise<void>}
+     *
+     */
+    pixDeleteWebhookRecurrenceAutomatic(): Promise<void>;
+    /**
+     * **PUT /v2/webhookcobr**
+     *
+     * Configurar o webhook de cobrança de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @param {{}} params
+     * @param {{
+     * webhookUrl: string,
+     * }} body
+     *
+     * @returns {Promise<void>}
+     *
+     */
+    pixConfigWebhookAutomaticCharge(params: {}, body: {
+        webhookUrl: string;
+    }): Promise<void>;
+    /**
+     * **GET /v2/webhookcobr**
+     *
+     * Exibir informações do webhook de cobrança de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @returns {Promise<{
+     *  webhookUrl: string,
+     *  criacao: string,
+     * }>}
+     */
+    pixListWebhookAutomaticCharge(): Promise<{
+        webhookUrl: string;
+        criacao: string;
+    }>;
+    /**
+     * **DELETE /v2/webhookcobr**
+     *
+     * Cancelar o webhook de cobrança de Pix Automático
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
+     *
+     * @returns {Promise<void>}
+     *
+     */
+    pixDeleteWebhookAutomaticCharge(): Promise<void>;
 }
 import { CobrancasMethods } from "./cobrancas";

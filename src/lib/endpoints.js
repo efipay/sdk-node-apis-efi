@@ -102,10 +102,6 @@ class Endpoints {
 					config.headers['x-idempotency-key'] = randomstring.generate({ length: 72, charset: 'alphanumeric' })
 				}
 
-				if (endpoint.route === '/v2/gn/pix/comprovantes') {
-					config.responseType = 'arraybuffer';
-				}
-
 				return config
 			},
 			(error) => {
@@ -115,6 +111,10 @@ class Endpoints {
 
 		return this.axiosInstance(req)
 			.then((res) => {
+				// Para a rota de comprovantes, retornar os dados diretamente (arraybuffer)
+				if (req.url.includes('/v2/gn/pix/comprovantes')) {
+					return res.data
+				}
 				return res.data
 			})
 			.catch((error) => {
@@ -134,24 +134,41 @@ class Endpoints {
 						default: throw error
 					}
 				} else {
+					// Para erros na rota de comprovantes, tratar normalmente (não como arraybuffer)
+					let errorData = error.response?.data;
+
+					const errorUrl = error.request.res.responseUrl || '';
+
+					// Se for um arraybuffer (rota de comprovantes), converter para string/JSON
+					if (errorUrl.includes('/v2/gn/pix/comprovantes')) {
+						try {
+							const decoder = new TextDecoder('utf-8');
+							const errorText = decoder.decode(errorData);
+							errorData = JSON.parse(errorText);
+						} catch (parseError) {
+							// Se não conseguir parsear, manter o erro original
+							errorData = error.response?.data;
+						}
+					}
+
 					switch (this.baseUrl) {
 						case this.constants.APIS.DEFAULT.URL.PRODUCTION:
 						case this.constants.APIS.DEFAULT.URL.SANDBOX:
-							throw error.response.data
+							throw errorData
 						case this.constants.APIS.PIX.URL.PRODUCTION:
 						case this.constants.APIS.PIX.URL.SANDBOX:
-							throw error.response.data
+							throw errorData
 						case this.constants.APIS.OPENFINANCE.URL.PRODUCTION:
 						case this.constants.APIS.OPENFINANCE.URL.SANDBOX:
-							throw error.response.data
+							throw errorData
 						case this.constants.APIS.PAGAMENTOS.URL.PRODUCTION:
 						case this.constants.APIS.PAGAMENTOS.URL.SANDBOX:
-							throw error.response.data
+							throw errorData
 						case this.constants.APIS.CONTAS.URL.PRODUCTION:
 						case this.constants.APIS.CONTAS.URL.SANDBOX:
-							throw error.response.data
+							throw errorData
 						default:
-							throw error.response.data
+							throw errorData
 					}
 				}
 			})
@@ -262,6 +279,11 @@ class Endpoints {
 			url: String([this.baseUrl, route, query].join('')),
 			headers,
 			data: body,
+		}
+
+		// Configurar responseType como arraybuffer para a rota de comprovantes
+		if (route.includes('/v2/gn/pix/comprovantes')) {
+			req['responseType'] = 'arraybuffer'
 		}
 
 		if (this.baseUrl != this.constants.APIS.DEFAULT.URL.PRODUCTION && this.baseUrl != this.constants.APIS.DEFAULT.URL.SANDBOX) {
