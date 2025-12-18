@@ -430,6 +430,14 @@ export default {
 					route: '/v2/gn/pix/comprovantes',
 					method: 'get'
 				},
+				pixSendSameOwnership: {
+					route: '/v2/gn/pix/:idEnvio/mesma-titularidade',
+					method: 'put'
+				},
+				pixKeysBucket: {
+					route: '/v2/gn/chaves/balde',
+					method: 'get'
+				},
 				pixDetailRecurrenceAutomatic: {
 					route: '/v2/rec/:idRec',
 					method: 'get'
@@ -522,9 +530,6 @@ export default {
 					route: '/v2/webhookcobr',
 					method: 'delete'
 				}
-
-
-
 			},
 		},
 		OPENFINANCE: {

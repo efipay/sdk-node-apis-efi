@@ -435,6 +435,14 @@ var constants = {
           route: '/v2/gn/pix/comprovantes',
           method: 'get'
         },
+        pixSendSameOwnership: {
+          route: '/v2/gn/pix/:idEnvio/mesma-titularidade',
+          method: 'put'
+        },
+        pixKeysBucket: {
+          route: '/v2/gn/chaves/balde',
+          method: 'get'
+        },
         pixDetailRecurrenceAutomatic: {
           route: '/v2/rec/:idRec',
           method: 'get'
@@ -763,7 +771,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.25";
+var version = "1.2.26";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -830,6 +838,29 @@ class Endpoints {
     this.constants = constants;
     this.authError = null;
     this.axiosInstance = axios.create();
+
+    // Request interceptor
+    this.axiosInstance.interceptors.request.use(async config => {
+      if (!this.auth || this.isExpired()) {
+        this.authError = await this.authenticate();
+      }
+      config.headers = {
+        Authorization: `Bearer ${this.auth.access_token}`,
+        'x-skip-mtls-checking': !this.options.validateMtls
+      };
+      if (this.options.partner_token) {
+        config.headers['partner-token'] = this.options.partner_token;
+      }
+      if (this.baseUrl == this.constants.APIS.OPENFINANCE.URL.PRODUCTION || this.baseUrl == this.constants.APIS.OPENFINANCE.URL.SANDBOX) {
+        config.headers['x-idempotency-key'] = randomstring.generate({
+          length: 72,
+          charset: 'alphanumeric'
+        });
+      }
+      return config;
+    }, error => {
+      Promise.reject(error);
+    });
   }
   run(name, params, body) {
     let endpoint;
@@ -892,29 +923,6 @@ class Endpoints {
   }
   async req(endpoint, body) {
     let req = await this.createRequest(endpoint, body);
-
-    // Request interceptor
-    this.axiosInstance.interceptors.request.use(async config => {
-      if (!this.auth || this.isExpired()) {
-        this.authError = await this.authenticate();
-      }
-      config.headers = {
-        Authorization: `Bearer ${this.auth.access_token}`,
-        'x-skip-mtls-checking': !this.options.validateMtls
-      };
-      if (this.options.partner_token) {
-        config.headers['partner-token'] = this.options.partner_token;
-      }
-      if (this.baseUrl == this.constants.APIS.OPENFINANCE.URL.PRODUCTION || this.baseUrl == this.constants.APIS.OPENFINANCE.URL.SANDBOX) {
-        config.headers['x-idempotency-key'] = randomstring.generate({
-          length: 72,
-          charset: 'alphanumeric'
-        });
-      }
-      return config;
-    }, error => {
-      Promise.reject(error);
-    });
     return this.axiosInstance(req).then(res => {
       // Para a rota de comprovantes, retornar os dados diretamente (arraybuffer)
       if (req.url.includes('/v2/gn/pix/comprovantes')) {

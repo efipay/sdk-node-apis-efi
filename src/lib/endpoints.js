@@ -13,6 +13,32 @@ class Endpoints {
 		this.constants = constants
 		this.authError = null
 		this.axiosInstance = axios.create()
+
+		// Request interceptor
+		this.axiosInstance.interceptors.request.use(
+			async (config) => {
+				if (!this.auth || this.isExpired()) {
+					this.authError = await this.authenticate()
+				}
+
+				config.headers = {
+					Authorization: `Bearer ${this.auth.access_token}`,
+					'x-skip-mtls-checking': !this.options.validateMtls
+				}
+				if (this.options.partner_token) {
+					config.headers['partner-token'] = this.options.partner_token
+				}
+				if (this.baseUrl == this.constants.APIS.OPENFINANCE.URL.PRODUCTION || this.baseUrl == this.constants.APIS.OPENFINANCE.URL.SANDBOX) {
+					config.headers['x-idempotency-key'] = randomstring.generate({ length: 72, charset: 'alphanumeric' })
+				}
+
+				return config
+			},
+			(error) => {
+				Promise.reject(error)
+			},
+		)
+
 	}
 
 	run(name, params, body) {
@@ -84,30 +110,6 @@ class Endpoints {
 	async req(endpoint, body) {
 		let req = await this.createRequest(endpoint, body)
 
-		// Request interceptor
-		this.axiosInstance.interceptors.request.use(
-			async (config) => {
-				if (!this.auth || this.isExpired()) {
-					this.authError = await this.authenticate()
-				}
-
-				config.headers = {
-					Authorization: `Bearer ${this.auth.access_token}`,
-					'x-skip-mtls-checking': !this.options.validateMtls
-				}
-				if (this.options.partner_token) {
-					config.headers['partner-token'] = this.options.partner_token
-				}
-				if (this.baseUrl == this.constants.APIS.OPENFINANCE.URL.PRODUCTION || this.baseUrl == this.constants.APIS.OPENFINANCE.URL.SANDBOX) {
-					config.headers['x-idempotency-key'] = randomstring.generate({ length: 72, charset: 'alphanumeric' })
-				}
-
-				return config
-			},
-			(error) => {
-				Promise.reject(error)
-			},
-		)
 
 		return this.axiosInstance(req)
 			.then((res) => {
