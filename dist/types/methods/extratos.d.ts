@@ -8,16 +8,17 @@ export class ExtratosMethods {
      *
      * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
      *
-     * @returns { Promise <{
+     * @returns { Promise<
      *  Array<{
      *      data_geracao: string,
      *      nome: string
      *  }>
-     * }>}
+     * >}
      */
-    listStatementFiles(): Promise<{
-        Array();
-    }>;
+    listStatementFiles(): Promise<Array<{
+        data_geracao: string;
+        nome: string;
+    }>>;
     /**
      * **GET /v1/extrato-cnab/download/:nome_arquivo**
      *
@@ -43,7 +44,7 @@ export class ExtratosMethods {
      *
      * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
      *
-     * @returns { Promise<{
+     * @returns { Promise<
      *  Array<{
      *      status: string,
      *      periodicidade: string,
@@ -51,12 +52,16 @@ export class ExtratosMethods {
      *      comprimir_arquivos: boolean,
      *      data_criacao: string
      *  }>
-     * }>}
+     * >}
      *
      */
-    listStatementRecurrences(): Promise<{
-        Array();
-    }>;
+    listStatementRecurrences(): Promise<Array<{
+        status: string;
+        periodicidade: string;
+        envia_email: boolean;
+        comprimir_arquivos: boolean;
+        data_criacao: string;
+    }>>;
     /**
      * **POST /v1/extrato-cnab/agendar**
      *

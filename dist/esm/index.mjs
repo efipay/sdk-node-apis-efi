@@ -771,7 +771,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.26";
+var version = "1.2.27";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -1099,12 +1099,12 @@ class ExtratosMethods {
    * 
    * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
    * 
-   * @returns { Promise <{
+   * @returns { Promise<
    *  Array<{
    *      data_geracao: string,
    *      nome: string
    *  }>
-   * }>}
+   * >}
    */
   listStatementFiles() {}
 
@@ -1132,7 +1132,7 @@ class ExtratosMethods {
    * 
    * Para capturar uma falha utilize o `catch`, o campo disponível será `mensagem`.
    * 
-   * @returns { Promise<{
+   * @returns { Promise<
    *  Array<{
    *      status: string,
    *      periodicidade: string,
@@ -1140,7 +1140,7 @@ class ExtratosMethods {
    *      comprimir_arquivos: boolean,
    *      data_criacao: string
    *  }>
-   * }>}
+   * >}
    * 
    */
   listStatementRecurrences() {}
@@ -5234,7 +5234,6 @@ class PixMethods extends CobrancasMethods {
    *  cpf?: string,
    *  cnpj?: string,
    * },
-   * status: string,
    * dadosQR?: {
    *   jornada: string,
    *   pixCopiaECola: string,
@@ -5322,7 +5321,6 @@ class PixMethods extends CobrancasMethods {
    *  cpf?: string,
    *  cnpj?: string,
    * },
-   * status: string,
    * dadosQR?: {
    *   jornada: string,
    *   pixCopiaECola: string,
@@ -5411,7 +5409,6 @@ class PixMethods extends CobrancasMethods {
    *  cpf?: string,
    *  cnpj?: string,
    * },
-   * status: string,
    * dadosQR?: {
    *   jornada: string,
    *   pixCopiaECola: string,
@@ -5466,7 +5463,7 @@ class PixMethods extends CobrancasMethods {
    *  periodicidade: string,
    * }
    * politicaRetentativa: string,
-   * loc?: id,
+   * loc?: number,
    * ativacao?: {
    *  dadosJornada: {
    *  txid: string
@@ -5510,7 +5507,6 @@ class PixMethods extends CobrancasMethods {
    *  cpf?: string,
    *  cnpj?: string,
    * },
-   * status: string,
    * ativacao: {
    *  tipoJornada: string,
    *  dadosJornada?: {
@@ -7213,7 +7209,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    * 
    * @param { { identificadorWebhook: string } } params
    * 
-   * @returns {Promise<{ void }>}
+   * @returns {Promise<void>}
    */
   accountDeleteWebhook(params) {}
 }
@@ -7240,6 +7236,7 @@ class EfiPay extends AllMethods {
   */
   constructor(options) {
     super();
+    const self = this;
     if (options.cache === undefined) {
       options.cache = true;
     }
@@ -7253,7 +7250,7 @@ class EfiPay extends AllMethods {
     });
     let endpoints = new Endpoints(options, constants);
     Object.keys(methods).forEach(function (api) {
-      EfiPay.prototype[api] = function (params, body) {
+      self[api] = function (params, body) {
         return endpoints.run(api, params, body);
       };
     });

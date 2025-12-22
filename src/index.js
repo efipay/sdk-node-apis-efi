@@ -23,6 +23,8 @@ export default class EfiPay extends AllMethods {
 	*/
 	constructor(options) {
 		super()
+		const self = this;
+
 		if (options.cache === undefined) {
 			options.cache = true
 		}
@@ -39,7 +41,7 @@ export default class EfiPay extends AllMethods {
 
 		let endpoints = new Endpoints(options, constants)
 		Object.keys(methods).forEach(function (api) {
-			EfiPay.prototype[api] = function (params, body) {
+			self[api] = function (params, body) {
 				return endpoints.run(api, params, body)
 			}
 		})

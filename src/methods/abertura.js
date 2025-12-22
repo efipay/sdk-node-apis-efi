@@ -159,7 +159,7 @@ export class OpenAccountMethods extends PagamentoDeContasMethods {
      * 
      * @param { { identificadorWebhook: string } } params
      * 
-     * @returns {Promise<{ void }>}
+     * @returns {Promise<void>}
      */
     accountDeleteWebhook(params) { }
 

@@ -2125,7 +2125,6 @@ export class PixMethods extends CobrancasMethods {
      *  cpf?: string,
      *  cnpj?: string,
      * },
-     * status: string,
      * dadosQR?: {
      *   jornada: string,
      *   pixCopiaECola: string,
@@ -2213,7 +2212,6 @@ export class PixMethods extends CobrancasMethods {
      *  cpf?: string,
      *  cnpj?: string,
      * },
-     * status: string,
      * dadosQR?: {
      *   jornada: string,
      *   pixCopiaECola: string,
@@ -2302,7 +2300,6 @@ export class PixMethods extends CobrancasMethods {
      *  cpf?: string,
      *  cnpj?: string,
      * },
-     * status: string,
      * dadosQR?: {
      *   jornada: string,
      *   pixCopiaECola: string,
@@ -2357,7 +2354,7 @@ export class PixMethods extends CobrancasMethods {
      *  periodicidade: string,
      * }
      * politicaRetentativa: string,
-     * loc?: id,
+     * loc?: number,
      * ativacao?: {
      *  dadosJornada: {
      *  txid: string
@@ -2401,7 +2398,6 @@ export class PixMethods extends CobrancasMethods {
      *  cpf?: string,
      *  cnpj?: string,
      * },
-     * status: string,
      * ativacao: {
      *  tipoJornada: string,
      *  dadosJornada?: {
