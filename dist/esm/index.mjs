@@ -771,7 +771,7 @@ var exports = {
 	}
 };
 var description = "Module for integration with Efi Bank API";
-var version = "1.2.27";
+var version = "1.2.28";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
@@ -3252,6 +3252,7 @@ class PixMethods extends CobrancasMethods {
    *     cnpj?: string,
    *     nome: string
    *   },
+   *   status?: string,
    *   valor?: {
    *     original: string
    *   },

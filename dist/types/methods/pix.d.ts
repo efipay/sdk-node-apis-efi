@@ -227,6 +227,7 @@ export class PixMethods extends CobrancasMethods {
      *     cnpj?: string,
      *     nome: string
      *   },
+     *   status?: string,
      *   valor?: {
      *     original: string
      *   },
@@ -274,6 +275,7 @@ export class PixMethods extends CobrancasMethods {
             cnpj?: string;
             nome: string;
         };
+        status?: string;
         valor?: {
             original: string;
         };
