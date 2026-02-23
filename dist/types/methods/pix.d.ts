@@ -1768,7 +1768,7 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixCreateLocation(params: any, body: {
-        tipoCob: 'cob' | 'cobv';
+        tipoCob: "cob" | "cobv";
     }): Promise<{
         id: number;
         location: string;
@@ -3174,7 +3174,7 @@ export class PixMethods extends CobrancasMethods {
             chave?: string;
             status: "ABERTA" | "ACEITA" | "CANCELADA_EFI" | "EM_DEFESA" | "REJEITADA";
             razao: string;
-            tipoSituacao?: "golpe" | "aquisição da conta" | "coerção" | "acesso fraudulento" | "outro" | "desconhecido";
+            tipoSituacao?: "golpe" | "aquisi\u00E7\u00E3o da conta" | "coer\u00E7\u00E3o" | "acesso fraudulento" | "outro" | "desconhecido";
             tipoFraude?: string;
             comentario?: string;
             defesa?: string;
@@ -3343,7 +3343,7 @@ export class PixMethods extends CobrancasMethods {
      *
      */
     pixResendWebhook(params: {}, body: {
-        tipo: 'PIX_RECEBIDO' | 'PIX_ENVIADO' | 'DEVOLUCAO_RECEBIDA' | 'DEVOLUCAO_ENVIADA';
+        tipo: "PIX_RECEBIDO" | "PIX_ENVIADO" | "DEVOLUCAO_RECEBIDA" | "DEVOLUCAO_ENVIADA";
         e2eids: Array<string>;
     }): Promise<void>;
     /**

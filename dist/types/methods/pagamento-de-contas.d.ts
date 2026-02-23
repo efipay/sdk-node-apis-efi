@@ -60,7 +60,7 @@ export class PagamentoDeContasMethods extends OpenFinanceMethods {
     payDetailBarCode(params: {
         codBarras: string;
     }): Promise<{
-        tipo: 'boleto' | 'tributo';
+        tipo: "boleto" | "tributo";
         banco: {
             codigo: number;
             nome: string;

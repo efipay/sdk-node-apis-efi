@@ -2,6 +2,7 @@
 import constants from "./lib/constants"
 import Endpoints from "./lib/endpoints"
 import { AllMethods } from "./methods/index"
+import { createStaticPix } from "./lib/pix-qrcode-estatico"
 
 export default class EfiPay extends AllMethods {
 
@@ -46,5 +47,23 @@ export default class EfiPay extends AllMethods {
 			}
 		})
 	}
+
+	/**
+	 * Método para gerar o payload do PIX Estático e a imagem do QR Code em base64, retornando um objeto com os campos `qrcode` e `imagemQrcode`. O payload é gerado seguindo as especificações do Banco Central para o BRCode, incluindo a estrutura TLV e o cálculo do CRC-16 CCITT. A imagem do QR Code é gerada a partir do payload utilizando a biblioteca `qrcode`.
+	 * 
+	 * @param {Object} pixData
+	 * @param {string} pixData.chave - Chave PIX (CPF, CNPJ, e-mail, telefone ou chave aleatória)
+	 * @param {string} pixData.merchantName - Nome do recebedor (máx. 25 caracteres)
+	 * @param {string} pixData.merchantCity - Cidade do recebedor (máx. 15 caracteres)
+	 * @param {number} [pixData.transactionAmount] - Valor da transação (ex: 10.50). Opcional.
+	 * @param {string} [pixData.txid='***'] - Identificador da transação (máx. 25 caracteres)
+	 * @param {string} [pixData.infoAdicional] - Informação adicional no MAI do PIX
+	 * @param {boolean} [pixData.oneTime=false] - Se true, o QR Code é de pagamento único 
+	 * @returns {Promise<{ qrcode: string, imagemQrcode: string }>} - Retorna o payload do PIX e a imagem do QR Code em base64
+	 */
+	async pixGenerateStaticQRCode(pixData) {
+		return createStaticPix(pixData);
+	}
+
 
 }

@@ -191,11 +191,11 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 expire_at: string;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 conditional_discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                     until_date: string;
                 };
@@ -204,7 +204,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     fine?: number;
                     interest?: {
                         value: number;
-                        type: 'monthly' | 'daily';
+                        type: "monthly" | "daily";
                     } | number;
                 };
                 message?: string;
@@ -232,7 +232,7 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 installments: number;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 billing_address?: {
@@ -495,11 +495,11 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 expire_at: string;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 conditional_discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                     until_date: string;
                 };
@@ -508,7 +508,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     fine?: number;
                     interest?: {
                         value: number;
-                        type: 'monthly' | 'daily';
+                        type: "monthly" | "daily";
                     } | number;
                 };
                 message?: string;
@@ -536,7 +536,7 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 installments: number;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 billing_address: {
@@ -572,7 +572,7 @@ export class CobrancasMethods extends ExtratosMethods {
             expire_at?: string;
             configurations?: {
                 days_to_write_off: number;
-                interest_type?: 'monthly' | 'daily';
+                interest_type?: "monthly" | "daily";
                 interest?: number;
                 fine?: number;
             };
@@ -782,7 +782,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     expire_at: string;
                     configurations?: {
                         days_to_write_off?: number;
-                        interest_type?: 'monthly' | 'daily';
+                        interest_type?: "monthly" | "daily";
                         interest?: number;
                         fine?: number;
                     };
@@ -888,9 +888,9 @@ export class CobrancasMethods extends ExtratosMethods {
     listCharges(params: {
         begin_date: string;
         end_date: string;
-        charge_type: 'billet' | 'card' | 'carnet' | 'subscription';
-        status?: 'new' | 'waiting' | 'link' | 'paid' | 'unpaid' | 'canceled' | 'identified' | 'settled';
-        date_of?: 'creation' | 'payment' | 'expired';
+        charge_type: "billet" | "card" | "carnet" | "subscription";
+        status?: "new" | "waiting" | "link" | "paid" | "unpaid" | "canceled" | "identified" | "settled";
+        date_of?: "creation" | "payment" | "expired";
         customer_document?: string;
         custom_id?: string;
         value?: number;
@@ -934,7 +934,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     link: string;
                     configurations: {
                         days_to_write_off: number;
-                        interest_type?: 'monthly' | 'daily';
+                        interest_type?: "monthly" | "daily";
                         interest: number;
                         fine: number;
                     };
@@ -947,12 +947,12 @@ export class CobrancasMethods extends ExtratosMethods {
                 billet_discount: number | null;
                 card_discount: number | null;
                 conditional_discount_value: number | null;
-                conditional_discount_type: 'percentage' | 'currency' | null;
+                conditional_discount_type: "percentage" | "currency" | null;
                 conditional_discount_date: string | null;
                 message: string | null;
                 expire_at: string;
                 request_delivery_address: boolean;
-                payment_method: 'banking_billet' | 'credit_card' | 'all';
+                payment_method: "banking_billet" | "credit_card" | "all";
                 payment_url: string;
             };
         }>;
@@ -1275,7 +1275,7 @@ export class CobrancasMethods extends ExtratosMethods {
      */
     getInstallments(params: {
         total: number;
-        brand: 'visa' | 'mastercard' | 'amex' | 'elo' | 'hipercard';
+        brand: "visa" | "mastercard" | "amex" | "elo" | "hipercard";
     }): Promise<{
         code: number;
         data: {
@@ -1421,16 +1421,16 @@ export class CobrancasMethods extends ExtratosMethods {
             fine?: number;
             interest?: {
                 value: number;
-                type: 'monthly' | 'daily';
+                type: "monthly" | "daily";
             } | number;
         };
         message?: string;
         discount?: {
-            type: 'percentage' | 'currency';
+            type: "percentage" | "currency";
             value: number;
         };
         conditional_discount?: {
-            type: 'percentage' | 'currency';
+            type: "percentage" | "currency";
             value: number;
             until_date: string;
         };
@@ -1553,7 +1553,7 @@ export class CobrancasMethods extends ExtratosMethods {
                 expire_at: string;
                 configurations?: {
                     days_to_write_off?: number;
-                    interest_type?: 'monthly' | 'daily';
+                    interest_type?: "monthly" | "daily";
                     interest?: number;
                     fine?: number;
                 };
@@ -2092,11 +2092,11 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 expire_at: string;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 conditional_discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                     until_date: string;
                 };
@@ -2104,7 +2104,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     fine?: number;
                     interest?: {
                         value: number;
-                        type: 'monthly' | 'daily';
+                        type: "monthly" | "daily";
                     } | number;
                 };
                 message?: string;
@@ -2141,7 +2141,7 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 payment_token: string;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 message?: string;
@@ -2398,11 +2398,11 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 expire_at: string;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 conditional_discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                     until_date: string;
                 };
@@ -2410,7 +2410,7 @@ export class CobrancasMethods extends ExtratosMethods {
                     fine?: number;
                     interest?: {
                         value: number;
-                        type: 'monthly' | 'daily';
+                        type: "monthly" | "daily";
                     } | number;
                 };
                 message?: string;
@@ -2447,7 +2447,7 @@ export class CobrancasMethods extends ExtratosMethods {
                 };
                 payment_token: string;
                 discount?: {
-                    type: 'percentage' | 'currency';
+                    type: "percentage" | "currency";
                     value: number;
                 };
                 message?: string;
@@ -2634,14 +2634,14 @@ export class CobrancasMethods extends ExtratosMethods {
             billet_discount?: number;
             card_discount?: number;
             conditional_discount?: {
-                type: 'percentage' | 'currency';
+                type: "percentage" | "currency";
                 value: number;
                 until_date: string;
             };
             message?: string;
             expire_at: string;
             request_delivery_address: boolean;
-            payment_method: 'banking_billet' | 'credit_card' | 'all';
+            payment_method: "banking_billet" | "credit_card" | "all";
         };
     }): Promise<{
         code: number;
@@ -2942,14 +2942,14 @@ export class CobrancasMethods extends ExtratosMethods {
             billet_discount?: number;
             card_discount?: number;
             conditional_discount?: {
-                type: 'percentage' | 'currency';
+                type: "percentage" | "currency";
                 value: number;
                 until_date: string;
             };
             message?: string;
             expire_at: string;
             request_delivery_address: boolean;
-            payment_method: 'banking_billet' | 'credit_card' | 'all';
+            payment_method: "banking_billet" | "credit_card" | "all";
         };
     }): Promise<{
         code: number;
@@ -3017,14 +3017,14 @@ export class CobrancasMethods extends ExtratosMethods {
         billet_discount?: number;
         card_discount?: number;
         conditional_discount?: {
-            type: 'percentage' | 'currency';
+            type: "percentage" | "currency";
             value: number;
             until_date: string;
         };
         message?: string;
         expire_at: string;
         request_delivery_address: boolean;
-        payment_method: 'banking_billet' | 'credit_card' | 'all';
+        payment_method: "banking_billet" | "credit_card" | "all";
     }): Promise<{
         code: number;
         data: {
@@ -3036,7 +3036,7 @@ export class CobrancasMethods extends ExtratosMethods {
             payment_method: string;
             conditional_discount_date: string | null;
             conditional_discount_value?: number;
-            conditional_discount_type?: 'percentage' | 'currency';
+            conditional_discount_type?: "percentage" | "currency";
             billet_discount?: number;
             card_discount?: number;
             created_at: string;
@@ -3088,14 +3088,14 @@ export class CobrancasMethods extends ExtratosMethods {
         billet_discount?: number;
         card_discount?: number;
         conditional_discount?: {
-            type: 'percentage' | 'currency';
+            type: "percentage" | "currency";
             value: number;
             until_date: string;
         };
         message?: string;
         expire_at: string;
         request_delivery_address: boolean;
-        payment_method: 'banking_billet' | 'credit_card' | 'all';
+        payment_method: "banking_billet" | "credit_card" | "all";
     }): Promise<{
         code: number;
         data: {
@@ -3107,7 +3107,7 @@ export class CobrancasMethods extends ExtratosMethods {
             payment_method: string;
             conditional_discount_date: string | null;
             conditional_discount_value?: number;
-            conditional_discount_type?: 'percentage' | 'currency';
+            conditional_discount_type?: "percentage" | "currency";
             billet_discount?: number;
             card_discount?: number;
             created_at: string;

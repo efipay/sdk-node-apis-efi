@@ -18,7 +18,7 @@ export class OpenFinanceMethods extends PixMethods {
         redirectURL: string;
         webhookURL: string;
         webhookSecurity: {
-            type: 'mtls' | 'hmac';
+            type: "mtls" | "hmac";
         };
     }>;
     /**
@@ -56,15 +56,15 @@ export class OpenFinanceMethods extends PixMethods {
         redirectURL: string;
         webhookURL: string;
         webhookSecurity?: {
-            type: 'mtls' | 'hmac';
+            type: "mtls" | "hmac";
             hash?: string;
         };
-        processPayment?: 'async' | 'sync';
+        processPayment?: "async" | "sync";
     }): Promise<{
         redirectURL: string;
         webhookURL: string;
         webhookSecurity: {
-            type: 'mtls' | 'hmac';
+            type: "mtls" | "hmac";
             hash?: string;
         };
     }>;
@@ -101,7 +101,7 @@ export class OpenFinanceMethods extends PixMethods {
         nome?: string;
         organizacao?: boolean;
         modalidade?: string;
-        tipoPessoa?: 'PJ' | 'PF';
+        tipoPessoa?: "PJ" | "PF";
     }): Promise<{
         participantes: Array<{
             identificador: string;
@@ -306,7 +306,7 @@ export class OpenFinanceMethods extends PixMethods {
                 agencia: string;
                 documento: string;
                 nome: string;
-                tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN';
+                tipoConta: "CACC" | "SLRY" | "SVGS" | "TRAN";
             };
         };
         pagamento: {
@@ -512,7 +512,7 @@ export class OpenFinanceMethods extends PixMethods {
                 agencia: string;
                 documento: string;
                 nome: string;
-                tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN';
+                tipoConta: "CACC" | "SLRY" | "SVGS" | "TRAN";
             };
         };
         pagamento: {
@@ -521,7 +521,7 @@ export class OpenFinanceMethods extends PixMethods {
             infoPagador?: string;
             idProprio?: string;
             recorrencia: {
-                tipo: 'diaria' | 'semanal' | 'mensal' | 'personalizada';
+                tipo: "diaria" | "semanal" | "mensal" | "personalizada";
                 dataInicio?: string;
                 quantidade?: number;
                 diaDaSemana?: string;
@@ -836,7 +836,7 @@ export class OpenFinanceMethods extends PixMethods {
                 codigoBanco: string;
                 agencia: string;
                 conta: string;
-                tipoConta: 'CACC' | 'SVGS' | 'TRAN';
+                tipoConta: "CACC" | "SVGS" | "TRAN";
             };
             chave?: string;
         };
@@ -887,20 +887,20 @@ export class OpenFinanceMethods extends PixMethods {
     ofListBiometricPixPayment(params: {
         inicio: string;
         fim: string;
-        status?: 'pendente' | 'rejeitado' | 'aceito' | 'expirado' | 'cancelado';
+        status?: "pendente" | "rejeitado" | "aceito" | "expirado" | "cancelado";
         identificador?: string;
     }, body: {}): Promise<{
         vinculos: Array<{
             identificadorPagamento: string;
             endToEndId: string;
             valor: string;
-            status: 'pendente' | 'rejeitado' | 'aceito' | 'expirado';
+            status: "pendente" | "rejeitado" | "aceito" | "expirado";
             dataCriacao: string;
             idProprio: string;
             devolucoes?: Array<{
                 identificadorDevolucao: string;
                 valor: string;
-                status: 'pendente' | 'rejeitado' | 'aceito';
+                status: "pendente" | "rejeitado" | "aceito";
                 dataCriacao: string;
             }>;
         }>;

@@ -51,7 +51,7 @@ export class OpenAccountMethods extends PagamentoDeContasMethods {
             razaoSocial?: string;
             endereco: {
                 cep: string;
-                estado: 'AC' | 'AL' | 'AP' | 'AM' | 'BA' | 'CE' | 'DF' | 'ES' | 'GO' | 'MA' | 'MT' | 'MS' | 'MG' | 'PA' | 'PB' | 'PR' | 'PE' | 'PI' | 'RJ' | 'RN' | 'RS' | 'RO' | 'RR' | 'SC' | 'SP' | 'SE' | 'TO';
+                estado: "AC" | "AL" | "AP" | "AM" | "BA" | "CE" | "DF" | "ES" | "GO" | "MA" | "MT" | "MS" | "MG" | "PA" | "PB" | "PR" | "PE" | "PI" | "RJ" | "RN" | "RS" | "RO" | "RR" | "SC" | "SP" | "SE" | "TO";
                 cidade: string;
                 bairro: string;
                 logradouro: string;
@@ -59,7 +59,7 @@ export class OpenAccountMethods extends PagamentoDeContasMethods {
                 complemento?: string;
             };
         };
-        meioDeNotificacao: Array<'sms' | 'whatsapp'>;
+        meioDeNotificacao: Array<"sms" | "whatsapp">;
         escoposIntegrados: Array<string>;
     }): Promise<{
         contaSimplificada: {
