@@ -3378,7 +3378,8 @@ export class PixMethods extends CobrancasMethods {
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e `violacoes`.
      *
      * @param {{
-     *  idRec: string
+     *  idRec: string,
+     *  txid?: string
      * }} params
      *
      * @returns {Promise<{
@@ -3440,6 +3441,7 @@ export class PixMethods extends CobrancasMethods {
      */
     pixDetailRecurrenceAutomatic(params: {
         idRec: string;
+        txid?: string;
     }): Promise<{
         idRec: string;
         status: string;
