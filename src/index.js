@@ -3,6 +3,7 @@ import constants from "./lib/constants"
 import Endpoints from "./lib/endpoints"
 import { AllMethods } from "./methods/index"
 import { createStaticPix } from "./lib/pix-qrcode-estatico"
+import { getDecodedPixJwt } from "pix-qr-code-detail"
 
 export default class EfiPay extends AllMethods {
 
@@ -63,6 +64,60 @@ export default class EfiPay extends AllMethods {
 	 */
 	async pixGenerateStaticQRCode(pixData) {
 		return createStaticPix(pixData);
+	}
+
+	/**
+	 * Decodifica localmente um QR Code Pix dinâmico, sem chamada à API Efí.
+	 * O método extrai a URL do payload do BR Code, baixa o JWT e retorna apenas o payload decodificado.
+	 *
+	 * @param {{}} params
+	 * @param {{ pixCopiaECola: string }} body
+	 * @returns {Promise<{
+	 * 	tipoCob: 'cobv',
+	 *  calendario: {
+	 * 		criacao: string,
+	 * 		apresentacao: string,
+	 * 		dataDeVencimento: string,
+	 *      validadeAposVencimento: number
+	 * 	},
+	 *  devedor: {nome: string, cpf: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} | {nome: string, cnpj: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} 
+	 *  recebedor: {nome: string, cnpj: string, logradouro: string, cidade: string, uf: string, cep: string} | {nome: string, cpf: string, logradouro: string, cidade: string, uf: string, cep: string}
+	 *  txid: string,
+	 *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+	 *  revisao: number,
+	 *  valor: {original?: string, juros?: string, multa?: string, desconto?: string, abatimento?: string, final: string}, 
+	 *  chave: string,
+	 *  solicitacaoPagador?: string,
+	 *  infoAdicionais?: {nome: string, valor: string}[],
+	 * } 
+	 * | 
+	 * {
+	 * 	tipoCob: 'cob',
+	 *  calendario: {
+	 * 		criacao: string,
+	 * 		apresentacao: string,
+	 * 		expiracao: string,
+	 * 	},
+	 *  devedor: {nome: string, cpf: string} | {nome: string, cnpj: string} 
+	 *  recebedor: {nome: string, cnpj: string} | {nome: string, cpf: string}
+	 *  txid: string,
+	 *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+	 *  revisao: number,
+	 *  valor: {final: string}, 
+	 *  chave: string,
+	 *  solicitacaoPagador?: string,
+	 *  infoAdicionais?: {nome: string, valor: string}[],
+	 * }
+	 * | 
+	 * string>}
+	 */
+	async pixQrCodeDetail(params, body) {
+		if (!body || typeof body.pixCopiaECola !== 'string' || body.pixCopiaECola.trim() === '') {
+			throw new Error('O campo "pixCopiaECola" é obrigatório e deve ser uma string.')
+		}
+		const decoded = await getDecodedPixJwt(body.pixCopiaECola)
+		const tipoCob = body.pixCopiaECola.includes('/cobv/') ? 'cobv' : 'cob'
+		return { tipoCob, ...decoded.payload }
 	}
 
 

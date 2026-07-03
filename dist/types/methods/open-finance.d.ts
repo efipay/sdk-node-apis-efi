@@ -147,8 +147,8 @@ export class OpenFinanceMethods extends PixMethods {
      *      }>,
      *      idProprio?: string,
      *   }>,
-     *  total: string,
-     *  porPagina: string,
+     *  total: number,
+     *  porPagina: number,
      *  ultimo: string,
      *  proximo: string | null,
      *  anterior: string | null,
@@ -177,8 +177,8 @@ export class OpenFinanceMethods extends PixMethods {
             }>;
             idProprio?: string;
         }>;
-        total: string;
-        porPagina: string;
+        total: number;
+        porPagina: number;
         ultimo: string;
         proximo: string | null;
         anterior: string | null;
@@ -198,31 +198,58 @@ export class OpenFinanceMethods extends PixMethods {
      *      cpf: string,
      *      cnpj?: string,
      *  },
-     *  favorecido: {
-     *      contaBanco: {
+     *  favorecido?: {
+     *      contaBanco?: {
      *          codigoBanco: string,
      *          agencia: string,
      *          documento: string,
      *          nome: string,
+     *          conta: string,
      *          tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN'
-     *      }
+     *      },
+     *      chave?: string
      *  },
-     *  detalhes: {
+     *  pagamento: {
      *      valor: string,
      *      idProprio?: string,
      *      infoPagador?: string,
-     *      dataAgendamento?: string,
      *      codigoCidadeIBGE?: string,
+     *      qrCode?: string,
+     *      identificadorTransacao?: string,
      *  }
-     *
-     *  }} body
+     * }} body
      *
      * @returns { Promise<{
      *  identificadorPagamento: string,
      *  redirectURI: string,
      * }> }
      */
-    ofStartPixPayment(params: {}, body: any): Promise<{
+    ofStartPixPayment(params: {}, body: {
+        pagador: {
+            idParticipante: string;
+            cpf: string;
+            cnpj?: string;
+        };
+        favorecido?: {
+            contaBanco?: {
+                codigoBanco: string;
+                agencia: string;
+                documento: string;
+                nome: string;
+                conta: string;
+                tipoConta: "CACC" | "SLRY" | "SVGS" | "TRAN";
+            };
+            chave?: string;
+        };
+        pagamento: {
+            valor: string;
+            idProprio?: string;
+            infoPagador?: string;
+            codigoCidadeIBGE?: string;
+            qrCode?: string;
+            identificadorTransacao?: string;
+        };
+    }): Promise<{
         identificadorPagamento: string;
         redirectURI: string;
     }>;
@@ -242,7 +269,8 @@ export class OpenFinanceMethods extends PixMethods {
      *
      * @returns { Promise<{
      *  identificadorPagamento: string,
-     *  valorDevolucao: string,
+     *  endToEndId: string,
+     *  valor: string,
      *  dataCriacao: string,
      *  status: string,
      * }>}
@@ -253,7 +281,8 @@ export class OpenFinanceMethods extends PixMethods {
         valor: string;
     }): Promise<{
         identificadorPagamento: string;
-        valorDevolucao: string;
+        endToEndId: string;
+        valor: string;
         dataCriacao: string;
         status: string;
     }>;
@@ -271,21 +300,25 @@ export class OpenFinanceMethods extends PixMethods {
      *      cpf: string,
      *      cnpj?: string,
      *  },
-     *  favorecido: {
-     *      contaBanco: {
+     *  favorecido?: {
+     *      contaBanco?: {
      *          codigoBanco: string,
      *          agencia: string,
      *          documento: string,
      *          nome: string,
+     *          conta: string,
      *          tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN'
-     *      }
+     *      },
+     *      chave?: string
      *  },
      *  pagamento: {
      *     valor: string,
      *     codigoCidadeIBGE?: string,
      *     infoPagador?: string,
      *     idProprio?: string,
-     *     dataAgendamento: string,
+     *     dataAgendamento?: string,
+     *     qrCode?: string,
+     *     identificadorTransacao?: string,
      *  }
      * }} body
      *
@@ -300,21 +333,25 @@ export class OpenFinanceMethods extends PixMethods {
             cpf: string;
             cnpj?: string;
         };
-        favorecido: {
-            contaBanco: {
+        favorecido?: {
+            contaBanco?: {
                 codigoBanco: string;
                 agencia: string;
                 documento: string;
                 nome: string;
+                conta: string;
                 tipoConta: "CACC" | "SLRY" | "SVGS" | "TRAN";
             };
+            chave?: string;
         };
         pagamento: {
             valor: string;
             codigoCidadeIBGE?: string;
             infoPagador?: string;
             idProprio?: string;
-            dataAgendamento: string;
+            dataAgendamento?: string;
+            qrCode?: string;
+            identificadorTransacao?: string;
         };
     }): Promise<{
         identificadorPagamento: string;
@@ -402,21 +439,17 @@ export class OpenFinanceMethods extends PixMethods {
      * }} params
      *
      * @returns { Promise<{
-     *  pagamentos: {
-     *    identificadorPagamento: string,
-     *    status: string,
-     *    dataCancelamento: string,
-     *  }
+     *  identificadorPagamento: string,
+     *  status: string,
+     *  dataCancelamento: string,
      * }> }
      */
     ofCancelSchedulePix(params: {
         identificadorPagamento: string;
     }): Promise<{
-        pagamentos: {
-            identificadorPagamento: string;
-            status: string;
-            dataCancelamento: string;
-        };
+        identificadorPagamento: string;
+        status: string;
+        dataCancelamento: string;
     }>;
     /**
      * **POST /v1/pagamentos-agendados/pix/:identificadorPagamento/devolver**
@@ -426,7 +459,7 @@ export class OpenFinanceMethods extends PixMethods {
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
      *
      * @param {{ identificadorPagamento: string }} params
-     * @param {{ valor: string }} body
+     * @param {{ endToEndId: string, valor: string }} body
      *
      * @returns { Promise<{
      *  identificadorPagamento: string,
@@ -439,6 +472,7 @@ export class OpenFinanceMethods extends PixMethods {
     ofDevolutionSchedulePix(params: {
         identificadorPagamento: string;
     }, body: {
+        endToEndId: string;
         valor: string;
     }): Promise<{
         identificadorPagamento: string;
@@ -469,27 +503,30 @@ export class OpenFinanceMethods extends PixMethods {
      *      cpf: string,
      *      cnpj?: string,
      *  },
-     *  favorecido: {
-     *      contaBanco: {
+     *  favorecido?: {
+     *      contaBanco?: {
      *          codigoBanco: string,
      *          agencia: string,
      *          documento: string,
      *          nome: string,
+     *          conta: string,
      *          tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN'
-     *      }
+     *      },
+     *      chave?: string
      *  },
      *  pagamento: {
      *     valor: string,
      *     codigoCidadeIBGE?: string,
      *     infoPagador?: string,
      *     idProprio?: string,
+     *     qrCode?: string,
      *     recorrencia: {
      *      tipo: 'diaria' | 'semanal' | 'mensal' | 'personalizada',
      *      dataInicio?: string,
      *      quantidade?: number,
-     *      diaDaSemana?: string,
+     *      diaDaSemana?: 'SEGUNDA_FEIRA' | 'TERCA_FEIRA' | 'QUARTA_FEIRA' | 'QUINTA_FEIRA' | 'SEXTA_FEIRA' | 'SABADO' | 'DOMINGO',
      *      diaDoMes?: number,
-     *      datas?: Array<string>
+     *      datas?: Array<string>,
      *      descricao?: string,
      *    }
      *  }
@@ -506,25 +543,28 @@ export class OpenFinanceMethods extends PixMethods {
             cpf: string;
             cnpj?: string;
         };
-        favorecido: {
-            contaBanco: {
+        favorecido?: {
+            contaBanco?: {
                 codigoBanco: string;
                 agencia: string;
                 documento: string;
                 nome: string;
+                conta: string;
                 tipoConta: "CACC" | "SLRY" | "SVGS" | "TRAN";
             };
+            chave?: string;
         };
         pagamento: {
             valor: string;
             codigoCidadeIBGE?: string;
             infoPagador?: string;
             idProprio?: string;
+            qrCode?: string;
             recorrencia: {
                 tipo: "diaria" | "semanal" | "mensal" | "personalizada";
                 dataInicio?: string;
                 quantidade?: number;
-                diaDaSemana?: string;
+                diaDaSemana?: "SEGUNDA_FEIRA" | "TERCA_FEIRA" | "QUARTA_FEIRA" | "QUINTA_FEIRA" | "SEXTA_FEIRA" | "SABADO" | "DOMINGO";
                 diaDoMes?: number;
                 datas?: Array<string>;
                 descricao?: string;
@@ -557,7 +597,7 @@ export class OpenFinanceMethods extends PixMethods {
      *      status: string,
      *      dataCriacao: string,
      *      idProprio: string,
-     *      recorrencia: Array<{
+     *      recorrencias: Array<{
      *          endToEndId: string,
      *          dataOperacao: string,
      *          status: string,
@@ -591,7 +631,7 @@ export class OpenFinanceMethods extends PixMethods {
             status: string;
             dataCriacao: string;
             idProprio: string;
-            recorrencia: Array<{
+            recorrencias: Array<{
                 endToEndId: string;
                 dataOperacao: string;
                 status: string;
@@ -622,21 +662,17 @@ export class OpenFinanceMethods extends PixMethods {
      * }} params
      *
      * @returns { Promise<{
-     *  pagamentos: {
-     *    identificadorPagamento: string,
-     *    status: string,
-     *    dataCancelamento: string,
-     *  }
+     *  identificadorPagamento: string,
+     *  status: string,
+     *  dataCancelamento: string,
      * }> }
      */
     ofCancelRecurrencyPix(params: {
         identificadorPagamento: string;
     }): Promise<{
-        pagamentos: {
-            identificadorPagamento: string;
-            status: string;
-            dataCancelamento: string;
-        };
+        identificadorPagamento: string;
+        status: string;
+        dataCancelamento: string;
     }>;
     /**
      * **POST /v1/pagamentos-recorrentes/pix/:identificadorPagamento/devolver**
@@ -646,10 +682,12 @@ export class OpenFinanceMethods extends PixMethods {
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
      *
      * @param {{ identificadorPagamento: string }} params
-     * @param {Array<{
-     *  endToEndId: string,
-     *  valor: string
-     * }>} body
+     * @param {{
+     *  devolucoes: Array<{
+     *      endToEndId: string,
+     *      valor: string
+     *  }>
+     * }} body
      *
      * @returns { Promise<Array<{
      *  identificadorPagamento: string,
@@ -661,10 +699,12 @@ export class OpenFinanceMethods extends PixMethods {
      */
     ofDevolutionRecurrencyPix(params: {
         identificadorPagamento: string;
-    }, body: Array<{
-        endToEndId: string;
-        valor: string;
-    }>): Promise<Array<{
+    }, body: {
+        devolucoes: Array<{
+            endToEndId: string;
+            valor: string;
+        }>;
+    }): Promise<Array<{
         identificadorPagamento: string;
         endToEndId: string;
         valor: string;
@@ -701,7 +741,7 @@ export class OpenFinanceMethods extends PixMethods {
         redirectURI: string;
     }>;
     /**
-     * **POST /v1/jsr/vinculos**
+     * **POST /v1/pagamentos-biometria/vinculos**
      *
      * Este endpoint permite a criação de um novo vínculo na jornada sem redirecionamento, possibilitando o registro de vínculos com diferentes detentoras de conta. Esses vínculos poderão ser utilizados posteriormente para a iniciação de pagamentos, promovendo maior flexibilidade no processo. O corpo da requisição deve incluir informações essenciais sobre o pagador: CPF ou CNPJ e o idParticipante da instituição detentora onde a conta do pagador está localizada.
      *
@@ -733,7 +773,7 @@ export class OpenFinanceMethods extends PixMethods {
         redirectURI: string;
     }>;
     /**
-     * **GET /v1/jsr/vinculos**
+     * **GET /v1/pagamentos-biometria/vinculos**
      *
      * Esse endpoint recupera todos os vínculos associados ao usuário informado. Este endpoint permite consultar os vínculos utilizando o CPF obrigatório e, opcionalmente, o CNPJ para filtrar resultados. A resposta contém uma lista de vínculos que podem ser utilizados para operações futuras, como a iniciação de pagamentos e gestão dos mesmos.
      *
@@ -792,7 +832,7 @@ export class OpenFinanceMethods extends PixMethods {
         }>;
     }>;
     /**
-     * **POST /v1/jsr/pagamentos/pix**
+     * **POST /v1/pagamentos-biometria/pix**
      *
      * Este endpoint permite a criação de um novo pagamento na jornada sem redirecionamento.
      *
@@ -814,7 +854,7 @@ export class OpenFinanceMethods extends PixMethods {
      *  },
      *  pagamento: {
      *      valor: string,
-     *      codigoBanco?: string,
+     *      codigoCidadeIBGE?: string,
      *      infoPagador?: string,
      *      idProprio?: string,
      *      qrCode?: string,
@@ -842,7 +882,7 @@ export class OpenFinanceMethods extends PixMethods {
         };
         pagamento: {
             valor: string;
-            codigoBanco?: string;
+            codigoCidadeIBGE?: string;
             infoPagador?: string;
             idProprio?: string;
             qrCode?: string;
@@ -853,7 +893,7 @@ export class OpenFinanceMethods extends PixMethods {
         redirectURI: string;
     }>;
     /**
-     * **GET /v1/jsr/pagamentos/pix**
+     * **GET /v1/pagamentos-biometria/pix**
      *
      * O endpoint em questão é uma ferramenta de pesquisa. Ele permite que o usuário busque por um pagamento específico, por pagamentos que possuem um status especifico ou por pagamentos que atendem ou não um critério dentro de um determinado período.
      *
@@ -904,6 +944,466 @@ export class OpenFinanceMethods extends PixMethods {
                 dataCriacao: string;
             }>;
         }>;
+    }>;
+    /**
+     * **PATCH /v1/pagamentos-biometria/vinculos**
+     *
+     * Revogar vínculo na jornada sem redirecionamento.
+     *
+     * O SDK envia automaticamente o header `x-idempotency-key` para chamadas Open Finance.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  identificadorVinculo: string,
+     *  motivo: string
+     * }} body
+     *
+     * @returns { Promise<{
+     *  identificadorVinculo: string,
+     *  status: 'revogado',
+     *  motivo: string,
+     *  data: string
+     * }>}
+     */
+    ofRevokeBiometricEnrollment(params: {}, body: {
+        identificadorVinculo: string;
+        motivo: string;
+    }): Promise<{
+        identificadorVinculo: string;
+        status: "revogado";
+        motivo: string;
+        data: string;
+    }>;
+    /**
+     * **POST /v1/pagamentos-automaticos/adesao**
+     *
+     * Solicitar criação de adesão para pagamento automático e receber a URL de redirecionamento.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  pagador: {
+     *      cpf: string,
+     *      cnpj?: string,
+     *      nome?: string,
+     *      idParticipante: string
+     *  },
+     *  favorecido: {
+     *      contaBanco: {
+     *          nome: string,
+     *          documento: string,
+     *          codigoBanco: string,
+     *          agencia: string,
+     *          conta: string,
+     *          tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+     *      }
+     *  },
+     *  assinatura: {
+     *      expiracao: string,
+     *      descricao?: string,
+     *      idProprio?: string,
+     *      configuracao: {
+     *          automatico: {
+     *              valorFixo?: string,
+     *              valorMinimo?: string,
+     *              valorMaximo?: string,
+     *              intervalo: 'SEMANAL' | 'MENSAL' | 'ANUAL' | 'SEMESTRAL' | 'TRIMESTRAL',
+     *              dataInicio: string,
+     *              permiteRetentativa?: boolean,
+     *              primeiroPagamento?: {
+     *                  data: string,
+     *                  valor: string,
+     *                  infoPagador?: string
+     *              }
+     *          }
+     *      }
+     *  }
+     * }} body
+     *
+     * @returns { Promise<{
+     *  identificadorAdesao: string,
+     *  redirectURI: string
+     * }>}
+     */
+    ofCreateAutomaticEnrollment(params: {}, body: {
+        pagador: {
+            cpf: string;
+            cnpj?: string;
+            nome?: string;
+            idParticipante: string;
+        };
+        favorecido: {
+            contaBanco: {
+                nome: string;
+                documento: string;
+                codigoBanco: string;
+                agencia: string;
+                conta: string;
+                tipoConta: "CACC" | "SVGS" | "TRAN";
+            };
+        };
+        assinatura: {
+            expiracao: string;
+            descricao?: string;
+            idProprio?: string;
+            configuracao: {
+                automatico: {
+                    valorFixo?: string;
+                    valorMinimo?: string;
+                    valorMaximo?: string;
+                    intervalo: "SEMANAL" | "MENSAL" | "ANUAL" | "SEMESTRAL" | "TRIMESTRAL";
+                    dataInicio: string;
+                    permiteRetentativa?: boolean;
+                    primeiroPagamento?: {
+                        data: string;
+                        valor: string;
+                        infoPagador?: string;
+                    };
+                };
+            };
+        };
+    }): Promise<{
+        identificadorAdesao: string;
+        redirectURI: string;
+    }>;
+    /**
+     * **GET /v1/pagamentos-automaticos/adesao**
+     *
+     * Consultar os parâmetros de adesões de pagamento automático.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{
+     *  inicio: string,
+     *  fim: string,
+     *  status: 'autorizado' | 'pendente' | 'revogado' | 'finalizado' | 'rejeitado',
+     *  identificadorAdesao?: string,
+     *  idProprio?: string,
+     *  documento?: string
+     * }} params
+     *
+     * @returns { Promise<{
+     *  adesoes: Array<{
+     *      identificadorAdesao: string,
+     *      status: 'autorizado' | 'pendente' | 'revogado' | 'finalizado' | 'rejeitado',
+     *      dataCriacao: string,
+     *      favorecido: {
+     *          contaBanco: {
+     *              nome: string,
+     *              documento: string,
+     *              codigoBanco: string,
+     *              agencia: string,
+     *              conta: string,
+     *              tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+     *          }
+     *      },
+     *      assinatura: {
+     *          expiracao: string,
+     *          descricao?: string,
+     *          idProprio?: string,
+     *          configuracao: {
+     *              automatico: {
+     *                  valorFixo?: string,
+     *                  valorMinimo?: string,
+     *                  valorMaximo?: string,
+     *                  intervalo: 'SEMANAL' | 'MENSAL' | 'ANUAL' | 'SEMESTRAL' | 'TRIMESTRAL',
+     *                  dataInicio: string,
+     *                  permiteRetentativa?: boolean,
+     *                  primeiroPagamento?: {
+     *                      data: string,
+     *                      valor: string,
+     *                      infoPagador?: string
+     *                  }
+     *              }
+     *          }
+     *      }
+     *  }>,
+     *  total: number,
+     *  porPagina: number,
+     *  ultimo: string,
+     *  proximo: string | null,
+     *  anterior: string | null,
+     *  atual: string
+     * }>}
+     */
+    ofListAutomaticEnrollment(params: {
+        inicio: string;
+        fim: string;
+        status: "autorizado" | "pendente" | "revogado" | "finalizado" | "rejeitado";
+        identificadorAdesao?: string;
+        idProprio?: string;
+        documento?: string;
+    }): Promise<{
+        adesoes: Array<{
+            identificadorAdesao: string;
+            status: "autorizado" | "pendente" | "revogado" | "finalizado" | "rejeitado";
+            dataCriacao: string;
+            favorecido: {
+                contaBanco: {
+                    nome: string;
+                    documento: string;
+                    codigoBanco: string;
+                    agencia: string;
+                    conta: string;
+                    tipoConta: "CACC" | "SVGS" | "TRAN";
+                };
+            };
+            assinatura: {
+                expiracao: string;
+                descricao?: string;
+                idProprio?: string;
+                configuracao: {
+                    automatico: {
+                        valorFixo?: string;
+                        valorMinimo?: string;
+                        valorMaximo?: string;
+                        intervalo: "SEMANAL" | "MENSAL" | "ANUAL" | "SEMESTRAL" | "TRIMESTRAL";
+                        dataInicio: string;
+                        permiteRetentativa?: boolean;
+                        primeiroPagamento?: {
+                            data: string;
+                            valor: string;
+                            infoPagador?: string;
+                        };
+                    };
+                };
+            };
+        }>;
+        total: number;
+        porPagina: number;
+        ultimo: string;
+        proximo: string | null;
+        anterior: string | null;
+        atual: string;
+    }>;
+    /**
+     * **PATCH /v1/pagamentos-automaticos/adesao**
+     *
+     * Editar uma adesão de pagamento automático.
+     *
+     * Atualmente, conforme documentação, apenas o status de uma adesão poderá ser alterado.
+     * O SDK envia automaticamente o header `x-idempotency-key` para chamadas Open Finance.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  identificador?: string,
+     *  nomeFavorecido?: string,
+     *  status?: 'revogado',
+     *  dataExpiracao?: string,
+     *  valorMaximo?: string
+     * }} body
+     *
+     * @returns { Promise<{
+     *  identificadorAdesao: string,
+     *  status: 'revogado' | 'autorizado' | 'pendente' | 'finalizado' | 'rejeitado',
+     *  motivo?: string,
+     *  favorecido: {
+     *      contaBanco: {
+     *          nome: string,
+     *          documento: string,
+     *          codigoBanco: string,
+     *          agencia: string,
+     *          conta: string,
+     *          tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+     *      }
+     *  },
+     *  assinatura: {
+     *      expiracao: string,
+     *      descricao?: string,
+     *      idProprio?: string,
+     *      configuracao: {
+     *          automatico: {
+     *              valorFixo?: string,
+     *              valorMinimo?: string,
+     *              valorMaximo?: string,
+     *              intervalo: 'SEMANAL' | 'MENSAL' | 'ANUAL' | 'SEMESTRAL' | 'TRIMESTRAL',
+     *              dataInicio: string,
+     *              permiteRetentativa?: boolean,
+     *              primeiroPagamento?: {
+     *                  data: string,
+     *                  valor: string,
+     *                  infoPagador?: string
+     *              }
+     *          }
+     *      }
+     *  }
+     * }>}
+     */
+    ofUpdateAutomaticEnrollment(params: {}, body: {
+        identificador?: string;
+        nomeFavorecido?: string;
+        status?: "revogado";
+        dataExpiracao?: string;
+        valorMaximo?: string;
+    }): Promise<{
+        identificadorAdesao: string;
+        status: "revogado" | "autorizado" | "pendente" | "finalizado" | "rejeitado";
+        motivo?: string;
+        favorecido: {
+            contaBanco: {
+                nome: string;
+                documento: string;
+                codigoBanco: string;
+                agencia: string;
+                conta: string;
+                tipoConta: "CACC" | "SVGS" | "TRAN";
+            };
+        };
+        assinatura: {
+            expiracao: string;
+            descricao?: string;
+            idProprio?: string;
+            configuracao: {
+                automatico: {
+                    valorFixo?: string;
+                    valorMinimo?: string;
+                    valorMaximo?: string;
+                    intervalo: "SEMANAL" | "MENSAL" | "ANUAL" | "SEMESTRAL" | "TRIMESTRAL";
+                    dataInicio: string;
+                    permiteRetentativa?: boolean;
+                    primeiroPagamento?: {
+                        data: string;
+                        valor: string;
+                        infoPagador?: string;
+                    };
+                };
+            };
+        };
+    }>;
+    /**
+     * **POST /v1/pagamentos-automaticos/pix**
+     *
+     * Solicitar criação de um pagamento automático.
+     *
+     * O SDK envia automaticamente o header `x-idempotency-key` para chamadas Open Finance.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  identificadorAdesao: string,
+     *  pagamento: {
+     *      valor: string,
+     *      data: string,
+     *      codigoCidadeIBGE?: string,
+     *      infoPagador?: string
+     *  }
+     * }} body
+     *
+     * @returns { Promise<{
+     *  identificadorAdesao: string,
+     *  endToEndId: string,
+     *  status: 'pendente' | 'rejeitado' | 'aceito' | 'expirado' | 'cancelado',
+     *  data: string
+     * }>}
+     */
+    ofCreateAutomaticPixPayment(params: {}, body: {
+        identificadorAdesao: string;
+        pagamento: {
+            valor: string;
+            data: string;
+            codigoCidadeIBGE?: string;
+            infoPagador?: string;
+        };
+    }): Promise<{
+        identificadorAdesao: string;
+        endToEndId: string;
+        status: "pendente" | "rejeitado" | "aceito" | "expirado" | "cancelado";
+        data: string;
+    }>;
+    /**
+     * **GET /v1/pagamentos-automaticos/pix**
+     *
+     * Consultar pagamentos automáticos.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{
+     *  identificadorAdesao: string,
+     *  endToEndId?: string
+     * }} params
+     *
+     * @returns { Promise<{
+     *  identificadorAdesao: string,
+     *  idProprio?: string,
+     *  status: 'autorizado' | 'pendente' | 'revogado' | 'finalizado' | 'rejeitado',
+     *  descricao?: string,
+     *  pagamentos: Array<{
+     *      endToEndId: string,
+     *      valor: string,
+     *      status: 'pendente' | 'rejeitado' | 'aceito' | 'expirado' | 'cancelado',
+     *      dataCriacao: string,
+     *      infoPagador?: string,
+     *      devolucoes?: Array<{
+     *          identificadorDevolucao: string,
+     *          valor: string,
+     *          status: 'pendente' | 'rejeitado' | 'aceito',
+     *          dataCriacao: string
+     *      }>
+     *  }>
+     * }>}
+     */
+    ofListAutomaticPixPayment(params: {
+        identificadorAdesao: string;
+        endToEndId?: string;
+    }): Promise<{
+        identificadorAdesao: string;
+        idProprio?: string;
+        status: "autorizado" | "pendente" | "revogado" | "finalizado" | "rejeitado";
+        descricao?: string;
+        pagamentos: Array<{
+            endToEndId: string;
+            valor: string;
+            status: "pendente" | "rejeitado" | "aceito" | "expirado" | "cancelado";
+            dataCriacao: string;
+            infoPagador?: string;
+            devolucoes?: Array<{
+                identificadorDevolucao: string;
+                valor: string;
+                status: "pendente" | "rejeitado" | "aceito";
+                dataCriacao: string;
+            }>;
+        }>;
+    }>;
+    /**
+     * **PATCH /v1/pagamentos-automaticos/pix**
+     *
+     * Solicitar o cancelamento de um pagamento automático.
+     *
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     *
+     * @param {{}} params
+     * @param {{
+     *  identificadorAdesao: string,
+     *  endToEndId: string
+     * }} body
+     *
+     * @returns { Promise<{
+     *  identificadorAdesao: string,
+     *  idProprio?: string,
+     *  endToEndId: string,
+     *  valor: string,
+     *  status: 'cancelado',
+     *  motivo: string,
+     *  dataCriacao: string
+     * }>}
+     */
+    ofCancelAutomaticPixPayment(params: {}, body: {
+        identificadorAdesao: string;
+        endToEndId: string;
+    }): Promise<{
+        identificadorAdesao: string;
+        idProprio?: string;
+        endToEndId: string;
+        valor: string;
+        status: "cancelado";
+        motivo: string;
+        dataCriacao: string;
     }>;
 }
 import { PixMethods } from "./pix";

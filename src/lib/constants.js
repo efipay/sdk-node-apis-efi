@@ -2,210 +2,202 @@ export default {
 	APIS: {
 		DEFAULT: {
 			URL: {
-				PRODUCTION: 'https://cobrancas.api.efipay.com.br/v1',
-				SANDBOX: 'https://cobrancas-h.api.efipay.com.br/v1',
+				PRODUCTION: 'https://cobrancas.api.efipay.com.br',
+				SANDBOX: 'https://cobrancas-h.api.efipay.com.br',
 			},
 			ENDPOINTS: {
 				authorize: {
-					route: '/authorize',
+					route: '/v1/authorize',
 					method: 'post',
 				},
 				sendSubscriptionLinkEmail: {
-					route: '/charge/:id/subscription/resend',
-					method: 'post',
-				},
-				oneStepSubscription: {
-					route: '/plan/:id/subscription/one-step',
+					route: '/v1/charge/:id/subscription/resend',
 					method: 'post',
 				},
 				settleCarnet: {
-					route: '/carnet/:id/settle',
+					route: '/v1/carnet/:id/settle',
 					method: 'put',
 				},
-				oneStepSubscriptionLink: {
-					route: '/plan/:id/subscription/one-step/link',
-					method: 'post',
-				},
 				sendLinkEmail: {
-					route: '/charge/:id/link/resend',
+					route: '/v1/charge/:id/link/resend',
 					method: 'post',
 				},
 				createOneStepLink: {
-					route: '/charge/one-step/link',
+					route: '/v1/charge/one-step/link',
 					method: 'post',
 				},
 				createCharge: {
-					route: '/charge',
+					route: '/v1/charge',
 					method: 'post',
 				},
 				detailCharge: {
-					route: '/charge/:id',
+					route: '/v1/charge/:id',
 					method: 'get',
 				},
 				updateChargeMetadata: {
-					route: '/charge/:id/metadata',
+					route: '/v1/charge/:id/metadata',
 					method: 'put',
 				},
 				updateBillet: {
-					route: '/charge/:id/billet',
+					route: '/v1/charge/:id/billet',
 					method: 'put',
 				},
 				definePayMethod: {
-					route: '/charge/:id/pay',
+					route: '/v1/charge/:id/pay',
 					method: 'post',
 				},
 				cancelCharge: {
-					route: '/charge/:id/cancel',
+					route: '/v1/charge/:id/cancel',
 					method: 'put',
 				},
 				createCarnet: {
-					route: '/carnet',
+					route: '/v1/carnet',
 					method: 'post',
 				},
 				detailCarnet: {
-					route: '/carnet/:id',
+					route: '/v1/carnet/:id',
 					method: 'get',
 				},
 				updateCarnetParcel: {
-					route: '/carnet/:id/parcel/:parcel',
+					route: '/v1/carnet/:id/parcel/:parcel',
 					method: 'put',
 				},
 				updateCarnetParcels: {
-					route: '/carnet/:id/parcels',
+					route: '/v1/carnet/:id/parcels',
 					method: 'put',
 				},
 				updateCarnetMetadata: {
-					route: '/carnet/:id/metadata',
+					route: '/v1/carnet/:id/metadata',
 					method: 'put',
 				},
 				getNotification: {
-					route: '/notification/:token',
+					route: '/v1/notification/:token',
 					method: 'get',
 				},
 				listPlans: {
-					route: '/plans',
+					route: '/v1/plans',
 					method: 'get',
 				},
 				createPlan: {
-					route: '/plan',
+					route: '/v1/plan',
 					method: 'post',
 				},
 				deletePlan: {
-					route: '/plan/:id',
+					route: '/v1/plan/:id',
 					method: 'delete',
 				},
 				createSubscription: {
-					route: '/plan/:id/subscription',
+					route: '/v1/plan/:id/subscription',
 					method: 'post',
 				},
 				createOneStepSubscription: {
-					route: '/plan/:id/subscription/one-step',
+					route: '/v1/plan/:id/subscription/one-step',
 					method: 'post',
 				},
 				createOneStepSubscriptionLink: {
-					route: '/plan/:id/subscription/one-step/link',
+					route: '/v1/plan/:id/subscription/one-step/link',
 					method: 'post'
 				},
 				detailSubscription: {
-					route: '/subscription/:id',
+					route: '/v1/subscription/:id',
 					method: 'get',
 				},
 				defineSubscriptionPayMethod: {
-					route: '/subscription/:id/pay',
+					route: '/v1/subscription/:id/pay',
 					method: 'post',
 				},
 				cancelSubscription: {
-					route: '/subscription/:id/cancel',
+					route: '/v1/subscription/:id/cancel',
 					method: 'put',
 				},
 				updateSubscriptionMetadata: {
-					route: '/subscription/:id/metadata',
+					route: '/v1/subscription/:id/metadata',
 					method: 'put',
 				},
 				getInstallments: {
-					route: '/installments',
+					route: '/v1/installments',
 					method: 'get',
 				},
 				sendBilletEmail: {
-					route: '/charge/:id/billet/resend',
+					route: '/v1/charge/:id/billet/resend',
 					method: 'post',
 				},
 				createChargeHistory: {
-					route: '/charge/:id/history',
+					route: '/v1/charge/:id/history',
 					method: 'post',
 				},
 				sendCarnetEmail: {
-					route: '/carnet/:id/resend',
+					route: '/v1/carnet/:id/resend',
 					method: 'post',
 				},
 				sendCarnetParcelEmail: {
-					route: '/carnet/:id/parcel/:parcel/resend',
+					route: '/v1/carnet/:id/parcel/:parcel/resend',
 					method: 'post',
 				},
 				createCarnetHistory: {
-					route: '/carnet/:id/history',
+					route: '/v1/carnet/:id/history',
 					method: 'post',
 				},
 				cancelCarnet: {
-					route: '/carnet/:id/cancel',
+					route: '/v1/carnet/:id/cancel',
 					method: 'put',
 				},
 				cancelCarnetParcel: {
-					route: '/carnet/:id/parcel/:parcel/cancel',
+					route: '/v1/carnet/:id/parcel/:parcel/cancel',
 					method: 'put',
 				},
-				linkCharge: {
-					route: '/charge/:id/link',
-					method: 'post',
-				},
 				defineLinkPayMethod: {
-					route: '/charge/:id/link',
+					route: '/v1/charge/:id/link',
 					method: 'post',
 				},
 				updateChargeLink: {
-					route: '/charge/:id/link',
+					route: '/v1/charge/:id/link',
 					method: 'put',
 				},
 				updatePlan: {
-					route: '/plan/:id',
+					route: '/v1/plan/:id',
 					method: 'put',
 				},
 				updateSubscription: {
-					route: '/subscription/:id',
+					route: '/v1/subscription/:id',
 					method: 'put'
 				},
 				createSubscriptionHistory: {
-					route: '/subscription/:id/history',
+					route: '/v1/subscription/:id/history',
 					method: 'post',
 				},
 				defineBalanceSheetBillet: {
-					route: '/charge/:id/balance-sheet',
+					route: '/v1/charge/:id/balance-sheet',
 					method: 'post',
 				},
 				settleCharge: {
-					route: '/charge/:id/settle',
+					route: '/v1/charge/:id/settle',
 					method: 'put',
 				},
 				settleCarnetParcel: {
-					route: '/carnet/:id/parcel/:parcel/settle',
+					route: '/v1/carnet/:id/parcel/:parcel/settle',
 					method: 'put',
 				},
 				createOneStepCharge: {
-					route: '/charge/one-step',
+					route: '/v1/charge/one-step',
 					method: 'post',
 				},
 				cardPaymentRetry: {
-					route: '/charge/:id/retry',
+					route: '/v1/charge/:id/retry',
 					method: 'post'
 				},
 				refundCard: {
-					route: '/charge/card/:id/refund',
+					route: '/v1/charge/card/:id/refund',
 					method: 'post'
 				},
 				listCharges: {
-					route: '/charges',
+					route: '/v1/charges',
 					method: 'get'
 				},
+				createChargeCard: {
+					route: '/v2/charge/card',
+					method: 'post'
+				}
 			},
 		},
 		PIX: {
@@ -359,7 +351,7 @@ export default {
 					method: 'put',
 				},
 				pixSplitUnlinkCharge: {
-					route: '/v2/gn/split/cob/:txid/vinculo/:splitConfigId',
+					route: '/v2/gn/split/cob/:txid/vinculo',
 					method: 'delete',
 				},
 				pixSplitDetailDueCharge: {
@@ -371,7 +363,7 @@ export default {
 					method: 'put',
 				},
 				pixSplitUnlinkDueCharge: {
-					route: '/v2/gn/split/cobv/:txid/vinculo/:splitConfigId',
+					route: '/v2/gn/split/cobv/:txid/vinculo',
 					method: 'delete',
 				},
 				pixSplitConfig: {
@@ -413,10 +405,6 @@ export default {
 				medList: {
 					route: '/v2/gn/infracoes',
 					method: 'get',
-				},
-				pixQrCodeDetail: {
-					route: '/v2/gn/qrcodes/detalhar',
-					method: 'post'
 				},
 				pixQrCodePay: {
 					route: '/v2/gn/pix/:idEnvio/qrcode',
@@ -529,6 +517,10 @@ export default {
 				pixDeleteWebhookAutomaticCharge: {
 					route: '/v2/webhookcobr',
 					method: 'delete'
+				},
+				pixSplitDevolution: {
+					route: '/v2/gn/split/pix/:e2eid/devolucao/:id',
+					method: 'put'
 				}
 			},
 		},
@@ -619,8 +611,8 @@ export default {
 					method: 'get'
 				},
 				ofRevokeBiometricEnrollment: {
-				    route: '/pagamentos-biometria/vinculos',
-					method: 'patch'	
+					route: '/pagamentos-biometria/vinculos',
+					method: 'patch'
 				},
 				ofCreateAutomaticEnrollment: {
 					route: '/pagamentos-automaticos/adesao',
@@ -674,6 +666,18 @@ export default {
 					route: '/resumo',
 					method: 'get',
 				},
+				payConfigWebhook: {
+					route: '/webhook',
+					method: 'put',
+				},
+				payListWebhook: {
+					route: '/webhook',
+					method: 'get',
+				},
+				payDeleteWebhook: {
+					route: '/webhook',
+					method: 'delete',
+				}
 			},
 		},
 		CONTAS: {
@@ -690,12 +694,8 @@ export default {
 					route: '/conta-simplificada',
 					method: 'post',
 				},
-				getAccountCertificate: {
-					route: '/conta-simplificada/:identificador/certificado',
-					method: 'post',
-				},
 				getAccountCredentials: {
-					route: '/conta-simplificada/:identificador/credenciais',
+					route: '/conta-simplificada/:idContaSimplificada/credenciais',
 					method: 'get',
 				},
 				accountConfigWebhook: {
@@ -714,6 +714,10 @@ export default {
 					route: '/webhooks',
 					method: 'get',
 				},
+				createAccountCertificate: {
+					route: '/conta-simplificada/:idContaSimplificada/certificado',
+					method: 'post',
+				}
 			},
 		},
 		EXTRATOS: {

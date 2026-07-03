@@ -3,8 +3,6 @@ import { CobrancasMethods } from "./cobrancas";
 
 export class PixMethods extends CobrancasMethods {
 
-
-
     /**
      * **POST /v2/cob**
      * 
@@ -64,7 +62,6 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixCreateImmediateCharge(params, body) { }
-
 
     /**
      * **PUT /v2/cob/:txid**
@@ -209,6 +206,10 @@ export class PixMethods extends CobrancasMethods {
      *   },
      *   chave: string,
      *   solicitacaoPagador?: string,
+     *   infoAdicionais?: Array<{
+     *       nome: string,
+     *       valor: string
+     *   }>,
      *   pixCopiaECola?: string,
      *   pix?: Array<{
      *     endToEndId: string,
@@ -344,10 +345,11 @@ export class PixMethods extends CobrancasMethods {
      *     validadeAposVencimento?: number
      *   },
      *   devedor: {
-     *     logradouro: string,
+     *     logradouro?: string,
      *     cidade: string,
-     *     uf: string,
-     *     cep: string,
+     *     uf?: string,
+     *     cep?: string,
+     *     email?: string,
      *     cpf?: string,
      *     cnpj?: string,
      *     nome: string
@@ -364,6 +366,7 @@ export class PixMethods extends CobrancasMethods {
      *     },
      *     desconto?: {
      *       modalidade: number,
+     *       valorPerc?: string,
      *       descontoDataFixa?: Array<{
      *         data: string,
      *         valorPerc: string
@@ -378,22 +381,45 @@ export class PixMethods extends CobrancasMethods {
      *     id: number
      *   },
      *   chave: string,
-     *   solicitacaoPagador?: string
+     *   solicitacaoPagador?: string,
+     *   infoAdicionais?: Array<{
+     *     nome: string,
+     *     valor: string
+     *   }>
      * } } body - Dados da requisição
      * 
      * @returns {Promise<{
      *   calendario: {
+     *     criacao: string,
      *     dataDeVencimento: string,
      *     validadeAposVencimento: number
      *   },
+     *   txid: string,
+     *   revisao: number,
+     *   loc: {
+     *     id: number,
+     *     location: string,
+     *     tipoCob: string
+     *   },
+     *   status: string,
      *   devedor: {
-     *     logradouro: string,
+     *     logradouro?: string,
      *     cidade: string,
-     *     uf: string,
-     *     cep: string,
+     *     uf?: string,
+     *     cep?: string,
+     *     email?: string,
      *     cpf?: string,
      *     cnpj?: string,
      *     nome: string
+     *   },
+     *   recebedor: {
+     *     logradouro?: string,
+     *     cidade?: string,
+     *     uf?: string,
+     *     cep?: string,
+     *     cnpj?: string,
+     *     cpf?: string,
+     *     nome?: string
      *   },
      *   valor: {
      *     original: string,
@@ -407,17 +433,24 @@ export class PixMethods extends CobrancasMethods {
      *     },
      *     desconto?: {
      *       modalidade: number,
+     *       valorPerc?: string,
      *       descontoDataFixa?: Array<{
      *         data: string,
      *         valorPerc: string
      *       }>
+     *     },
+     *     abatimento?: {
+     *       modalidade: number,
+     *       valorPerc: string
      *     }
      *   },
-     *   loc?: {
-     *     id: number
-     *   },
      *   chave: string,
-     *   solicitacaoPagador?: string
+     *   solicitacaoPagador?: string,
+     *   infoAdicionais?: Array<{
+     *     nome: string,
+     *     valor: string
+     *   }>,
+     *   pixCopiaECola: string
      * }>}
      */
     pixCreateDueCharge(params, body) { }
@@ -465,6 +498,7 @@ export class PixMethods extends CobrancasMethods {
      *     cpf?: string,
      *     cnpj?: string,
      *     nome?: string,
+     *     email?: string,
      *     logradouro?: string,
      *     cidade?: string,
      *     uf?: string,
@@ -482,16 +516,25 @@ export class PixMethods extends CobrancasMethods {
      *     },
      *     desconto?: {
      *       modalidade?: number,
+     *       valorPerc?: string,
      *       descontoDataFixa?: Array<{
      *         data?: string,
      *         valorPerc?: string
      *       }>
+     *     },
+     *     abatimento?: {
+     *       modalidade?: number,
+     *       valorPerc?: string
      *     }
      *   },
      *   chave?: string,
      *   solicitacaoPagador?: string,
+     *   infoAdicionais?: Array<{
+     *     nome: string,
+     *     valor: string
+     *   }>,
      *   loc?: {
-     *     id?: number
+     *     id: number
      *   }
      * } } body
      * 
@@ -505,6 +548,7 @@ export class PixMethods extends CobrancasMethods {
      *     cpf?: string,
      *     cnpj?: string,
      *     nome: string,
+     *     email?: string,
      *     logradouro?: string,
      *     cidade?: string,
      *     uf?: string,
@@ -522,17 +566,29 @@ export class PixMethods extends CobrancasMethods {
      *     },
      *     desconto?: {
      *       modalidade: number,
+     *       valorPerc?: string,
      *       descontoDataFixa?: Array<{
      *         data: string,
      *         valorPerc: string
      *       }>
+     *     },
+     *     abatimento?: {
+     *       modalidade: number,
+     *       valorPerc: string
      *     }
      *   },
      *   chave: string,
      *   solicitacaoPagador?: string,
+     *   infoAdicionais?: Array<{
+     *     nome: string,
+     *     valor: string
+     *   }>,
      *   loc?: {
-     *     id: number
-     *   }
+     *     id: number,
+     *     location: string,
+     *     tipoCob: string
+     *   },
+     *   pixCopiaECola: string
      * }>}
      */
     pixUpdateDueCharge(params, body) { }
@@ -544,7 +600,7 @@ export class PixMethods extends CobrancasMethods {
      * 
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
      * 
-     * @param { { txid: string } } params 
+     * @param { { txid: string, revisao?: number } } params 
      * 
      * @returns {Promise<{
      *   calendario: {
@@ -561,26 +617,53 @@ export class PixMethods extends CobrancasMethods {
      *   },
      *   status: string,
      *   devedor: {
-     *     logradouro: string,
-     *     cidade: string,
-     *     uf: string,
-     *     cep: string,
-     *     cpf: string,
-     *     nome: string
+     *     cpf?: string,
+     *     cnpj?: string,
+     *     nome: string,
+     *     email?: string,
+     *     logradouro?: string,
+     *     cidade?: string,
+     *     uf?: string,
+     *     cep?: string
      *   },
      *   recebedor: {
      *     logradouro: string,
      *     cidade: string,
      *     uf: string,
      *     cep: string,
-     *     cnpj: string,
+     *     cnpj?: string,
+     *     cpf?: string,
      *     nome: string
      *   },
      *   valor: {
-     *     original: string
+     *     original: string,
+     *     multa?: {
+     *      modalidade: number,
+     *      valorPerc: string
+     *     },
+     *     juros?: {
+     *      modalidade: number,
+     *      valorPerc: string
+     *     },
+     *     desconto?: {
+     *       modalidade: number,
+     *       valorPerc?: string,
+     *       descontoDataFixa?: Array<{
+     *        data: string,
+     *        valorPerc: string
+     *      }>
+     *     },
+     *     abatimento?: {
+     *      modalidade: number,
+     *      valorPerc: string
+     *     }
      *   },
      *   chave: string,
      *   solicitacaoPagador?: string,
+     *   infoAdicionais?: Array<{
+     *       nome: string,
+     *       valor: string
+     *   }>,
      *   pixCopiaECola: string
      * }>}
      */
@@ -595,7 +678,14 @@ export class PixMethods extends CobrancasMethods {
      * 
      * @param { {
      *   inicio: string,
-     *   fim: string
+     *   fim: string,
+     *   cpf?: string,
+     *   cnpj?: string,
+     *   locationPresente?: boolean,
+     *   status?: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_USUARIO_RECEBEDOR' | 'REMOVIDA_PELO_PSP',
+     *   loteCobVId?: number,
+     *   'paginacao.paginaAtual'?: number,
+     *   'paginacao.itensPorPagina'?: number
      * } } params 
      * 
      * @returns {Promise<{
@@ -622,6 +712,7 @@ export class PixMethods extends CobrancasMethods {
      *       nome: string,
      *       cpf?: string,
      *       cnpj?: string,
+     *       email?: string,
      *       logradouro?: string,
      *       cidade?: string,
      *       uf?: string,
@@ -793,6 +884,7 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixSendDetailId(params) { }
+
     /**
      * **GET /v2/gn/pix/enviados**
      * 
@@ -805,6 +897,8 @@ export class PixMethods extends CobrancasMethods {
      *   fim: string,
      *   status?: string,
      *   devolucaoPresente?: boolean,
+     *   cpf?: string,
+     *   cnpj?: string,
      *   "paginacao.itensPorPagina"?: number,
      *   "paginacao.paginaAtual"?: number
      * } } params 
@@ -837,45 +931,59 @@ export class PixMethods extends CobrancasMethods {
      * }>>}
      */
     pixSendList(params) { }
+
     /**
-     * **POST /v2/gn/qrcodes/detalhar**
-     * 
-     * Detalha um QR Code Pix.
-     * 
-     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
-     * 
-     * @param { { } } params 
-     * 
+     * Detalha localmente um QR Code Pix dinâmico a partir do BR Code copia e cola.
+     *
+     * Este método não chama a API Efí. Ele extrai a URL do payload dinâmico, baixa o JWT e retorna apenas o payload decodificado.
+     *
+     * @param { { } } params
+     *
      * @param { {
      *   pixCopiaECola: string
-     * } } body 
-     * 
+     * } } body
+     *
      * @returns {Promise<{
-     *   tipoCob: string,
-     *   txid: string,
-     *   revisao: number,
-     *   calendario: {
-     *     criacao: string,
-     *     apresentacao: string,
-     *     expiracao: number
-     *   },
-     *   status: string,
-     *   devedor: {
-     *     nome: string,
-     *     cpf: string
-     *   },
-     *   recebedor: {
-     *     nome: string,
-     *     cpf: string
-     *   },
-     *   valor: {
-     *     final: string
-     *   },
-     *   chave: string,
-     *   solicitacaoPagador: string
-     * }>}
+     * 	tipoCob: 'cobv',
+     *  calendario: {
+     * 		criacao: string,
+     * 		apresentacao: string,
+     * 		dataDeVencimento: string,
+     *      validadeAposVencimento: number
+     * 	},
+     *  devedor: {nome: string, cpf: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} | {nome: string, cnpj: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} 
+     *  recebedor: {nome: string, cnpj: string, logradouro: string, cidade: string, uf: string, cep: string} | {nome: string, cpf: string, logradouro: string, cidade: string, uf: string, cep: string}
+     *  txid: string,
+     *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+     *  revisao: number,
+     *  valor: {original?: string, juros?: string, multa?: string, desconto?: string, abatimento?: string, final: string}, 
+     *  chave: string,
+     *  solicitacaoPagador?: string,
+     *  infoAdicionais?: {nome: string, valor: string}[],
+     * } 
+     * | 
+     * {
+     * 	tipoCob: 'cob',
+     *  calendario: {
+     * 		criacao: string,
+     * 		apresentacao: string,
+     * 		expiracao: string,
+     * 	},
+     *  devedor: {nome: string, cpf: string} | {nome: string, cnpj: string} 
+     *  recebedor: {nome: string, cnpj: string} | {nome: string, cpf: string}
+     *  txid: string,
+     *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+     *  revisao: number,
+     *  valor: {final: string}, 
+     *  chave: string,
+     *  solicitacaoPagador?: string,
+     *  infoAdicionais?: {nome: string, valor: string}[],
+     * }
+     * | 
+     * string>}
      */
     pixQrCodeDetail(params, body) { }
+
     /**
      * **PUT /v2/gn/pix/:idEnvio/qrcode**
      * 
@@ -903,6 +1011,7 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixQrCodePay(params, body) { }
+
     /**
      * **GET /v2/pix/:e2eId**
      * 
@@ -930,6 +1039,7 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixDetailReceived(params) { }
+
     /**
      * **GET /v2/pix**
      * 
@@ -980,6 +1090,7 @@ export class PixMethods extends CobrancasMethods {
      * }>}
      */
     pixReceivedList(params) { }
+
     /**
      * **PUT /v2/pix/:e2eId/devolucao/:id**
      * 
@@ -1032,6 +1143,7 @@ export class PixMethods extends CobrancasMethods {
      * 
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome`, `mensagem`
      * 
+     * @param { {} } params
      * @param { { 
      *   tipoCob: 'cob' | 'cobv' 
      * } } body 
@@ -1611,7 +1723,6 @@ export class PixMethods extends CobrancasMethods {
      */
     pixSplitDetailCharge(params) { }
 
-
     /**
      * **GET /v2/gn/split/cobv/:txid**
      * 
@@ -1665,7 +1776,6 @@ export class PixMethods extends CobrancasMethods {
      *   pixCopiaECola: string
      * }>}
      */
-
     pixSplitDetailDueCharge(params) { }
 
     /**
@@ -2688,7 +2798,6 @@ export class PixMethods extends CobrancasMethods {
      */
     pixUpdateAutomaticCharge(params, body) { }
 
-
     /**
      * **GET /v2/cobr/:txid**
      * 
@@ -2961,7 +3070,6 @@ export class PixMethods extends CobrancasMethods {
      */
     pixCreateLocationRecurrenceAutomatic() { }
 
-
     /**
      * **GET /v2/locrec**
      * 
@@ -3006,9 +3114,9 @@ export class PixMethods extends CobrancasMethods {
      * 
      * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
      * 
-     * @param {
+     * @param {{
      *  id: string
-     * } params 
+     * }} params 
      * 
      * @returns {Promise<{
      *  id: number,
@@ -3122,5 +3230,93 @@ export class PixMethods extends CobrancasMethods {
      */
     pixDeleteWebhookAutomaticCharge() { }
 
-}
+    /**
+     * **PUT /v2/gn/split/pix/:e2eid/devolucao/:id**
+     * 
+     * Realiza a devolução de um pagamento Pix recebido com split.
+     * 
+     * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+     * 
+     * @param { { e2eId: string, id: string } } params - Identificadores da transação e devolução
+     * @param { {
+     *   valor: string
+     * } } body - Dados da devolução
+     * 
+     * @returns {Promise<{
+     *   id: string,
+     *   rtrId: string,
+     *   valor: string,
+     *   horario: {
+     *     solicitacao: string
+     *   },
+     *   status: string
+     * }>}
+     */
+    pixSplitDevolution(params, body) { }
 
+    /**
+    * **PUT /v2/gn/pix/:idEnvio/mesma-titularidade**
+    * 
+    * Realiza o envio de Pix para mesma titularidade.
+    * 
+    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+    * 
+    * @param { { idEnvio: string } } params 
+    * @param { {
+    *   valor: string,
+    *   pagador: {
+    *     chave: string,
+    *     infoPagador?: string
+    *   },
+    *   favorecido: {
+    *     chave?: string,
+    *     contaBanco?: {
+    *       nome: string,
+    *       cpf?: string,
+    *       cnpj?: string,
+    *       codigoBanco: string,
+    *       agencia: string,
+    *       conta: string,
+    *       tipoConta: string
+    *     },
+    *     cpf?: string,
+    *     cnpj?: string
+    *   }
+    * } } body
+    * 
+    * @returns {Promise<{
+    *   idEnvio: string,
+    *   e2eId: string,
+    *   valor: string,
+    *   horario: {
+    *      solicitacao: string
+    *   }
+    *   status: string
+    * }>}
+    */
+    pixSendSameOwnership(params, body) { }
+
+    /**
+    * **GET /v2/gn/chaves/balde**
+    * 
+    * Consultar baldes de fichas
+    * 
+    * @returns {Promise<{
+    *   baldeA: {
+    *     tiposChave: ["cpf", "cnpj", "evp"],
+    *     capacidade: number,
+    *     fichasDisponiveis: number,
+    *     taxaDeReposicaoFichas: number,
+    *     periodoReposicaoEmSegundos: number
+    *   },
+    *   baldeB: {
+    *     tiposChave: ["telefone", "email"],
+    *     capacidade: number,
+    *     fichasDisponiveis: number,
+    *     taxaDeReposicaoFichas: number,
+    *     periodoReposicaoEmSegundos: number
+    *   }
+    * }>}
+    */
+    pixKeysBucket() { }
+}

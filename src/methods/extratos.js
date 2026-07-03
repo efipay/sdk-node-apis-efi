@@ -67,8 +67,8 @@ export class ExtratosMethods {
      * 
      * @param { {} } params 
      * @param { {
-     *  periodicidade: string,
-     *  enviar_email: boolean,
+     *  periodicidade: 'diario' | 'semanal' | 'mensal',
+     *  envia_email: boolean,
      *  comprimir_arquivos: boolean    
      * } } body 
      * 

@@ -2,9 +2,10 @@
 
 var fs = require('fs');
 var https = require('https');
+var crypto = require('crypto');
 var axios = require('axios');
-var randomstring = require('randomstring');
 var QRCode = require('qrcode');
+var pixQrCodeDetail = require('pix-qr-code-detail');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -29,216 +30,207 @@ function _interopNamespace(e) {
 var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
 var https__default = /*#__PURE__*/_interopDefaultLegacy(https);
 var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
-var randomstring__default = /*#__PURE__*/_interopDefaultLegacy(randomstring);
 var QRCode__namespace = /*#__PURE__*/_interopNamespace(QRCode);
 
 var constants = {
   APIS: {
     DEFAULT: {
       URL: {
-        PRODUCTION: 'https://cobrancas.api.efipay.com.br/v1',
-        SANDBOX: 'https://cobrancas-h.api.efipay.com.br/v1'
+        PRODUCTION: 'https://cobrancas.api.efipay.com.br',
+        SANDBOX: 'https://cobrancas-h.api.efipay.com.br'
       },
       ENDPOINTS: {
         authorize: {
-          route: '/authorize',
+          route: '/v1/authorize',
           method: 'post'
         },
         sendSubscriptionLinkEmail: {
-          route: '/charge/:id/subscription/resend',
-          method: 'post'
-        },
-        oneStepSubscription: {
-          route: '/plan/:id/subscription/one-step',
+          route: '/v1/charge/:id/subscription/resend',
           method: 'post'
         },
         settleCarnet: {
-          route: '/carnet/:id/settle',
+          route: '/v1/carnet/:id/settle',
           method: 'put'
         },
-        oneStepSubscriptionLink: {
-          route: '/plan/:id/subscription/one-step/link',
-          method: 'post'
-        },
         sendLinkEmail: {
-          route: '/charge/:id/link/resend',
+          route: '/v1/charge/:id/link/resend',
           method: 'post'
         },
         createOneStepLink: {
-          route: '/charge/one-step/link',
+          route: '/v1/charge/one-step/link',
           method: 'post'
         },
         createCharge: {
-          route: '/charge',
+          route: '/v1/charge',
           method: 'post'
         },
         detailCharge: {
-          route: '/charge/:id',
+          route: '/v1/charge/:id',
           method: 'get'
         },
         updateChargeMetadata: {
-          route: '/charge/:id/metadata',
+          route: '/v1/charge/:id/metadata',
           method: 'put'
         },
         updateBillet: {
-          route: '/charge/:id/billet',
+          route: '/v1/charge/:id/billet',
           method: 'put'
         },
         definePayMethod: {
-          route: '/charge/:id/pay',
+          route: '/v1/charge/:id/pay',
           method: 'post'
         },
         cancelCharge: {
-          route: '/charge/:id/cancel',
+          route: '/v1/charge/:id/cancel',
           method: 'put'
         },
         createCarnet: {
-          route: '/carnet',
+          route: '/v1/carnet',
           method: 'post'
         },
         detailCarnet: {
-          route: '/carnet/:id',
+          route: '/v1/carnet/:id',
           method: 'get'
         },
         updateCarnetParcel: {
-          route: '/carnet/:id/parcel/:parcel',
+          route: '/v1/carnet/:id/parcel/:parcel',
           method: 'put'
         },
         updateCarnetParcels: {
-          route: '/carnet/:id/parcels',
+          route: '/v1/carnet/:id/parcels',
           method: 'put'
         },
         updateCarnetMetadata: {
-          route: '/carnet/:id/metadata',
+          route: '/v1/carnet/:id/metadata',
           method: 'put'
         },
         getNotification: {
-          route: '/notification/:token',
+          route: '/v1/notification/:token',
           method: 'get'
         },
         listPlans: {
-          route: '/plans',
+          route: '/v1/plans',
           method: 'get'
         },
         createPlan: {
-          route: '/plan',
+          route: '/v1/plan',
           method: 'post'
         },
         deletePlan: {
-          route: '/plan/:id',
+          route: '/v1/plan/:id',
           method: 'delete'
         },
         createSubscription: {
-          route: '/plan/:id/subscription',
+          route: '/v1/plan/:id/subscription',
           method: 'post'
         },
         createOneStepSubscription: {
-          route: '/plan/:id/subscription/one-step',
+          route: '/v1/plan/:id/subscription/one-step',
           method: 'post'
         },
         createOneStepSubscriptionLink: {
-          route: '/plan/:id/subscription/one-step/link',
+          route: '/v1/plan/:id/subscription/one-step/link',
           method: 'post'
         },
         detailSubscription: {
-          route: '/subscription/:id',
+          route: '/v1/subscription/:id',
           method: 'get'
         },
         defineSubscriptionPayMethod: {
-          route: '/subscription/:id/pay',
+          route: '/v1/subscription/:id/pay',
           method: 'post'
         },
         cancelSubscription: {
-          route: '/subscription/:id/cancel',
+          route: '/v1/subscription/:id/cancel',
           method: 'put'
         },
         updateSubscriptionMetadata: {
-          route: '/subscription/:id/metadata',
+          route: '/v1/subscription/:id/metadata',
           method: 'put'
         },
         getInstallments: {
-          route: '/installments',
+          route: '/v1/installments',
           method: 'get'
         },
         sendBilletEmail: {
-          route: '/charge/:id/billet/resend',
+          route: '/v1/charge/:id/billet/resend',
           method: 'post'
         },
         createChargeHistory: {
-          route: '/charge/:id/history',
+          route: '/v1/charge/:id/history',
           method: 'post'
         },
         sendCarnetEmail: {
-          route: '/carnet/:id/resend',
+          route: '/v1/carnet/:id/resend',
           method: 'post'
         },
         sendCarnetParcelEmail: {
-          route: '/carnet/:id/parcel/:parcel/resend',
+          route: '/v1/carnet/:id/parcel/:parcel/resend',
           method: 'post'
         },
         createCarnetHistory: {
-          route: '/carnet/:id/history',
+          route: '/v1/carnet/:id/history',
           method: 'post'
         },
         cancelCarnet: {
-          route: '/carnet/:id/cancel',
+          route: '/v1/carnet/:id/cancel',
           method: 'put'
         },
         cancelCarnetParcel: {
-          route: '/carnet/:id/parcel/:parcel/cancel',
+          route: '/v1/carnet/:id/parcel/:parcel/cancel',
           method: 'put'
         },
-        linkCharge: {
-          route: '/charge/:id/link',
-          method: 'post'
-        },
         defineLinkPayMethod: {
-          route: '/charge/:id/link',
+          route: '/v1/charge/:id/link',
           method: 'post'
         },
         updateChargeLink: {
-          route: '/charge/:id/link',
+          route: '/v1/charge/:id/link',
           method: 'put'
         },
         updatePlan: {
-          route: '/plan/:id',
+          route: '/v1/plan/:id',
           method: 'put'
         },
         updateSubscription: {
-          route: '/subscription/:id',
+          route: '/v1/subscription/:id',
           method: 'put'
         },
         createSubscriptionHistory: {
-          route: '/subscription/:id/history',
+          route: '/v1/subscription/:id/history',
           method: 'post'
         },
         defineBalanceSheetBillet: {
-          route: '/charge/:id/balance-sheet',
+          route: '/v1/charge/:id/balance-sheet',
           method: 'post'
         },
         settleCharge: {
-          route: '/charge/:id/settle',
+          route: '/v1/charge/:id/settle',
           method: 'put'
         },
         settleCarnetParcel: {
-          route: '/carnet/:id/parcel/:parcel/settle',
+          route: '/v1/carnet/:id/parcel/:parcel/settle',
           method: 'put'
         },
         createOneStepCharge: {
-          route: '/charge/one-step',
+          route: '/v1/charge/one-step',
           method: 'post'
         },
         cardPaymentRetry: {
-          route: '/charge/:id/retry',
+          route: '/v1/charge/:id/retry',
           method: 'post'
         },
         refundCard: {
-          route: '/charge/card/:id/refund',
+          route: '/v1/charge/card/:id/refund',
           method: 'post'
         },
         listCharges: {
-          route: '/charges',
+          route: '/v1/charges',
           method: 'get'
+        },
+        createChargeCard: {
+          route: '/v2/charge/card',
+          method: 'post'
         }
       }
     },
@@ -393,7 +385,7 @@ var constants = {
           method: 'put'
         },
         pixSplitUnlinkCharge: {
-          route: '/v2/gn/split/cob/:txid/vinculo/:splitConfigId',
+          route: '/v2/gn/split/cob/:txid/vinculo',
           method: 'delete'
         },
         pixSplitDetailDueCharge: {
@@ -405,7 +397,7 @@ var constants = {
           method: 'put'
         },
         pixSplitUnlinkDueCharge: {
-          route: '/v2/gn/split/cobv/:txid/vinculo/:splitConfigId',
+          route: '/v2/gn/split/cobv/:txid/vinculo',
           method: 'delete'
         },
         pixSplitConfig: {
@@ -447,10 +439,6 @@ var constants = {
         medList: {
           route: '/v2/gn/infracoes',
           method: 'get'
-        },
-        pixQrCodeDetail: {
-          route: '/v2/gn/qrcodes/detalhar',
-          method: 'post'
         },
         pixQrCodePay: {
           route: '/v2/gn/pix/:idEnvio/qrcode',
@@ -563,6 +551,10 @@ var constants = {
         pixDeleteWebhookAutomaticCharge: {
           route: '/v2/webhookcobr',
           method: 'delete'
+        },
+        pixSplitDevolution: {
+          route: '/v2/gn/split/pix/:e2eid/devolucao/:id',
+          method: 'put'
         }
       }
     },
@@ -707,6 +699,18 @@ var constants = {
         payListPayments: {
           route: '/resumo',
           method: 'get'
+        },
+        payConfigWebhook: {
+          route: '/webhook',
+          method: 'put'
+        },
+        payListWebhook: {
+          route: '/webhook',
+          method: 'get'
+        },
+        payDeleteWebhook: {
+          route: '/webhook',
+          method: 'delete'
         }
       }
     },
@@ -724,12 +728,8 @@ var constants = {
           route: '/conta-simplificada',
           method: 'post'
         },
-        getAccountCertificate: {
-          route: '/conta-simplificada/:identificador/certificado',
-          method: 'post'
-        },
         getAccountCredentials: {
-          route: '/conta-simplificada/:identificador/credenciais',
+          route: '/conta-simplificada/:idContaSimplificada/credenciais',
           method: 'get'
         },
         accountConfigWebhook: {
@@ -747,6 +747,10 @@ var constants = {
         accountListWebhook: {
           route: '/webhooks',
           method: 'get'
+        },
+        createAccountCertificate: {
+          route: '/conta-simplificada/:idContaSimplificada/certificado',
+          method: 'post'
         }
       }
     },
@@ -790,21 +794,32 @@ var constants = {
 };
 
 var name = "sdk-node-apis-efi";
-var main = "dist/cjs/index.cjs";
-var types = "dist/types/index.d.ts";
+var main = "./dist/cjs/index.cjs";
+var module$1 = "./dist/esm/index.mjs";
+var types = "./dist/types/index.d.ts";
 var exports$1 = {
 	".": {
+		types: "./dist/types/index.d.ts",
+		"import": "./dist/esm/index.mjs",
 		require: "./dist/cjs/index.cjs",
-		"import": "./dist/cjs/index.cjs",
-		types: "./dist/types/index.d.ts"
-	}
+		"default": "./dist/esm/index.mjs"
+	},
+	"./package.json": "./package.json"
 };
+var files = [
+	"dist/",
+	"README.md",
+	"LICENSE"
+];
 var description = "Module for integration with Efi Bank API";
-var version = "1.3.1";
+var version = "1.4.0";
 var author = "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas";
 var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
 var homepage = "https://github.com/efipay/sdk-node-apis-efi";
+var engines = {
+	node: ">=18"
+};
 var keywords = [
 	"efi",
 	"efi pay",
@@ -823,39 +838,43 @@ var keywords = [
 	"Open Finance"
 ];
 var dependencies = {
-	axios: "^1.2.2",
-	qrcode: "^1.5.4",
-	randomstring: "^1.2.2"
+	axios: "^1.18.1",
+	"pix-qr-code-detail": "1.2.0",
+	qrcode: "^1.5.4"
 };
 var scripts = {
 	start: "node app.js",
 	build: "rollup -c && tsc --project tsconfig.json",
-	test: "./node_modules/.bin/jest",
-	"test-cov": "./node_modules/.bin/jest --coverage"
+	test: "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+	"test-cov": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
 };
 var devDependencies = {
 	"@babel/core": "^7.14.6",
 	"@babel/preset-env": "^7.14.5",
 	"@rollup/plugin-babel": "^5.3.0",
 	"@rollup/plugin-json": "^6.1.0",
-	"@types/node": "^25.3.0",
+	"@types/node": "^18.19.0",
 	"@types/qrcode": "^1.5.6",
+	"babel-jest": "^30.4.1",
+	jest: "^30.4.2",
 	prettier: "^3.0.3",
 	rollup: "^2.52.3",
-	typescript: "^5.9.3",
-	undici: "^6.19.2"
+	typescript: "^5.9.3"
 };
 var sdkPackage = {
 	name: name,
 	main: main,
+	module: module$1,
 	types: types,
 	exports: exports$1,
+	files: files,
 	description: description,
 	version: version,
 	author: author,
 	license: license,
 	repository: repository,
 	homepage: homepage,
+	engines: engines,
 	keywords: keywords,
 	dependencies: dependencies,
 	scripts: scripts,
@@ -863,98 +882,105 @@ var sdkPackage = {
 };
 
 // @ts-nocheck
+const ALPHANUMERIC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const TOKEN_EXPIRATION_MARGIN_SECONDS = 30;
+function generateIdempotencyKey(length = 72) {
+  let key = '';
+  for (let i = 0; i < length; i++) {
+    key += ALPHANUMERIC[crypto.randomInt(0, ALPHANUMERIC.length)];
+  }
+  return key;
+}
 class Endpoints {
   constructor(options, constants) {
     this.options = options;
-    this.auth = null;
     this.constants = constants;
-    this.authError = null;
+    this.authCache = new Map();
     this.axiosInstance = axios__default["default"].create();
-
-    // Request interceptor
-    this.axiosInstance.interceptors.request.use(async config => {
-      if (!this.auth || this.isExpired()) {
-        this.authError = await this.authenticate();
-      }
-      config.headers = {
-        Authorization: `Bearer ${this.auth.access_token}`,
-        'x-skip-mtls-checking': !this.options.validateMtls
-      };
-      if (this.options.partner_token) {
-        config.headers['partner-token'] = this.options.partner_token;
-      }
-      if (this.baseUrl == this.constants.APIS.OPENFINANCE.URL.PRODUCTION || this.baseUrl == this.constants.APIS.OPENFINANCE.URL.SANDBOX) {
-        config.headers['x-idempotency-key'] = randomstring__default["default"].generate({
-          length: 72,
-          charset: 'alphanumeric'
-        });
-      }
-      return config;
-    }, error => {
-      Promise.reject(error);
-    });
   }
   run(name, params, body) {
-    let endpoint;
-    if (this.constants.APIS.DEFAULT.ENDPOINTS.hasOwnProperty(name)) {
-      endpoint = this.constants.APIS.DEFAULT.ENDPOINTS[name];
-      this.baseUrl = this.options.sandbox ? this.constants.APIS.DEFAULT.URL.SANDBOX : this.constants.APIS.DEFAULT.URL.PRODUCTION;
-      this.authRoute = this.constants.APIS.DEFAULT.ENDPOINTS.authorize;
+    const context = this.resolveRequestContext(name);
+    return this.req(context, params, body);
+  }
+  resolveRequestContext(name) {
+    let apiKey = null;
+    let apiConfig = null;
+    let endpoint = null;
+    if (Object.prototype.hasOwnProperty.call(this.constants.APIS.DEFAULT.ENDPOINTS, name)) {
+      apiKey = 'DEFAULT';
+      apiConfig = this.constants.APIS.DEFAULT;
+      endpoint = apiConfig.ENDPOINTS[name];
     } else {
       Object.keys(this.constants.APIS).forEach(key => {
-        if (this.constants.APIS[key].ENDPOINTS.hasOwnProperty(name)) {
-          endpoint = this.constants.APIS[key].ENDPOINTS[name];
-          this.baseUrl = this.options.sandbox ? this.constants.APIS[key].URL.SANDBOX : this.constants.APIS[key].URL.PRODUCTION;
-          this.authRoute = this.constants.APIS[key].ENDPOINTS.authorize;
-          return;
+        if (!endpoint && Object.prototype.hasOwnProperty.call(this.constants.APIS[key].ENDPOINTS, name)) {
+          apiKey = key;
+          apiConfig = this.constants.APIS[key];
+          endpoint = apiConfig.ENDPOINTS[name];
         }
       });
-      try {
-        if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
-          if (this.options.pemKey) {
-            this.agent = new https__default["default"].Agent({
-              cert: fs__default["default"].readFileSync(this.options.certificate),
-              key: fs__default["default"].readFileSync(this.options.pemKey),
-              passphrase: ''
-            });
-          } else {
-            this.agent = new https__default["default"].Agent({
-              pfx: fs__default["default"].readFileSync(this.options.certificate),
-              passphrase: ''
-            });
-          }
-        } else if (this.options.cert_base64 === true) {
-          if (this.options.pemKey) {
-            this.agent = new https__default["default"].Agent({
-              cert: Buffer.from(this.options.certificate, 'base64'),
-              key: Buffer.from(this.options.pemKey, 'base64'),
-              passphrase: ''
-            });
-          } else {
-            this.agent = new https__default["default"].Agent({
-              pfx: Buffer.from(this.options.certificate, 'base64'),
-              passphrase: ''
-            });
-          }
-        }
-      } catch (error) {
-        if (this.options.pemKey && (this.options.cert_base64 === undefined || this.options.cert_base64 === false)) {
-          console.error(`Falha ao ler o certificado ou a chave, verifique o caminho informado:\nCaminho do certificado: ${this.options.certificate}\nCaminho da chave: ${this.options.pemKey}`);
-        } else if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
-          console.error(`Falha ao ler o certificado, verifique o caminho informado: ${this.options.certificate}`);
-        }
-        if (this.options.pemKey && this.options.cert_base64 === true) {
-          console.error(`Falha ao ler o certificado ou a chave, verifique o conteúdo informado do certificado e da chave`);
-        } else if (this.options.cert_base64 === true) {
-          console.error(`Falha ao ler o certificado, verifique o conteúdo informado`);
-        }
-      }
     }
-    this.params = params;
-    return this.req(endpoint, body);
+    if (!endpoint) {
+      throw new Error(`Endpoint "${name}" não encontrado`);
+    }
+    const baseUrl = this.options.sandbox ? apiConfig.URL.SANDBOX : apiConfig.URL.PRODUCTION;
+    const context = {
+      apiKey,
+      endpoint,
+      baseUrl,
+      authRoute: apiConfig.ENDPOINTS.authorize
+    };
+    if (apiKey !== 'DEFAULT') {
+      context.httpsAgent = this.createHttpsAgent();
+    }
+    return context;
   }
-  async req(endpoint, body) {
-    let req = await this.createRequest(endpoint, body);
+  createHttpsAgent() {
+    try {
+      if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
+        if (this.options.pemKey) {
+          return new https__default["default"].Agent({
+            cert: fs__default["default"].readFileSync(this.options.certificate),
+            key: fs__default["default"].readFileSync(this.options.pemKey),
+            passphrase: ''
+          });
+        }
+        return new https__default["default"].Agent({
+          pfx: fs__default["default"].readFileSync(this.options.certificate),
+          passphrase: ''
+        });
+      }
+      if (this.options.cert_base64 === true) {
+        if (this.options.pemKey) {
+          return new https__default["default"].Agent({
+            cert: Buffer.from(this.options.certificate, 'base64'),
+            key: Buffer.from(this.options.pemKey, 'base64'),
+            passphrase: ''
+          });
+        }
+        return new https__default["default"].Agent({
+          pfx: Buffer.from(this.options.certificate, 'base64'),
+          passphrase: ''
+        });
+      }
+    } catch (error) {
+      this.handleCertificateError();
+    }
+    return undefined;
+  }
+  handleCertificateError() {
+    if (this.options.pemKey && (this.options.cert_base64 === undefined || this.options.cert_base64 === false)) {
+      console.error(`Falha ao ler o certificado ou a chave, verifique o caminho informado:\nCaminho do certificado: ${this.options.certificate}\nCaminho da chave: ${this.options.pemKey}`);
+    } else if (this.options.cert_base64 === undefined || this.options.cert_base64 === false) {
+      console.error(`Falha ao ler o certificado, verifique o caminho informado: ${this.options.certificate}`);
+    }
+    if (this.options.pemKey && this.options.cert_base64 === true) {
+      console.error(`Falha ao ler o certificado ou a chave, verifique o conteúdo informado do certificado e da chave`);
+    } else if (this.options.cert_base64 === true) {
+      console.error(`Falha ao ler o certificado, verifique o conteúdo informado`);
+    }
+  }
+  async req(context, params, body) {
+    let req = await this.createRequest(context, params, body);
     return this.axiosInstance(req).then(res => {
       // Para a rota de comprovantes, retornar os dados diretamente (arraybuffer)
       if (req.url.includes('/v2/gn/pix/comprovantes')) {
@@ -962,71 +988,64 @@ class Endpoints {
       }
       return res.data;
     }).catch(error => {
-      if (this.authError) {
-        const error = this.authError?.response?.data || this.authError?.cause || this.authError;
-        switch (error.message) {
-          case 'socket hang up':
-            throw 'Verifique o atributo sandbox e certificate, e garanta que eles estejam corretamente atribuidos para o ambiente desejado';
-          case 'header too long':
-            throw 'Verifique se o certificado foi enviado no formato correto';
-          case 'wrong tag':
-          case 'error:0909006C:PEM routines:get_name:no start line':
-            throw 'Foi enviando um certificado .pem porém não foi enviado o atributo pemKey corretamente, tente enviar o mesmo valor para ambos';
-          default:
-            throw error;
-        }
-      } else {
-        // Para erros na rota de comprovantes, tratar normalmente (não como arraybuffer)
-        let errorData = error.response?.data;
-        const errorUrl = error.request.res.responseUrl || '';
+      let errorData = error.response?.data;
+      const errorUrl = error.request?.res?.responseUrl || '';
 
-        // Se for um arraybuffer (rota de comprovantes), converter para string/JSON
-        if (errorUrl.includes('/v2/gn/pix/comprovantes')) {
-          try {
-            const decoder = new TextDecoder('utf-8');
-            const errorText = decoder.decode(errorData);
-            errorData = JSON.parse(errorText);
-          } catch (parseError) {
-            // Se não conseguir parsear, manter o erro original
-            errorData = error.response?.data;
-          }
-        }
-        switch (this.baseUrl) {
-          case this.constants.APIS.DEFAULT.URL.PRODUCTION:
-          case this.constants.APIS.DEFAULT.URL.SANDBOX:
-            throw errorData;
-          case this.constants.APIS.PIX.URL.PRODUCTION:
-          case this.constants.APIS.PIX.URL.SANDBOX:
-            throw errorData;
-          case this.constants.APIS.OPENFINANCE.URL.PRODUCTION:
-          case this.constants.APIS.OPENFINANCE.URL.SANDBOX:
-            throw errorData;
-          case this.constants.APIS.PAGAMENTOS.URL.PRODUCTION:
-          case this.constants.APIS.PAGAMENTOS.URL.SANDBOX:
-            throw errorData;
-          case this.constants.APIS.CONTAS.URL.PRODUCTION:
-          case this.constants.APIS.CONTAS.URL.SANDBOX:
-            throw errorData;
-          default:
-            throw errorData;
+      // Se for um arraybuffer (rota de comprovantes), converter para string/JSON
+      if (errorUrl.includes('/v2/gn/pix/comprovantes')) {
+        try {
+          const decoder = new TextDecoder('utf-8');
+          const errorText = decoder.decode(errorData);
+          errorData = JSON.parse(errorText);
+        } catch (parseError) {
+          // Se não conseguir parsear, manter o erro original
+          errorData = error.response?.data;
         }
       }
+      throw errorData;
     });
   }
-  isExpired() {
+  isExpired(auth) {
     if (!this.options.cache) {
       return true;
     }
     let current_time = new Date().getTime() / 1000;
-    if (current_time > this.auth.authDate + this.auth.expires_in) {
+    if (current_time > auth.authDate + auth.expires_in - TOKEN_EXPIRATION_MARGIN_SECONDS) {
       return true;
     }
     return false;
   }
-  async authenticate() {
+  async getAuthentication(context) {
+    const cachedAuth = this.authCache.get(context.baseUrl);
+    if (cachedAuth && !this.isExpired(cachedAuth)) {
+      return cachedAuth;
+    }
+    try {
+      const auth = await this.authenticate(context);
+      this.authCache.set(context.baseUrl, auth);
+      return auth;
+    } catch (error) {
+      this.handleAuthError(error);
+    }
+  }
+  handleAuthError(authError) {
+    const error = authError?.response?.data || authError?.cause || authError;
+    switch (error.message) {
+      case 'socket hang up':
+        throw 'Verifique o atributo sandbox e certificate, e garanta que eles estejam corretamente atribuidos para o ambiente desejado';
+      case 'header too long':
+        throw 'Verifique se o certificado foi enviado no formato correto';
+      case 'wrong tag':
+      case 'error:0909006C:PEM routines:get_name:no start line':
+        throw 'Foi enviando um certificado .pem porém não foi enviado o atributo pemKey corretamente, tente enviar o mesmo valor para ambos';
+      default:
+        throw error;
+    }
+  }
+  async authenticate(context) {
     let authParams = {
       method: 'POST',
-      url: this.baseUrl + this.authRoute.route,
+      url: context.baseUrl + context.authRoute.route,
       headers: {
         'api-sdk': 'efi-node-' + sdkPackage.version
       },
@@ -1034,7 +1053,7 @@ class Endpoints {
         grant_type: 'client_credentials'
       }
     };
-    if (this.constants.APIS.DEFAULT.URL.PRODUCTION == this.baseUrl || this.constants.APIS.DEFAULT.URL.SANDBOX == this.baseUrl) {
+    if (context.apiKey === 'DEFAULT') {
       authParams.auth = {
         username: this.options.client_id,
         password: this.options.client_secret
@@ -1043,27 +1062,24 @@ class Endpoints {
       let token = Buffer.from(this.options.client_id + ':' + this.options.client_secret).toString('base64');
       authParams.headers['Authorization'] = 'Basic ' + token;
       authParams.headers['Content-Type'] = 'application/json';
-      authParams.httpsAgent = this.agent;
+      authParams.httpsAgent = context.httpsAgent;
     }
-    return axios__default["default"](authParams).then(res => {
-      this.auth = res.data;
-      this.auth.authDate = new Date().getTime() / 1000;
-    }).catch(error => {
-      return error;
-    });
+    const res = await axios__default["default"](authParams);
+    const auth = res.data;
+    auth.authDate = new Date().getTime() / 1000;
+    return auth;
   }
-  async createRequest(endpoint, body) {
+  async createRequest(context, params = {}, body) {
+    const auth = await this.getAuthentication(context);
     let {
       route,
       method
-    } = endpoint;
+    } = context.endpoint;
     let regex = /\:(\w+)/g;
-    let query = '';
     let placeholders = route.match(regex) || [];
-    let params = {};
-    for (let prop in this.params) {
-      params[prop] = this.params[prop];
-    }
+    let requestParams = {
+      ...params
+    };
     let getVariables = function () {
       return placeholders.map(function (item) {
         return item.replace(':', '');
@@ -1072,39 +1088,35 @@ class Endpoints {
     let updateRoute = function () {
       let variables = getVariables();
       variables.forEach(function (value, index) {
-        if (params[value]) {
-          route = route.replace(placeholders[index], params[value]);
-          delete params[value];
+        if (Object.prototype.hasOwnProperty.call(requestParams, value)) {
+          route = route.replace(placeholders[index], encodeURIComponent(requestParams[value]));
+          delete requestParams[value];
         }
       });
     };
     let getQueryString = function () {
-      let keys = Object.keys(params);
+      let keys = Object.keys(requestParams);
       let initial = keys.length >= 1 ? '?' : '';
       return keys.reduce(function (previous, current, index, array) {
         let next = index === array.length - 1 ? '' : '&';
-        return [previous, current, '=', params[current], next].join('');
+        return [previous, encodeURIComponent(current), '=', encodeURIComponent(requestParams[current]), next].join('');
       }, initial);
     };
     updateRoute();
-    query = getQueryString();
-    let headers = new Object();
-    if (endpoint.route === this.constants.APIS.PIX.ENDPOINTS.pixConfigWebhook.route && endpoint.method === this.constants.APIS.PIX.ENDPOINTS.pixConfigWebhook.method) {
-      this.options.validateMtls = this.options.validateMtls || this.options.validate_mtls;
-      headers['x-skip-mtls-checking'] = !this.options.validateMtls;
-    }
+    let query = getQueryString();
+    let headers = {
+      Authorization: `Bearer ${auth.access_token}`,
+      'x-skip-mtls-checking': !(this.options.validateMtls || this.options.validate_mtls)
+    };
     if (this.options.partner_token) {
       headers['partner-token'] = this.options.partner_token;
     }
-    if (this.baseUrl == this.constants.APIS.OPENFINANCE.URL.PRODUCTION || this.baseUrl == this.constants.APIS.OPENFINANCE.URL.SANDBOX) {
-      headers['x-idempotency-key'] = randomstring__default["default"].generate({
-        length: 72,
-        charset: 'alphanumeric'
-      });
+    if (context.apiKey === 'OPENFINANCE') {
+      headers['x-idempotency-key'] = generateIdempotencyKey();
     }
     let req = {
       method,
-      url: String([this.baseUrl, route, query].join('')),
+      url: String([context.baseUrl, route, query].join('')),
       headers,
       data: body
     };
@@ -1113,8 +1125,8 @@ class Endpoints {
     if (route.includes('/v2/gn/pix/comprovantes')) {
       req['responseType'] = 'arraybuffer';
     }
-    if (this.baseUrl != this.constants.APIS.DEFAULT.URL.PRODUCTION && this.baseUrl != this.constants.APIS.DEFAULT.URL.SANDBOX) {
-      req['httpsAgent'] = this.agent;
+    if (context.apiKey !== 'DEFAULT') {
+      req['httpsAgent'] = context.httpsAgent;
     }
     return req;
   }
@@ -1188,8 +1200,8 @@ class ExtratosMethods {
    * 
    * @param { {} } params 
    * @param { {
-   *  periodicidade: string,
-   *  enviar_email: boolean,
+   *  periodicidade: 'diario' | 'semanal' | 'mensal',
+   *  envia_email: boolean,
    *  comprimir_arquivos: boolean    
    * } } body 
    * 
@@ -3144,6 +3156,100 @@ class CobrancasMethods extends ExtratosMethods {
    * 
    */
   getNotification(params) {}
+
+  /**
+   * **POST /v2/charge/card**
+   * 
+   * Criar cobrança no cartão.
+   * 
+   * Para capturar uma falha utilize o `catch`; os campos disponíveis no objeto serão `title`, `status`, `detail` e `extras`.
+   * 
+   * Obs: Para Pessoa Jurídica não serão obrigatórios o nome e CPF, apenas os dados do cliente contidos em `juridical_person`.
+   * 
+   * @param { {} } params
+   * @param { {
+   *   items: Array<{
+   *     name: string,
+   *     value: number,
+   *     amount?: number,
+   *     marketplace?: {
+   *       mode?: 1 | 2,
+   *       repasses: Array<{
+   *         payee_code: string,
+   *         percentage?: number,
+   *         fixed?: number
+   *       }>
+   *     }
+   *   }>,
+   *   shippings?: Array<{
+   *     name: string,
+   *     value: number,
+   *     payee_code?: string
+   *   }>,
+   *   customer: {
+   *     name?: string,
+   *     cpf?: string,
+   *     email: string,
+   *     phone_number: string,
+   *     birth?: string,
+   *     address?: {
+   *       street: string,
+   *       number: string,
+   *       neighborhood: string,
+   *       zipcode: string,
+   *       city: string,
+   *       complement?: string | null,
+   *       state: string
+   *     },
+   *     juridical_person?: {
+   *       corporate_name: string,
+   *       cnpj: string
+   *     }
+   *   },
+   *   installments?: number,
+   *   billing_address?: {
+   *     street: string,
+   *     number: string,
+   *     neighborhood: string,
+   *     zipcode: string,
+   *     city: string,
+   *     complement?: string | null,
+   *     state: string
+   *   },
+   *   payment_token: string,
+   *   tds_info: {
+   *     tds_identifier: string,
+   *     challenge_callback_url: string
+   *   },
+   *   discount?: {
+   *     type: 'currency' | 'percentage',
+   *     value: number
+   *   },
+   *   message?: string
+   * } } body
+   * 
+   * @returns {Promise<{
+   *   charge_id: number,
+   *   status: 'approved' | 'unpaid' | 'waiting',
+   *   installments: number,
+   *   installment_value: number,
+   *   total: number,
+   *   refusal?: {
+   *     reason: string,
+   *     retry: boolean
+   *   },
+   *   tds_challenge?: {
+   *     form_data?: {
+   *       method: 'POST',
+   *       action_url: string,
+   *       creq: string,
+   *       threeDSSessionData: string
+   *     },
+   *     html_template?: string
+   *   }
+   * }>}
+   */
+  createChargeCard(params, body) {}
 }
 
 // @ts-nocheck
@@ -3351,6 +3457,10 @@ class PixMethods extends CobrancasMethods {
    *   },
    *   chave: string,
    *   solicitacaoPagador?: string,
+   *   infoAdicionais?: Array<{
+   *       nome: string,
+   *       valor: string
+   *   }>,
    *   pixCopiaECola?: string,
    *   pix?: Array<{
    *     endToEndId: string,
@@ -3486,10 +3596,11 @@ class PixMethods extends CobrancasMethods {
    *     validadeAposVencimento?: number
    *   },
    *   devedor: {
-   *     logradouro: string,
+   *     logradouro?: string,
    *     cidade: string,
-   *     uf: string,
-   *     cep: string,
+   *     uf?: string,
+   *     cep?: string,
+   *     email?: string,
    *     cpf?: string,
    *     cnpj?: string,
    *     nome: string
@@ -3506,6 +3617,7 @@ class PixMethods extends CobrancasMethods {
    *     },
    *     desconto?: {
    *       modalidade: number,
+   *       valorPerc?: string,
    *       descontoDataFixa?: Array<{
    *         data: string,
    *         valorPerc: string
@@ -3520,22 +3632,45 @@ class PixMethods extends CobrancasMethods {
    *     id: number
    *   },
    *   chave: string,
-   *   solicitacaoPagador?: string
+   *   solicitacaoPagador?: string,
+   *   infoAdicionais?: Array<{
+   *     nome: string,
+   *     valor: string
+   *   }>
    * } } body - Dados da requisição
    * 
    * @returns {Promise<{
    *   calendario: {
+   *     criacao: string,
    *     dataDeVencimento: string,
    *     validadeAposVencimento: number
    *   },
+   *   txid: string,
+   *   revisao: number,
+   *   loc: {
+   *     id: number,
+   *     location: string,
+   *     tipoCob: string
+   *   },
+   *   status: string,
    *   devedor: {
-   *     logradouro: string,
+   *     logradouro?: string,
    *     cidade: string,
-   *     uf: string,
-   *     cep: string,
+   *     uf?: string,
+   *     cep?: string,
+   *     email?: string,
    *     cpf?: string,
    *     cnpj?: string,
    *     nome: string
+   *   },
+   *   recebedor: {
+   *     logradouro?: string,
+   *     cidade?: string,
+   *     uf?: string,
+   *     cep?: string,
+   *     cnpj?: string,
+   *     cpf?: string,
+   *     nome?: string
    *   },
    *   valor: {
    *     original: string,
@@ -3549,17 +3684,24 @@ class PixMethods extends CobrancasMethods {
    *     },
    *     desconto?: {
    *       modalidade: number,
+   *       valorPerc?: string,
    *       descontoDataFixa?: Array<{
    *         data: string,
    *         valorPerc: string
    *       }>
+   *     },
+   *     abatimento?: {
+   *       modalidade: number,
+   *       valorPerc: string
    *     }
    *   },
-   *   loc?: {
-   *     id: number
-   *   },
    *   chave: string,
-   *   solicitacaoPagador?: string
+   *   solicitacaoPagador?: string,
+   *   infoAdicionais?: Array<{
+   *     nome: string,
+   *     valor: string
+   *   }>,
+   *   pixCopiaECola: string
    * }>}
    */
   pixCreateDueCharge(params, body) {}
@@ -3607,6 +3749,7 @@ class PixMethods extends CobrancasMethods {
    *     cpf?: string,
    *     cnpj?: string,
    *     nome?: string,
+   *     email?: string,
    *     logradouro?: string,
    *     cidade?: string,
    *     uf?: string,
@@ -3624,16 +3767,25 @@ class PixMethods extends CobrancasMethods {
    *     },
    *     desconto?: {
    *       modalidade?: number,
+   *       valorPerc?: string,
    *       descontoDataFixa?: Array<{
    *         data?: string,
    *         valorPerc?: string
    *       }>
+   *     },
+   *     abatimento?: {
+   *       modalidade?: number,
+   *       valorPerc?: string
    *     }
    *   },
    *   chave?: string,
    *   solicitacaoPagador?: string,
+   *   infoAdicionais?: Array<{
+   *     nome: string,
+   *     valor: string
+   *   }>,
    *   loc?: {
-   *     id?: number
+   *     id: number
    *   }
    * } } body
    * 
@@ -3647,6 +3799,7 @@ class PixMethods extends CobrancasMethods {
    *     cpf?: string,
    *     cnpj?: string,
    *     nome: string,
+   *     email?: string,
    *     logradouro?: string,
    *     cidade?: string,
    *     uf?: string,
@@ -3664,17 +3817,29 @@ class PixMethods extends CobrancasMethods {
    *     },
    *     desconto?: {
    *       modalidade: number,
+   *       valorPerc?: string,
    *       descontoDataFixa?: Array<{
    *         data: string,
    *         valorPerc: string
    *       }>
+   *     },
+   *     abatimento?: {
+   *       modalidade: number,
+   *       valorPerc: string
    *     }
    *   },
    *   chave: string,
    *   solicitacaoPagador?: string,
+   *   infoAdicionais?: Array<{
+   *     nome: string,
+   *     valor: string
+   *   }>,
    *   loc?: {
-   *     id: number
-   *   }
+   *     id: number,
+   *     location: string,
+   *     tipoCob: string
+   *   },
+   *   pixCopiaECola: string
    * }>}
    */
   pixUpdateDueCharge(params, body) {}
@@ -3686,7 +3851,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
    * 
-   * @param { { txid: string } } params 
+   * @param { { txid: string, revisao?: number } } params 
    * 
    * @returns {Promise<{
    *   calendario: {
@@ -3703,26 +3868,53 @@ class PixMethods extends CobrancasMethods {
    *   },
    *   status: string,
    *   devedor: {
-   *     logradouro: string,
-   *     cidade: string,
-   *     uf: string,
-   *     cep: string,
-   *     cpf: string,
-   *     nome: string
+   *     cpf?: string,
+   *     cnpj?: string,
+   *     nome: string,
+   *     email?: string,
+   *     logradouro?: string,
+   *     cidade?: string,
+   *     uf?: string,
+   *     cep?: string
    *   },
    *   recebedor: {
    *     logradouro: string,
    *     cidade: string,
    *     uf: string,
    *     cep: string,
-   *     cnpj: string,
+   *     cnpj?: string,
+   *     cpf?: string,
    *     nome: string
    *   },
    *   valor: {
-   *     original: string
+   *     original: string,
+   *     multa?: {
+   *      modalidade: number,
+   *      valorPerc: string
+   *     },
+   *     juros?: {
+   *      modalidade: number,
+   *      valorPerc: string
+   *     },
+   *     desconto?: {
+   *       modalidade: number,
+   *       valorPerc?: string,
+   *       descontoDataFixa?: Array<{
+   *        data: string,
+   *        valorPerc: string
+   *      }>
+   *     },
+   *     abatimento?: {
+   *      modalidade: number,
+   *      valorPerc: string
+   *     }
    *   },
    *   chave: string,
    *   solicitacaoPagador?: string,
+   *   infoAdicionais?: Array<{
+   *       nome: string,
+   *       valor: string
+   *   }>,
    *   pixCopiaECola: string
    * }>}
    */
@@ -3737,7 +3929,14 @@ class PixMethods extends CobrancasMethods {
    * 
    * @param { {
    *   inicio: string,
-   *   fim: string
+   *   fim: string,
+   *   cpf?: string,
+   *   cnpj?: string,
+   *   locationPresente?: boolean,
+   *   status?: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_USUARIO_RECEBEDOR' | 'REMOVIDA_PELO_PSP',
+   *   loteCobVId?: number,
+   *   'paginacao.paginaAtual'?: number,
+   *   'paginacao.itensPorPagina'?: number
    * } } params 
    * 
    * @returns {Promise<{
@@ -3764,6 +3963,7 @@ class PixMethods extends CobrancasMethods {
    *       nome: string,
    *       cpf?: string,
    *       cnpj?: string,
+   *       email?: string,
    *       logradouro?: string,
    *       cidade?: string,
    *       uf?: string,
@@ -3935,6 +4135,7 @@ class PixMethods extends CobrancasMethods {
    * }>}
    */
   pixSendDetailId(params) {}
+
   /**
    * **GET /v2/gn/pix/enviados**
    * 
@@ -3947,6 +4148,8 @@ class PixMethods extends CobrancasMethods {
    *   fim: string,
    *   status?: string,
    *   devolucaoPresente?: boolean,
+   *   cpf?: string,
+   *   cnpj?: string,
    *   "paginacao.itensPorPagina"?: number,
    *   "paginacao.paginaAtual"?: number
    * } } params 
@@ -3979,45 +4182,59 @@ class PixMethods extends CobrancasMethods {
    * }>>}
    */
   pixSendList(params) {}
+
   /**
-   * **POST /v2/gn/qrcodes/detalhar**
-   * 
-   * Detalha um QR Code Pix.
-   * 
-   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
-   * 
-   * @param { { } } params 
-   * 
+   * Detalha localmente um QR Code Pix dinâmico a partir do BR Code copia e cola.
+   *
+   * Este método não chama a API Efí. Ele extrai a URL do payload dinâmico, baixa o JWT e retorna apenas o payload decodificado.
+   *
+   * @param { { } } params
+   *
    * @param { {
    *   pixCopiaECola: string
-   * } } body 
-   * 
+   * } } body
+   *
    * @returns {Promise<{
-   *   tipoCob: string,
-   *   txid: string,
-   *   revisao: number,
-   *   calendario: {
-   *     criacao: string,
-   *     apresentacao: string,
-   *     expiracao: number
-   *   },
-   *   status: string,
-   *   devedor: {
-   *     nome: string,
-   *     cpf: string
-   *   },
-   *   recebedor: {
-   *     nome: string,
-   *     cpf: string
-   *   },
-   *   valor: {
-   *     final: string
-   *   },
-   *   chave: string,
-   *   solicitacaoPagador: string
-   * }>}
+   * 	tipoCob: 'cobv',
+   *  calendario: {
+   * 		criacao: string,
+   * 		apresentacao: string,
+   * 		dataDeVencimento: string,
+   *      validadeAposVencimento: number
+   * 	},
+   *  devedor: {nome: string, cpf: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} | {nome: string, cnpj: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} 
+   *  recebedor: {nome: string, cnpj: string, logradouro: string, cidade: string, uf: string, cep: string} | {nome: string, cpf: string, logradouro: string, cidade: string, uf: string, cep: string}
+   *  txid: string,
+   *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+   *  revisao: number,
+   *  valor: {original?: string, juros?: string, multa?: string, desconto?: string, abatimento?: string, final: string}, 
+   *  chave: string,
+   *  solicitacaoPagador?: string,
+   *  infoAdicionais?: {nome: string, valor: string}[],
+   * } 
+   * | 
+   * {
+   * 	tipoCob: 'cob',
+   *  calendario: {
+   * 		criacao: string,
+   * 		apresentacao: string,
+   * 		expiracao: string,
+   * 	},
+   *  devedor: {nome: string, cpf: string} | {nome: string, cnpj: string} 
+   *  recebedor: {nome: string, cnpj: string} | {nome: string, cpf: string}
+   *  txid: string,
+   *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+   *  revisao: number,
+   *  valor: {final: string}, 
+   *  chave: string,
+   *  solicitacaoPagador?: string,
+   *  infoAdicionais?: {nome: string, valor: string}[],
+   * }
+   * | 
+   * string>}
    */
   pixQrCodeDetail(params, body) {}
+
   /**
    * **PUT /v2/gn/pix/:idEnvio/qrcode**
    * 
@@ -4045,6 +4262,7 @@ class PixMethods extends CobrancasMethods {
    * }>}
    */
   pixQrCodePay(params, body) {}
+
   /**
    * **GET /v2/pix/:e2eId**
    * 
@@ -4072,6 +4290,7 @@ class PixMethods extends CobrancasMethods {
    * }>}
    */
   pixDetailReceived(params) {}
+
   /**
    * **GET /v2/pix**
    * 
@@ -4122,6 +4341,7 @@ class PixMethods extends CobrancasMethods {
    * }>}
    */
   pixReceivedList(params) {}
+
   /**
    * **PUT /v2/pix/:e2eId/devolucao/:id**
    * 
@@ -4174,6 +4394,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome`, `mensagem`
    * 
+   * @param { {} } params
    * @param { { 
    *   tipoCob: 'cob' | 'cobv' 
    * } } body 
@@ -4806,7 +5027,6 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-
   pixSplitDetailDueCharge(params) {}
 
   /**
@@ -6145,9 +6365,9 @@ class PixMethods extends CobrancasMethods {
    * 
    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `type`, `title`, `status`, `detail` e dependendo da falha `violacoes`.
    * 
-   * @param {
+   * @param {{
    *  id: string
-   * } params 
+   * }} params 
    * 
    * @returns {Promise<{
    *  id: number,
@@ -6260,6 +6480,96 @@ class PixMethods extends CobrancasMethods {
    * 
    */
   pixDeleteWebhookAutomaticCharge() {}
+
+  /**
+   * **PUT /v2/gn/split/pix/:e2eid/devolucao/:id**
+   * 
+   * Realiza a devolução de um pagamento Pix recebido com split.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param { { e2eId: string, id: string } } params - Identificadores da transação e devolução
+   * @param { {
+   *   valor: string
+   * } } body - Dados da devolução
+   * 
+   * @returns {Promise<{
+   *   id: string,
+   *   rtrId: string,
+   *   valor: string,
+   *   horario: {
+   *     solicitacao: string
+   *   },
+   *   status: string
+   * }>}
+   */
+  pixSplitDevolution(params, body) {}
+
+  /**
+  * **PUT /v2/gn/pix/:idEnvio/mesma-titularidade**
+  * 
+  * Realiza o envio de Pix para mesma titularidade.
+  * 
+  * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+  * 
+  * @param { { idEnvio: string } } params 
+  * @param { {
+  *   valor: string,
+  *   pagador: {
+  *     chave: string,
+  *     infoPagador?: string
+  *   },
+  *   favorecido: {
+  *     chave?: string,
+  *     contaBanco?: {
+  *       nome: string,
+  *       cpf?: string,
+  *       cnpj?: string,
+  *       codigoBanco: string,
+  *       agencia: string,
+  *       conta: string,
+  *       tipoConta: string
+  *     },
+  *     cpf?: string,
+  *     cnpj?: string
+  *   }
+  * } } body
+  * 
+  * @returns {Promise<{
+  *   idEnvio: string,
+  *   e2eId: string,
+  *   valor: string,
+  *   horario: {
+  *      solicitacao: string
+  *   }
+  *   status: string
+  * }>}
+  */
+  pixSendSameOwnership(params, body) {}
+
+  /**
+  * **GET /v2/gn/chaves/balde**
+  * 
+  * Consultar baldes de fichas
+  * 
+  * @returns {Promise<{
+  *   baldeA: {
+  *     tiposChave: ["cpf", "cnpj", "evp"],
+  *     capacidade: number,
+  *     fichasDisponiveis: number,
+  *     taxaDeReposicaoFichas: number,
+  *     periodoReposicaoEmSegundos: number
+  *   },
+  *   baldeB: {
+  *     tiposChave: ["telefone", "email"],
+  *     capacidade: number,
+  *     fichasDisponiveis: number,
+  *     taxaDeReposicaoFichas: number,
+  *     periodoReposicaoEmSegundos: number
+  *   }
+  * }>}
+  */
+  pixKeysBucket() {}
 }
 
 // @ts-nocheck
@@ -6376,8 +6686,8 @@ class OpenFinanceMethods extends PixMethods {
    *      }>,
    *      idProprio?: string,
    *   }>,
-   *  total: string,
-   *  porPagina: string,
+   *  total: number,
+   *  porPagina: number,
    *  ultimo: string,
    *  proximo: string | null,
    *  anterior: string | null,
@@ -6400,24 +6710,26 @@ class OpenFinanceMethods extends PixMethods {
    *      cpf: string,
    *      cnpj?: string, 
    *  },
-   *  favorecido: {
-   *      contaBanco: {
+   *  favorecido?: {
+   *      contaBanco?: {
    *          codigoBanco: string,
    *          agencia: string,
    *          documento: string,
    *          nome: string,
+   *          conta: string,
    *          tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN'
-   *      }
+   *      },
+   *      chave?: string
    *  },
-   *  detalhes: {
+   *  pagamento: {
    *      valor: string,
    *      idProprio?: string,
    *      infoPagador?: string,
-   *      dataAgendamento?: string,
    *      codigoCidadeIBGE?: string,
+   *      qrCode?: string,
+   *      identificadorTransacao?: string,
    *  }
-   * 
-   *  }} body 
+   * }} body 
    * 
    * @returns { Promise<{
    *  identificadorPagamento: string,
@@ -6442,7 +6754,8 @@ class OpenFinanceMethods extends PixMethods {
    * 
    * @returns { Promise<{
    *  identificadorPagamento: string,
-   *  valorDevolucao: string,
+   *  endToEndId: string,
+   *  valor: string,
    *  dataCriacao: string,
    *  status: string,
    * }>}
@@ -6463,21 +6776,25 @@ class OpenFinanceMethods extends PixMethods {
    *      cpf: string,
    *      cnpj?: string, 
    *  },
-   *  favorecido: {
-   *      contaBanco: {
+   *  favorecido?: {
+   *      contaBanco?: {
    *          codigoBanco: string,
    *          agencia: string,
    *          documento: string,
    *          nome: string,
+   *          conta: string,
    *          tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN'
-   *      }
+   *      },
+   *      chave?: string
    *  },
    *  pagamento: {
    *     valor: string,
    *     codigoCidadeIBGE?: string,
    *     infoPagador?: string,
    *     idProprio?: string,
-   *     dataAgendamento: string,
+   *     dataAgendamento?: string,
+   *     qrCode?: string,
+   *     identificadorTransacao?: string,
    *  }
    * }} body 
    * 
@@ -6542,11 +6859,9 @@ class OpenFinanceMethods extends PixMethods {
    * }} params 
    * 
    * @returns { Promise<{
-   *  pagamentos: {
-   *    identificadorPagamento: string,
-   *    status: string,
-   *    dataCancelamento: string,
-   *  }
+   *  identificadorPagamento: string,
+   *  status: string,
+   *  dataCancelamento: string,
    * }> }
    */
   ofCancelSchedulePix(params) {}
@@ -6559,7 +6874,7 @@ class OpenFinanceMethods extends PixMethods {
    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
    * 
    * @param {{ identificadorPagamento: string }} params 
-   * @param {{ valor: string }} body 
+   * @param {{ endToEndId: string, valor: string }} body 
    * 
    * @returns { Promise<{
    *  identificadorPagamento: string,
@@ -6593,27 +6908,30 @@ class OpenFinanceMethods extends PixMethods {
    *      cpf: string,
    *      cnpj?: string, 
    *  },
-   *  favorecido: {
-   *      contaBanco: {
+   *  favorecido?: {
+   *      contaBanco?: {
    *          codigoBanco: string,
    *          agencia: string,
    *          documento: string,
    *          nome: string,
+   *          conta: string,
    *          tipoConta: 'CACC' | 'SLRY' | 'SVGS' | 'TRAN'
-   *      }
+   *      },
+   *      chave?: string
    *  },
    *  pagamento: {
    *     valor: string,
    *     codigoCidadeIBGE?: string,
    *     infoPagador?: string,
    *     idProprio?: string,
+   *     qrCode?: string,
    *     recorrencia: {
    *      tipo: 'diaria' | 'semanal' | 'mensal' | 'personalizada',
    *      dataInicio?: string,
    *      quantidade?: number,
-   *      diaDaSemana?: string,
+   *      diaDaSemana?: 'SEGUNDA_FEIRA' | 'TERCA_FEIRA' | 'QUARTA_FEIRA' | 'QUINTA_FEIRA' | 'SEXTA_FEIRA' | 'SABADO' | 'DOMINGO',
    *      diaDoMes?: number,
-   *      datas?: Array<string>
+   *      datas?: Array<string>,
    *      descricao?: string,
    *    }
    *  }
@@ -6649,7 +6967,7 @@ class OpenFinanceMethods extends PixMethods {
    *      status: string,
    *      dataCriacao: string,
    *      idProprio: string,
-   *      recorrencia: Array<{
+   *      recorrencias: Array<{
    *          endToEndId: string,
    *          dataOperacao: string,
    *          status: string,
@@ -6683,11 +7001,9 @@ class OpenFinanceMethods extends PixMethods {
    * }} params 
    * 
    * @returns { Promise<{
-   *  pagamentos: {
-   *    identificadorPagamento: string,
-   *    status: string,
-   *    dataCancelamento: string,
-   *  }
+   *  identificadorPagamento: string,
+   *  status: string,
+   *  dataCancelamento: string,
    * }> }
    */
   ofCancelRecurrencyPix(params) {}
@@ -6700,10 +7016,12 @@ class OpenFinanceMethods extends PixMethods {
    * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
    * 
    * @param {{ identificadorPagamento: string }} params 
-   * @param {Array<{
-   *  endToEndId: string, 
-   *  valor: string 
-   * }>} body 
+   * @param {{
+   *  devolucoes: Array<{
+   *      endToEndId: string, 
+   *      valor: string 
+   *  }>
+   * }} body 
    * 
    * @returns { Promise<Array<{
    *  identificadorPagamento: string,
@@ -6738,7 +7056,7 @@ class OpenFinanceMethods extends PixMethods {
   ofReplaceRecurrencyPixParcel(params, body) {}
 
   /**
-   * **POST /v1/jsr/vinculos**
+   * **POST /v1/pagamentos-biometria/vinculos**
    * 
    * Este endpoint permite a criação de um novo vínculo na jornada sem redirecionamento, possibilitando o registro de vínculos com diferentes detentoras de conta. Esses vínculos poderão ser utilizados posteriormente para a iniciação de pagamentos, promovendo maior flexibilidade no processo. O corpo da requisição deve incluir informações essenciais sobre o pagador: CPF ou CNPJ e o idParticipante da instituição detentora onde a conta do pagador está localizada.
    * 
@@ -6762,7 +7080,7 @@ class OpenFinanceMethods extends PixMethods {
   ofCreateBiometricEnrollment(params, body) {}
 
   /**
-   * **GET /v1/jsr/vinculos**
+   * **GET /v1/pagamentos-biometria/vinculos**
    * 
    * Esse endpoint recupera todos os vínculos associados ao usuário informado. Este endpoint permite consultar os vínculos utilizando o CPF obrigatório e, opcionalmente, o CNPJ para filtrar resultados. A resposta contém uma lista de vínculos que podem ser utilizados para operações futuras, como a iniciação de pagamentos e gestão dos mesmos. 
    * 
@@ -6799,7 +7117,7 @@ class OpenFinanceMethods extends PixMethods {
   ofListBiometricEnrollment(params, body) {}
 
   /**
-   * **POST /v1/jsr/pagamentos/pix**
+   * **POST /v1/pagamentos-biometria/pix**
    * 
    * Este endpoint permite a criação de um novo pagamento na jornada sem redirecionamento. 
    * 
@@ -6821,7 +7139,7 @@ class OpenFinanceMethods extends PixMethods {
    *  },
    *  pagamento: {
    *      valor: string,
-   *      codigoBanco?: string,
+   *      codigoCidadeIBGE?: string,
    *      infoPagador?: string,
    *      idProprio?: string,
    *      qrCode?: string,
@@ -6837,7 +7155,7 @@ class OpenFinanceMethods extends PixMethods {
   ofCreateBiometricPixPayment(params, body) {}
 
   /**
-   * **GET /v1/jsr/pagamentos/pix**
+   * **GET /v1/pagamentos-biometria/pix**
    * 
    * O endpoint em questão é uma ferramenta de pesquisa. Ele permite que o usuário busque por um pagamento específico, por pagamentos que possuem um status especifico ou por pagamentos que atendem ou não um critério dentro de um determinado período.
    * 
@@ -6869,6 +7187,291 @@ class OpenFinanceMethods extends PixMethods {
    * }>} 
    */
   ofListBiometricPixPayment(params, body) {}
+
+  /**
+   * **PATCH /v1/pagamentos-biometria/vinculos**
+   * 
+   * Revogar vínculo na jornada sem redirecionamento.
+   * 
+   * O SDK envia automaticamente o header `x-idempotency-key` para chamadas Open Finance.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params
+   * @param {{
+   *  identificadorVinculo: string,
+   *  motivo: string
+   * }} body
+   * 
+   * @returns { Promise<{
+   *  identificadorVinculo: string,
+   *  status: 'revogado',
+   *  motivo: string,
+   *  data: string
+   * }>}
+   */
+  ofRevokeBiometricEnrollment(params, body) {}
+
+  /**
+   * **POST /v1/pagamentos-automaticos/adesao**
+   * 
+   * Solicitar criação de adesão para pagamento automático e receber a URL de redirecionamento.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params
+   * @param {{
+   *  pagador: {
+   *      cpf: string,
+   *      cnpj?: string,
+   *      nome?: string,
+   *      idParticipante: string
+   *  },
+   *  favorecido: {
+   *      contaBanco: {
+   *          nome: string,
+   *          documento: string,
+   *          codigoBanco: string,
+   *          agencia: string,
+   *          conta: string,
+   *          tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+   *      }
+   *  },
+   *  assinatura: {
+   *      expiracao: string,
+   *      descricao?: string,
+   *      idProprio?: string,
+   *      configuracao: {
+   *          automatico: {
+   *              valorFixo?: string,
+   *              valorMinimo?: string,
+   *              valorMaximo?: string,
+   *              intervalo: 'SEMANAL' | 'MENSAL' | 'ANUAL' | 'SEMESTRAL' | 'TRIMESTRAL',
+   *              dataInicio: string,
+   *              permiteRetentativa?: boolean,
+   *              primeiroPagamento?: {
+   *                  data: string,
+   *                  valor: string,
+   *                  infoPagador?: string
+   *              }
+   *          }
+   *      }
+   *  }
+   * }} body
+   * 
+   * @returns { Promise<{
+   *  identificadorAdesao: string,
+   *  redirectURI: string
+   * }>}
+   */
+  ofCreateAutomaticEnrollment(params, body) {}
+
+  /**
+   * **GET /v1/pagamentos-automaticos/adesao**
+   * 
+   * Consultar os parâmetros de adesões de pagamento automático.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{
+   *  inicio: string,
+   *  fim: string,
+   *  status: 'autorizado' | 'pendente' | 'revogado' | 'finalizado' | 'rejeitado',
+   *  identificadorAdesao?: string,
+   *  idProprio?: string,
+   *  documento?: string
+   * }} params
+   * 
+   * @returns { Promise<{
+   *  adesoes: Array<{
+   *      identificadorAdesao: string,
+   *      status: 'autorizado' | 'pendente' | 'revogado' | 'finalizado' | 'rejeitado',
+   *      dataCriacao: string,
+   *      favorecido: {
+   *          contaBanco: {
+   *              nome: string,
+   *              documento: string,
+   *              codigoBanco: string,
+   *              agencia: string,
+   *              conta: string,
+   *              tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+   *          }
+   *      },
+   *      assinatura: {
+   *          expiracao: string,
+   *          descricao?: string,
+   *          idProprio?: string,
+   *          configuracao: {
+   *              automatico: {
+   *                  valorFixo?: string,
+   *                  valorMinimo?: string,
+   *                  valorMaximo?: string,
+   *                  intervalo: 'SEMANAL' | 'MENSAL' | 'ANUAL' | 'SEMESTRAL' | 'TRIMESTRAL',
+   *                  dataInicio: string,
+   *                  permiteRetentativa?: boolean,
+   *                  primeiroPagamento?: {
+   *                      data: string,
+   *                      valor: string,
+   *                      infoPagador?: string
+   *                  }
+   *              }
+   *          }
+   *      }
+   *  }>,
+   *  total: number,
+   *  porPagina: number,
+   *  ultimo: string,
+   *  proximo: string | null,
+   *  anterior: string | null,
+   *  atual: string
+   * }>}
+   */
+  ofListAutomaticEnrollment(params) {}
+
+  /**
+   * **PATCH /v1/pagamentos-automaticos/adesao**
+   * 
+   * Editar uma adesão de pagamento automático.
+   * 
+   * Atualmente, conforme documentação, apenas o status de uma adesão poderá ser alterado.
+   * O SDK envia automaticamente o header `x-idempotency-key` para chamadas Open Finance.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params
+   * @param {{
+   *  identificador?: string,
+   *  nomeFavorecido?: string,
+   *  status?: 'revogado',
+   *  dataExpiracao?: string,
+   *  valorMaximo?: string
+   * }} body
+   * 
+   * @returns { Promise<{
+   *  identificadorAdesao: string,
+   *  status: 'revogado' | 'autorizado' | 'pendente' | 'finalizado' | 'rejeitado',
+   *  motivo?: string,
+   *  favorecido: {
+   *      contaBanco: {
+   *          nome: string,
+   *          documento: string,
+   *          codigoBanco: string,
+   *          agencia: string,
+   *          conta: string,
+   *          tipoConta: 'CACC' | 'SVGS' | 'TRAN'
+   *      }
+   *  },
+   *  assinatura: {
+   *      expiracao: string,
+   *      descricao?: string,
+   *      idProprio?: string,
+   *      configuracao: {
+   *          automatico: {
+   *              valorFixo?: string,
+   *              valorMinimo?: string,
+   *              valorMaximo?: string,
+   *              intervalo: 'SEMANAL' | 'MENSAL' | 'ANUAL' | 'SEMESTRAL' | 'TRIMESTRAL',
+   *              dataInicio: string,
+   *              permiteRetentativa?: boolean,
+   *              primeiroPagamento?: {
+   *                  data: string,
+   *                  valor: string,
+   *                  infoPagador?: string
+   *              }
+   *          }
+   *      }
+   *  }
+   * }>}
+   */
+  ofUpdateAutomaticEnrollment(params, body) {}
+
+  /**
+   * **POST /v1/pagamentos-automaticos/pix**
+   * 
+   * Solicitar criação de um pagamento automático.
+   * 
+   * O SDK envia automaticamente o header `x-idempotency-key` para chamadas Open Finance.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params
+   * @param {{
+   *  identificadorAdesao: string,
+   *  pagamento: {
+   *      valor: string,
+   *      data: string,
+   *      codigoCidadeIBGE?: string,
+   *      infoPagador?: string
+   *  }
+   * }} body
+   * 
+   * @returns { Promise<{
+   *  identificadorAdesao: string,
+   *  endToEndId: string,
+   *  status: 'pendente' | 'rejeitado' | 'aceito' | 'expirado' | 'cancelado',
+   *  data: string
+   * }>}
+   */
+  ofCreateAutomaticPixPayment(params, body) {}
+
+  /**
+   * **GET /v1/pagamentos-automaticos/pix**
+   * 
+   * Consultar pagamentos automáticos.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{
+   *  identificadorAdesao: string,
+   *  endToEndId?: string
+   * }} params
+   * 
+   * @returns { Promise<{
+   *  identificadorAdesao: string,
+   *  idProprio?: string,
+   *  status: 'autorizado' | 'pendente' | 'revogado' | 'finalizado' | 'rejeitado',
+   *  descricao?: string,
+   *  pagamentos: Array<{
+   *      endToEndId: string,
+   *      valor: string,
+   *      status: 'pendente' | 'rejeitado' | 'aceito' | 'expirado' | 'cancelado',
+   *      dataCriacao: string,
+   *      infoPagador?: string,
+   *      devolucoes?: Array<{
+   *          identificadorDevolucao: string,
+   *          valor: string,
+   *          status: 'pendente' | 'rejeitado' | 'aceito',
+   *          dataCriacao: string
+   *      }>
+   *  }>
+   * }>}
+   */
+  ofListAutomaticPixPayment(params) {}
+
+  /**
+   * **PATCH /v1/pagamentos-automaticos/pix**
+   * 
+   * Solicitar o cancelamento de um pagamento automático.
+   * 
+   * Para capturar uma falha utilize o `catch`, os campos disponíveis no objeto serão `nome` e `mensagem`.
+   * 
+   * @param {{}} params
+   * @param {{
+   *  identificadorAdesao: string,
+   *  endToEndId: string
+   * }} body
+   * 
+   * @returns { Promise<{
+   *  identificadorAdesao: string,
+   *  idProprio?: string,
+   *  endToEndId: string,
+   *  valor: string,
+   *  status: 'cancelado',
+   *  motivo: string,
+   *  dataCriacao: string
+   * }>}
+   */
+  ofCancelAutomaticPixPayment(params, body) {}
 }
 
 // @ts-nocheck
@@ -6886,50 +7489,72 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    * 
    * @param {{ codBarras: string }} params
    * 
-   * @returns { Promise<{
-   *  tipo: 'boleto' | 'tributo',
-   *  banco: {
-   *      codigo: number,
-   *      nome: string
-   *  } | null,
-   *  codBarras: string,
-   *  linhaDigitavel: string,
-   *  datas: {
-   *      vencimento: string,
-   *      limitePagamento: string | null,
+   * @returns { Promise<(
+   *  {
+   *      tipo: 'boleto',
+   *      banco: {
+   *          codigo: number,
+   *          nome: string
+   *      },
+   *      codBarras: string,
+   *      linhaDigitavel: string,
+   *      datas: {
+   *          vencimento: string,
+   *          limitePagamento: string
+   *      },
+   *      beneficiario: {
+   *          nome: string,
+   *          fantasia: string,
+   *          documento: string
+   *      },
+   *      pagador: {
+   *          nome: string,
+   *          documento: string
+   *      },
+   *      valores: {
+   *          original: number,
+   *          abatimento: number,
+   *          multa: number,
+   *          juros: number,
+   *          desconto: number,
+   *          final: number
+   *      },
+   *      informacoesPagamento: {
+   *          divergente: {
+   *              deveAceitar: boolean,
+   *              valorMinimo: number,
+   *              valorMaximo: number
+   *          },
+   *          parcial: {
+   *              deveAceitar: boolean,
+   *              limiteDePagamentos: number
+   *          },
+   *          podeSerPago: boolean
+   *      }
+   *  } | {
+   *      tipo: 'tributo',
+   *      banco: null,
+   *      codBarras: string,
+   *      linhaDigitavel: string,
+   *      datas: {
+   *          vencimento: string,
+   *          limitePagamento: null
+   *      },
+   *      beneficiario: null,
+   *      pagador: null,
+   *      sacadorAvalista: null | {
+   *          nome?: string,
+   *          documento?: string
+   *      },
+   *      valores: {
+   *          original: number,
+   *          abatimento: number | null,
+   *          pago: number | null,
+   *          final: number
+   *      },
+   *      informacoesPagamento: null
    *  }
-   *  beneficiario: {
-   *      nome: string,
-   *      documento: string,
-   *      fantasia: string
-   *  } | null,
-   *  pagador: {
-   *      nome: string,
-   *      documento: string,
-   *  } | null,
-   *  valores: {
-   *      original: number,
-   *      abatimento: number | null,
-   *      multa: number,
-   *      juros: number,
-   *      desconto: number,
-   *      pago: number | null,
-   *      final: number
-   *  },
-   *  informacoesPagamento: {
-   *      divergente: {
-   *          deveAceitar: boolean,
-   *          valorMinimo: number,
-   *          valorMaximo: number,
-   *      },
-   *      parcial: {
-   *          deveAceitar: boolean,
-   *          limiteDePagamentos: number,
-   *      },
-   *      podeSerPago: boolean,
-   *  } | null,
-   * > } 
-   * }
+   * )> }
    */
   payDetailBarCode(params) {}
 
@@ -7454,6 +8079,63 @@ class EfiPay extends AllMethods {
    */
   async pixGenerateStaticQRCode(pixData) {
     return createStaticPix(pixData);
+  }
+
+  /**
+   * Decodifica localmente um QR Code Pix dinâmico, sem chamada à API Efí.
+   * O método extrai a URL do payload do BR Code, baixa o JWT e retorna apenas o payload decodificado.
+   *
+   * @param {{}} params
+   * @param {{ pixCopiaECola: string }} body
+   * @returns {Promise<{
+   * 	tipoCob: 'cobv',
+   *  calendario: {
+   * 		criacao: string,
+   * 		apresentacao: string,
+   * 		dataDeVencimento: string,
+   *      validadeAposVencimento: number
+   * 	},
+   *  devedor: {nome: string, cpf: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} | {nome: string, cnpj: string, email?: string, logradouro?: string, cidade?: string, uf?: string, cep?: string} 
+   *  recebedor: {nome: string, cnpj: string, logradouro: string, cidade: string, uf: string, cep: string} | {nome: string, cpf: string, logradouro: string, cidade: string, uf: string, cep: string}
+   *  txid: string,
+   *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+   *  revisao: number,
+   *  valor: {original?: string, juros?: string, multa?: string, desconto?: string, abatimento?: string, final: string}, 
+   *  chave: string,
+   *  solicitacaoPagador?: string,
+   *  infoAdicionais?: {nome: string, valor: string}[],
+   * } 
+   * | 
+   * {
+   * 	tipoCob: 'cob',
+   *  calendario: {
+   * 		criacao: string,
+   * 		apresentacao: string,
+   * 		expiracao: string,
+   * 	},
+   *  devedor: {nome: string, cpf: string} | {nome: string, cnpj: string} 
+   *  recebedor: {nome: string, cnpj: string} | {nome: string, cpf: string}
+   *  txid: string,
+   *  status: 'ATIVA' | 'CONCLUIDA' | 'REMOVIDA_PELO_PSP' | 'REMOVIDA_PELO_USUARIO',
+   *  revisao: number,
+   *  valor: {final: string}, 
+   *  chave: string,
+   *  solicitacaoPagador?: string,
+   *  infoAdicionais?: {nome: string, valor: string}[],
+   * }
+   * | 
+   * string>}
+   */
+  async pixQrCodeDetail(params, body) {
+    if (!body || typeof body.pixCopiaECola !== 'string' || body.pixCopiaECola.trim() === '') {
+      throw new Error('O campo "pixCopiaECola" é obrigatório e deve ser uma string.');
+    }
+    const decoded = await pixQrCodeDetail.getDecodedPixJwt(body.pixCopiaECola);
+    const tipoCob = body.pixCopiaECola.includes('/cobv/') ? 'cobv' : 'cob';
+    return {
+      tipoCob,
+      ...decoded.payload
+    };
   }
 }
 

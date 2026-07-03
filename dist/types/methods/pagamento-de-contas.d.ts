@@ -12,81 +12,102 @@ export class PagamentoDeContasMethods extends OpenFinanceMethods {
      *
      * @param {{ codBarras: string }} params
      *
-     * @returns { Promise<{
-     *  tipo: 'boleto' | 'tributo',
-     *  banco: {
-     *      codigo: number,
-     *      nome: string
-     *  } | null,
-     *  codBarras: string,
-     *  linhaDigitavel: string,
-     *  datas: {
-     *      vencimento: string,
-     *      limitePagamento: string | null,
+     * @returns { Promise<(
+     *  {
+     *      tipo: 'boleto',
+     *      banco: {
+     *          codigo: number,
+     *          nome: string
+     *      },
+     *      codBarras: string,
+     *      linhaDigitavel: string,
+     *      datas: {
+     *          vencimento: string,
+     *          limitePagamento: string
+     *      },
+     *      beneficiario: {
+     *          nome: string,
+     *          fantasia: string,
+     *          documento: string
+     *      },
+     *      pagador: {
+     *          nome: string,
+     *          documento: string
+     *      },
+     *      valores: {
+     *          original: number,
+     *          abatimento: number,
+     *          multa: number,
+     *          juros: number,
+     *          desconto: number,
+     *          final: number
+     *      },
+     *      informacoesPagamento: {
+     *          divergente: {
+     *              deveAceitar: boolean,
+     *              valorMinimo: number,
+     *              valorMaximo: number
+     *          },
+     *          parcial: {
+     *              deveAceitar: boolean,
+     *              limiteDePagamentos: number
+     *          },
+     *          podeSerPago: boolean
+     *      }
+     *  } | {
+     *      tipo: 'tributo',
+     *      banco: null,
+     *      codBarras: string,
+     *      linhaDigitavel: string,
+     *      datas: {
+     *          vencimento: string,
+     *          limitePagamento: null
+     *      },
+     *      beneficiario: null,
+     *      pagador: null,
+     *      sacadorAvalista: null | {
+     *          nome?: string,
+     *          documento?: string
+     *      },
+     *      valores: {
+     *          original: number,
+     *          abatimento: number | null,
+     *          pago: number | null,
+     *          final: number
+     *      },
+     *      informacoesPagamento: null
      *  }
-     *  beneficiario: {
-     *      nome: string,
-     *      documento: string,
-     *      fantasia: string
-     *  } | null,
-     *  pagador: {
-     *      nome: string,
-     *      documento: string,
-     *  } | null,
-     *  valores: {
-     *      original: number,
-     *      abatimento: number | null,
-     *      multa: number,
-     *      juros: number,
-     *      desconto: number,
-     *      pago: number | null,
-     *      final: number
-     *  },
-     *  informacoesPagamento: {
-     *      divergente: {
-     *          deveAceitar: boolean,
-     *          valorMinimo: number,
-     *          valorMaximo: number,
-     *      },
-     *      parcial: {
-     *          deveAceitar: boolean,
-     *          limiteDePagamentos: number,
-     *      },
-     *      podeSerPago: boolean,
-     *  } | null,
-     * > }
-     * }
+     * )> }
      */
     payDetailBarCode(params: {
         codBarras: string;
-    }): Promise<{
-        tipo: "boleto" | "tributo";
+    }): Promise<({
+        tipo: "boleto";
         banco: {
             codigo: number;
             nome: string;
-        } | null;
+        };
         codBarras: string;
         linhaDigitavel: string;
         datas: {
             vencimento: string;
-            limitePagamento: string | null;
+            limitePagamento: string;
         };
         beneficiario: {
             nome: string;
-            documento: string;
             fantasia: string;
-        } | null;
+            documento: string;
+        };
         pagador: {
             nome: string;
             documento: string;
-        } | null;
+        };
         valores: {
             original: number;
-            abatimento: number | null;
+            abatimento: number;
             multa: number;
             juros: number;
             desconto: number;
-            pago: number | null;
             final: number;
         };
         informacoesPagamento: {
@@ -100,8 +121,30 @@ export class PagamentoDeContasMethods extends OpenFinanceMethods {
                 limiteDePagamentos: number;
             };
             podeSerPago: boolean;
-        } | null;
-    }>;
+        };
+    } | {
+        tipo: "tributo";
+        banco: null;
+        codBarras: string;
+        linhaDigitavel: string;
+        datas: {
+            vencimento: string;
+            limitePagamento: null;
+        };
+        beneficiario: null;
+        pagador: null;
+        sacadorAvalista: null | {
+            nome?: string;
+            documento?: string;
+        };
+        valores: {
+            original: number;
+            abatimento: number | null;
+            pago: number | null;
+            final: number;
+        };
+        informacoesPagamento: null;
+    })>;
     /**
      * **POST /v1/codBarras/:codBarras**
      *

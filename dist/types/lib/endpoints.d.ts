@@ -2,22 +2,30 @@ export default Endpoints;
 declare class Endpoints {
     constructor(options: any, constants: any);
     options: any;
-    auth: any;
     constants: any;
-    authError: any;
+    authCache: Map<any, any>;
     axiosInstance: import("axios").AxiosInstance;
     run(name: any, params: any, body: any): Promise<any>;
-    baseUrl: any;
-    authRoute: any;
-    agent: any;
-    params: any;
-    req(endpoint: any, body: any): Promise<any>;
-    isExpired(): boolean;
-    authenticate(): Promise<any>;
-    createRequest(endpoint: any, body: any): Promise<{
+    resolveRequestContext(name: any): {
+        apiKey: string | null;
+        endpoint: any;
+        baseUrl: any;
+        authRoute: any;
+    };
+    createHttpsAgent(): any;
+    handleCertificateError(): void;
+    req(context: any, params: any, body: any): Promise<any>;
+    isExpired(auth: any): boolean;
+    getAuthentication(context: any): Promise<any>;
+    handleAuthError(authError: any): void;
+    authenticate(context: any): Promise<any>;
+    createRequest(context: any, params: {} | undefined, body: any): Promise<{
         method: any;
         url: string;
-        headers: Object;
+        headers: {
+            Authorization: string;
+            'x-skip-mtls-checking': boolean;
+        };
         data: any;
     }>;
 }

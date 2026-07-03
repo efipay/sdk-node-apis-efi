@@ -1912,4 +1912,97 @@ export class CobrancasMethods extends ExtratosMethods {
      */
     getNotification(params) { }
 
+    /**
+     * **POST /v2/charge/card**
+     * 
+     * Criar cobrança no cartão.
+     * 
+     * Para capturar uma falha utilize o `catch`; os campos disponíveis no objeto serão `title`, `status`, `detail` e `extras`.
+     * 
+     * Obs: Para Pessoa Jurídica não serão obrigatórios o nome e CPF, apenas os dados do cliente contidos em `juridical_person`.
+     * 
+     * @param { {} } params
+     * @param { {
+     *   items: Array<{
+     *     name: string,
+     *     value: number,
+     *     amount?: number,
+     *     marketplace?: {
+     *       mode?: 1 | 2,
+     *       repasses: Array<{
+     *         payee_code: string,
+     *         percentage?: number,
+     *         fixed?: number
+     *       }>
+     *     }
+     *   }>,
+     *   shippings?: Array<{
+     *     name: string,
+     *     value: number,
+     *     payee_code?: string
+     *   }>,
+     *   customer: {
+     *     name?: string,
+     *     cpf?: string,
+     *     email: string,
+     *     phone_number: string,
+     *     birth?: string,
+     *     address?: {
+     *       street: string,
+     *       number: string,
+     *       neighborhood: string,
+     *       zipcode: string,
+     *       city: string,
+     *       complement?: string | null,
+     *       state: string
+     *     },
+     *     juridical_person?: {
+     *       corporate_name: string,
+     *       cnpj: string
+     *     }
+     *   },
+     *   installments?: number,
+     *   billing_address?: {
+     *     street: string,
+     *     number: string,
+     *     neighborhood: string,
+     *     zipcode: string,
+     *     city: string,
+     *     complement?: string | null,
+     *     state: string
+     *   },
+     *   payment_token: string,
+     *   tds_info: {
+     *     tds_identifier: string,
+     *     challenge_callback_url: string
+     *   },
+     *   discount?: {
+     *     type: 'currency' | 'percentage',
+     *     value: number
+     *   },
+     *   message?: string
+     * } } body
+     * 
+     * @returns {Promise<{
+     *   charge_id: number,
+     *   status: 'approved' | 'unpaid' | 'waiting',
+     *   installments: number,
+     *   installment_value: number,
+     *   total: number,
+     *   refusal?: {
+     *     reason: string,
+     *     retry: boolean
+     *   },
+     *   tds_challenge?: {
+     *     form_data?: {
+     *       method: 'POST',
+     *       action_url: string,
+     *       creq: string,
+     *       threeDSSessionData: string
+     *     },
+     *     html_template?: string
+     *   }
+     * }>}
+     */
+    createChargeCard(params, body) {}
 }
