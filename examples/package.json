@@ -1,5 +1,0 @@
-{
-	"dependencies": {
-		"sdk-node-apis-efi": "https://github.com/efipay/sdk-node-apis-efi.git"
-	}
-}

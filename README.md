@@ -1,103 +1,145 @@
-<h1 align="center">SDK Node.js para APIs Efí Pay</h1>
+# SDK Node para APIs Efí
 
-![Banner APIs Efí Pay](https://gnetbr.com/BJgSIUhlYs)
+SDK oficial para integração com as APIs de Cobranças, Pix, Open Finance, Pagamento de Contas, Abertura de Contas e Extratos da Efí.
 
+## Requisitos
 
-> Um módulo nodejs para integrar seu backend com os serviços de pagamento da [Efí](http://sejaefi.com.br).
+- Node.js 22 ou superior.
+- Credenciais da aplicação Efí.
+- Certificado para as APIs que usam mTLS.
 
 ## Instalação
 
 ```bash
-$ npm install sdk-node-apis-efi
+npm install sdk-node-apis-efi
 ```
 
-## Uso Básico
+## Uso com TypeScript ou ESM
 
-Importe o módulo:
+```ts
+import EfiPay, {
+  type PixCreateImmediateChargeBody,
+  type SdkOptions,
+} from 'sdk-node-apis-efi';
 
-```js
-const EfiPay = require('sdk-node-apis-efi')
-// ou
-import EfiPay from 'sdk-node-apis-efi'
+const options: SdkOptions = {
+  sandbox: true,
+  client_id: 'seu-client-id',
+  client_secret: 'seu-client-secret',
+  certificate: '/caminho/para/certificado.p12',
+};
+
+const efipay = new EfiPay(options);
+
+const body: PixCreateImmediateChargeBody = {
+  calendario: { expiracao: 3600 },
+  valor: { original: '10.00' },
+  chave: 'sua-chave-pix',
+};
+
+const cobranca = await efipay.pixCreateImmediateCharge(body);
 ```
 
-Insira suas credenciais e defina se deseja usar o sandbox ou não.
-Você também pode usar o arquivo [examples/credentials.js](examples/credentials.js) de modelo.
+A classe também pode ser importada pelo nome:
+
+```ts
+import { EfiPay } from 'sdk-node-apis-efi';
+```
+
+## Uso com CommonJS
 
 ```js
-module.exports = {
-	// PRODUÇÃO = false
-	// HOMOLOGAÇÃO = true
-	sandbox: false,
-	client_id: 'seuClientId',
-	client_secret: 'seuClientSecret',
-	certificate: 'caminho/Ate/O/Certificado/Pix',
-	cert_base64: false, // Indica se o certificado está em base64 ou não
+const EfiPay = require('sdk-node-apis-efi');
+
+async function main() {
+  const efipay = new EfiPay({
+    sandbox: true,
+    client_id: 'seu-client-id',
+    client_secret: 'seu-client-secret',
+    certificate: '/caminho/para/certificado.p12',
+  });
+
+  const cobranca = await efipay.pixCreateImmediateCharge({
+    calendario: { expiracao: 3600 },
+    valor: { original: '10.00' },
+    chave: 'sua-chave-pix',
+  });
+
+  console.log(cobranca);
 }
+
+main().catch(console.error);
 ```
 
-Instancie o módulo passando as options:
+`const { EfiPay } = require('sdk-node-apis-efi')` também é suportado.
 
-```js
-const efipay = new EfiPay(options)
+## Assinaturas dos métodos
+
+As chamadas seguem uma convenção única:
+
+| Endpoint | Assinatura |
+| --- | --- |
+| Sem params | `metodo(body, headers?)` |
+| Sem body | `metodo(params, headers?)` |
+| Com params e body | `metodo(params, body, headers?)` |
+| Sem params e body | `metodo(headers?)` |
+
+Chamadas da v1 que enviam `{}` como primeiro argumento continuam disponíveis nesta versão:
+
+```ts
+await efipay.pixCreateImmediateCharge({}, body); // legado
+await efipay.pixCreateImmediateCharge(body);     // recomendado
 ```
 
-Crie uma cobrança:
+Os overloads legados estão marcados com `@deprecated` nas declarações TypeScript e serão removidos em uma futura versão major. O SDK não emite avisos em runtime.
 
-```js
-let chargeInput = {
-	items: [
-		{
-			name: 'Product A',
-			value: 1000,
-			amount: 2,
-		},
-	],
-}
+## Opções
 
-efipay.createCharge({}, chargeInput)
-	.then((resposta) => {
-		console.log(resposta)
-	})
-	.catch((error) => {
-		console.log(error)
-	})
+| Opção | Descrição |
+| --- | --- |
+| `sandbox` | Seleciona homologação (`true`) ou produção (`false`). |
+| `client_id` | Client ID da aplicação. |
+| `client_secret` | Client secret da aplicação. |
+| `certificate` | Caminho do P12/PEM ou certificado em base64. |
+| `pemKey` | Caminho ou conteúdo base64 da chave do certificado PEM. |
+| `cert_base64` | Indica que certificado e chave foram fornecidos em base64. |
+| `partner_token` | Token de parceiro, quando aplicável. |
+| `validateMtls` | Use `false` somente ao configurar webhooks sem validação mTLS. |
+| `cache` | Controla o cache de tokens OAuth; padrão `true`. |
+| `idempotencyKey` | Chave global de idempotência para Open Finance. |
+
+## Tipos e schemas
+
+Todos os tipos e schemas Zod públicos são exportados pela raiz do pacote:
+
+```ts
+import {
+  PixCreateImmediateChargeBodySchema,
+  type PixCreateImmediateChargeBody,
+} from 'sdk-node-apis-efi';
 ```
+
+Os schemas usam Zod 4. O SDK não valida requests automaticamente em runtime; aplicações podem usar os schemas exportados quando desejarem validação local.
+
+Cada método possui um tipo de resposta específico, também importável pela raiz, como `CreateChargeResponse` e `DetailCarnetResponse`.
+
+## Erros
+
+Falhas retornadas pelas APIs são rejeitadas preservando o payload de erro da Efí. Erros locais de configuração, certificado ou resolução de rota são instâncias de `Error`.
 
 ## Exemplos
 
-Para executar os exemplos, clone este repo e instale as dependências:
+O repositório contém exemplos equivalentes em TypeScript (`examples/ts`) e CommonJS (`examples/cjs`). Eles não fazem parte do tarball publicado no NPM.
+
+## Migração e mudanças
+
+Consulte [MIGRATION.md](./MIGRATION.md) para migrar da v1 e [CHANGELOG.md](./CHANGELOG.md) para o histórico da versão.
+
+## Desenvolvimento
 
 ```bash
-$ git clone git@github.com:efipay/sdk-node-apis-efi.git
-$ cd sdk-node-apis-efi/examples
-$ npm install
+npm test
+npm run test:package
 ```
 
-Defina suas credenciais em credentials.js:
-
-```js
-module.exports = {
-	// PRODUÇÃO = false
-	// HOMOLOGAÇÃO = true
-	sandbox: false,
-	client_id: 'seuClientId',
-	client_secret: 'seuClientSecret',
-	certificate: 'caminhoAteOCertificadoPix',
-	cert_base64: false, // Indica se o certificado está em base64 ou não
-}
-```
-
-Em seguida, execute o exemplo que você deseja:
-
-```bash
-$ node createCharge.js
-```
-
-## Documentação
-
-A documentação completa com todos os endpoints disponíveis você encontra em: https://dev.sejaefi.com.br/.
-
-## License
-
-[MIT](LICENSE)
+`npm test` executa build, typecheck, auditoria da API pública, testes de transporte, examples e smoke tests CJS/ESM. `npm run test:package` instala o tarball em um projeto temporário e valida CJS, ESM e TypeScript.
