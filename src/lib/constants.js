@@ -474,7 +474,7 @@ export default {
 					route: '/v2/cobr',
 					method: 'get'
 				},
-				pixRetryRequestAutomaticCharge: {
+				pixRetryRequestAutomatic: {
 					route: '/v2/cobr/:txid/retentativa/:data',
 					method: 'post'
 				},

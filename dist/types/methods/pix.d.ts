@@ -5132,7 +5132,7 @@ export class PixMethods extends CobrancasMethods {
      * }>
      * }>}
      */
-    pixRetryRequestAutomaticCharge(params: {
+    pixRetryRequestAutomatic(params: {
         txid: string;
         data: string;
     }): Promise<{

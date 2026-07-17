@@ -706,7 +706,7 @@ declare namespace _default {
                     let method_114: string;
                     export { method_114 as method };
                 }
-                export namespace pixRetryRequestAutomaticCharge {
+                export namespace pixRetryRequestAutomatic {
                     let route_115: string;
                     export { route_115 as route };
                     let method_115: string;

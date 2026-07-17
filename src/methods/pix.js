@@ -3052,7 +3052,7 @@ export class PixMethods extends CobrancasMethods {
      * }>
      * }>}
      */
-    pixRetryRequestAutomaticCharge(params) { }
+    pixRetryRequestAutomatic(params) { }
 
     /**
      * **POST /v2/locrec**

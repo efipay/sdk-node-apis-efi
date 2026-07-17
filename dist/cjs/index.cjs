@@ -7,24 +7,24 @@ var axios = require('axios');
 var QRCode = require('qrcode');
 var pixQrCodeDetail = require('pix-qr-code-detail');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+function _interopDefaultLegacy(e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 function _interopNamespace(e) {
-	if (e && e.__esModule) return e;
-	var n = Object.create(null);
-	if (e) {
-		Object.keys(e).forEach(function (k) {
-			if (k !== 'default') {
-				var d = Object.getOwnPropertyDescriptor(e, k);
-				Object.defineProperty(n, k, d.get ? d : {
-					enumerable: true,
-					get: function () { return e[k]; }
-				});
-			}
-		});
-	}
-	n["default"] = e;
-	return Object.freeze(n);
+  if (e && e.__esModule) return e;
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () { return e[k]; }
+        });
+      }
+    });
+  }
+  n["default"] = e;
+  return Object.freeze(n);
 }
 
 var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
@@ -508,7 +508,7 @@ var constants = {
           route: '/v2/cobr',
           method: 'get'
         },
-        pixRetryRequestAutomaticCharge: {
+        pixRetryRequestAutomatic: {
           route: '/v2/cobr/:txid/retentativa/:data',
           method: 'post'
         },
@@ -798,18 +798,18 @@ var main = "./dist/cjs/index.cjs";
 var module$1 = "./dist/esm/index.mjs";
 var types = "./dist/types/index.d.ts";
 var exports$1 = {
-	".": {
-		types: "./dist/types/index.d.ts",
-		"import": "./dist/esm/index.mjs",
-		require: "./dist/cjs/index.cjs",
-		"default": "./dist/esm/index.mjs"
-	},
-	"./package.json": "./package.json"
+  ".": {
+    types: "./dist/types/index.d.ts",
+    "import": "./dist/esm/index.mjs",
+    require: "./dist/cjs/index.cjs",
+    "default": "./dist/esm/index.mjs"
+  },
+  "./package.json": "./package.json"
 };
 var files = [
-	"dist/",
-	"README.md",
-	"LICENSE"
+  "dist/",
+  "README.md",
+  "LICENSE"
 ];
 var description = "Module for integration with Efi Bank API";
 var version = "1.4.0";
@@ -818,67 +818,67 @@ var license = "MIT";
 var repository = "efipay/sdk-node-apis-efi";
 var homepage = "https://github.com/efipay/sdk-node-apis-efi";
 var engines = {
-	node: ">=18"
+  node: ">=18"
 };
 var keywords = [
-	"efi",
-	"efi pay",
-	"efi bank",
-	"pagamentos",
-	"payment",
-	"sdk",
-	"integração",
-	"integration",
-	"api",
-	"bank slip",
-	"boleto bancario",
-	"credit card",
-	"cartao de credito",
-	"pix",
-	"Open Finance"
+  "efi",
+  "efi pay",
+  "efi bank",
+  "pagamentos",
+  "payment",
+  "sdk",
+  "integração",
+  "integration",
+  "api",
+  "bank slip",
+  "boleto bancario",
+  "credit card",
+  "cartao de credito",
+  "pix",
+  "Open Finance"
 ];
 var dependencies = {
-	axios: "^1.18.1",
-	"pix-qr-code-detail": "1.2.0",
-	qrcode: "^1.5.4"
+  axios: "^1.18.1",
+  "pix-qr-code-detail": "1.2.0",
+  qrcode: "^1.5.4"
 };
 var scripts = {
-	start: "node app.js",
-	build: "rollup -c && tsc --project tsconfig.json",
-	test: "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-	"test-cov": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
+  start: "node app.js",
+  build: "rollup -c && tsc --project tsconfig.json",
+  test: "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+  "test-cov": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
 };
 var devDependencies = {
-	"@babel/core": "^7.14.6",
-	"@babel/preset-env": "^7.14.5",
-	"@rollup/plugin-babel": "^5.3.0",
-	"@rollup/plugin-json": "^6.1.0",
-	"@types/node": "^18.19.0",
-	"@types/qrcode": "^1.5.6",
-	"babel-jest": "^30.4.1",
-	jest: "^30.4.2",
-	prettier: "^3.0.3",
-	rollup: "^2.52.3",
-	typescript: "^5.9.3"
+  "@babel/core": "^7.14.6",
+  "@babel/preset-env": "^7.14.5",
+  "@rollup/plugin-babel": "^5.3.0",
+  "@rollup/plugin-json": "^6.1.0",
+  "@types/node": "^18.19.0",
+  "@types/qrcode": "^1.5.6",
+  "babel-jest": "^30.4.1",
+  jest: "^30.4.2",
+  prettier: "^3.0.3",
+  rollup: "^2.52.3",
+  typescript: "^5.9.3"
 };
 var sdkPackage = {
-	name: name,
-	main: main,
-	module: module$1,
-	types: types,
-	exports: exports$1,
-	files: files,
-	description: description,
-	version: version,
-	author: author,
-	license: license,
-	repository: repository,
-	homepage: homepage,
-	engines: engines,
-	keywords: keywords,
-	dependencies: dependencies,
-	scripts: scripts,
-	devDependencies: devDependencies
+  name: name,
+  main: main,
+  module: module$1,
+  types: types,
+  exports: exports$1,
+  files: files,
+  description: description,
+  version: version,
+  author: author,
+  license: license,
+  repository: repository,
+  homepage: homepage,
+  engines: engines,
+  keywords: keywords,
+  dependencies: dependencies,
+  scripts: scripts,
+  devDependencies: devDependencies
 };
 
 // @ts-nocheck
@@ -1150,7 +1150,7 @@ class ExtratosMethods {
    *  }>
    * >}
    */
-  listStatementFiles() {}
+  listStatementFiles() { }
 
   /**
    * **GET /v1/extrato-cnab/download/:nome_arquivo**
@@ -1165,7 +1165,7 @@ class ExtratosMethods {
    * 
    * @returns { Promise<string> }
    */
-  getStatementFile(params) {}
+  getStatementFile(params) { }
 
   /**
    * **GET /v1/extrato-cnab/agendamentos**
@@ -1187,7 +1187,7 @@ class ExtratosMethods {
    * >}
    * 
    */
-  listStatementRecurrences() {}
+  listStatementRecurrences() { }
 
   /**
    * **POST /v1/extrato-cnab/agendar**
@@ -1207,7 +1207,7 @@ class ExtratosMethods {
    * 
    * @returns { Promise<void> }
    */
-  createStatementRecurrency(params, body) {}
+  createStatementRecurrency(params, body) { }
 
   /**
    * **PATCH /v1/extrato-cnab/agendar/:identificador**
@@ -1228,7 +1228,7 @@ class ExtratosMethods {
    * 
    * @returns { Promise<void> }
    */
-  updateStatementRecurrency(params, body) {}
+  updateStatementRecurrency(params, body) { }
 
   /**
    * **POST /v1/extrato-cnab/gerar-chaves**
@@ -1243,7 +1243,7 @@ class ExtratosMethods {
    *  privateKey: string
    * }>}
    */
-  createSftpKey() {}
+  createSftpKey() { }
 }
 
 // @ts-nocheck
@@ -1393,7 +1393,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createOneStepCharge(params, body) {}
+  createOneStepCharge(params, body) { }
 
   /**
    * **POST /v1/charge**
@@ -1435,7 +1435,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createCharge(params, body) {}
+  createCharge(params, body) { }
 
   /**
    * **POST /v1/charge/:id/pay**
@@ -1562,7 +1562,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  definePayMethod(params, body) {}
+  definePayMethod(params, body) { }
 
   /**
    * **GET /v1/charge/:id**
@@ -1679,7 +1679,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  detailCharge(params) {}
+  detailCharge(params) { }
 
   /**
    * **GET /v1/charges**
@@ -1764,7 +1764,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }>
    * >}
    */
-  listCharges(params) {}
+  listCharges(params) { }
 
   /**
    * **PUT /v1/charge/:id/metadata**
@@ -1786,7 +1786,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  updateChargeMetadata(params, body) {}
+  updateChargeMetadata(params, body) { }
 
   /**
    * **PUT /v1/charge/:id/billet** 
@@ -1804,7 +1804,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number,
    * }>}
    */
-  updateBillet(params, body) {}
+  updateBillet(params, body) { }
 
   /**
    * **PUT /v1/charge/:id/cancel**
@@ -1819,7 +1819,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number,
    * }>}
    */
-  cancelCharge(params) {}
+  cancelCharge(params) { }
 
   /**
    * **POST /v1/charge/:id/billet/resend**
@@ -1835,7 +1835,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number,
    * }>}
    */
-  sendBilletEmail(params, body) {}
+  sendBilletEmail(params, body) { }
 
   /**
    * **POST /v1/charge/:id/history**
@@ -1851,7 +1851,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number,
    * }>}
    */
-  createChargeHistory(params, body) {}
+  createChargeHistory(params, body) { }
 
   /**
    * **POST /v1/charge/:id/balance-sheet**
@@ -1881,7 +1881,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   code: number,
    * }>} 
    */
-  defineBalanceSheetBillet(params, body) {}
+  defineBalanceSheetBillet(params, body) { }
 
   /**
    * **PUT /v1/charge/:id/settle**
@@ -1896,7 +1896,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   code: number,
    * }>} 
    */
-  settleCharge(params) {}
+  settleCharge(params) { }
 
   /**
    * **POST /v1/charge/:id/retry**
@@ -1948,7 +1948,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  cardPaymentRetry(params, body) {}
+  cardPaymentRetry(params, body) { }
 
   /**
    * **POST /v1/charge/card/:id/refund**
@@ -1965,7 +1965,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   message: string,
    * }>}
    */
-  refundCard(params, body) {}
+  refundCard(params, body) { }
 
   /**
    * **GET /v1/installments**
@@ -1994,7 +1994,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>}
    */
-  getInstallments(params) {}
+  getInstallments(params) { }
 
   /**
    * **POST /v1/carnet**
@@ -2090,7 +2090,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createCarnet(params, body) {}
+  createCarnet(params, body) { }
 
   /**
    * **GET /v1/carnet/:id**
@@ -2146,7 +2146,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  detailCarnet(params) {}
+  detailCarnet(params) { }
 
   /**
    * **PUT /v1/carnet/:id/metadata**
@@ -2168,7 +2168,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  updateCarnetMetadata(params, body) {}
+  updateCarnetMetadata(params, body) { }
 
   /**
    * **PUT /v1/carnet/:id/parcel/:parcel**
@@ -2189,7 +2189,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  updateCarnetParcel(params, body) {}
+  updateCarnetParcel(params, body) { }
 
   /**
    * **PUT /v1/carnet/:id/parcels**
@@ -2207,7 +2207,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  updateCarnetParcels(params, body) {}
+  updateCarnetParcels(params, body) { }
 
   /**
    * **PUT /v1/carnet/:id/cancel**
@@ -2222,7 +2222,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  cancelCarnet(params) {}
+  cancelCarnet(params) { }
 
   /**
    * **PUT /v1/carnet/:id/parcel/:parcel/cancel**
@@ -2240,7 +2240,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  cancelCarnetParcel(params) {}
+  cancelCarnetParcel(params) { }
 
   /**
    * **POST /v1/carnet/:id/resend**
@@ -2256,7 +2256,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  sendCarnetEmail(params, body) {}
+  sendCarnetEmail(params, body) { }
 
   /**
    * **POST /v1/carnet/:id/parcel/:parcel/resend**
@@ -2275,7 +2275,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  sendCarnetParcelEmail(params, body) {}
+  sendCarnetParcelEmail(params, body) { }
 
   /**
    * **POST /v1/carnet/:id/history**
@@ -2293,7 +2293,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  createCarnetHistory(params, body) {}
+  createCarnetHistory(params, body) { }
 
   /**
    * **PUT /v1/carnet/:id/settle**
@@ -2308,7 +2308,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  settleCarnet(params) {}
+  settleCarnet(params) { }
 
   /**
    * **PUT /v1/carnet/:id/parcel/:parcel/settle**
@@ -2326,7 +2326,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  settleCarnetParcel(params) {}
+  settleCarnetParcel(params) { }
 
   /**
    * **POST /v1/plan**
@@ -2357,7 +2357,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>}
    */
-  createPlan(params, body) {}
+  createPlan(params, body) { }
 
   /**
    * **GET /v1/plans**
@@ -2383,7 +2383,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }>
    * }>}
    */
-  listPlans(params) {}
+  listPlans(params) { }
 
   /**
    * **PUT /v1/plan/:id**
@@ -2401,7 +2401,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>}  
    */
-  updatePlan(params, body) {}
+  updatePlan(params, body) { }
 
   /**
    * **DELETE /v1/plan/:id**
@@ -2416,7 +2416,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  deletePlan(params) {}
+  deletePlan(params) { }
 
   /**
    * **POST /v1/plan/:id/subscription/one-step**
@@ -2554,7 +2554,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createOneStepSubscription(params, body) {}
+  createOneStepSubscription(params, body) { }
 
   /**
    * **POST /v1/plan/:id/subscription**
@@ -2597,7 +2597,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createSubscription(params, body) {}
+  createSubscription(params, body) { }
 
   /**
    * **POST /v1/subscription/:id/pay**
@@ -2721,7 +2721,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  defineSubscriptionPayMethod(params, body) {}
+  defineSubscriptionPayMethod(params, body) { }
 
   /**
    * **GET /v1/subscription/:id**
@@ -2759,7 +2759,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  detailSubscription(params) {}
+  detailSubscription(params) { }
 
   /**
    * **POST /v1/plan/:id/subscription/one-step/link**
@@ -2824,7 +2824,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createOneStepSubscriptionLink(params, body) {}
+  createOneStepSubscriptionLink(params, body) { }
 
   /**
    * **PUT /v1/subscription/:id/metadata**
@@ -2844,7 +2844,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 	code: number,
    * }>} 
    */
-  updateSubscriptionMetadata(params, body) {}
+  updateSubscriptionMetadata(params, body) { }
 
   /**
    * **PUT /v1/subscription/:id**
@@ -2900,7 +2900,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  updateSubscription(params, body) {}
+  updateSubscription(params, body) { }
 
   /**
    * **PUT /v1/subscription/:id/cancel**
@@ -2915,7 +2915,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number
    * }>}
    */
-  cancelSubscription(params) {}
+  cancelSubscription(params) { }
 
   /**
    * **POST/v1/subscription/:id/history**
@@ -2933,7 +2933,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number
    * }>}
    */
-  createSubscriptionHistory(params, body) {}
+  createSubscriptionHistory(params, body) { }
 
   /**
    * **POST /v1/charge/:id/subscription/resend**
@@ -2951,7 +2951,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number
    * }>}
    */
-  sendSubscriptionLinkEmail(params, body) {}
+  sendSubscriptionLinkEmail(params, body) { }
 
   /**
    * **POST /v1/charge/one-step/link**
@@ -3019,7 +3019,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  createOneStepLink(params, body) {}
+  createOneStepLink(params, body) { }
 
   /**
    * **POST /v1/charge/:id/link**
@@ -3061,7 +3061,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  defineLinkPayMethod(params, body) {}
+  defineLinkPayMethod(params, body) { }
 
   /**
    * **PUT /v1/charge/:id/link**
@@ -3103,7 +3103,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>} 
    */
-  updateChargeLink(params, body) {}
+  updateChargeLink(params, body) { }
 
   /**
    * **POST /v1/charge/:id/link/resend**
@@ -3121,7 +3121,7 @@ class CobrancasMethods extends ExtratosMethods {
    *  code: number
    * }>}
    */
-  sendLinkEmail(params, body) {}
+  sendLinkEmail(params, body) { }
 
   /**
    * **GET /v1/notification/:token**
@@ -3155,7 +3155,7 @@ class CobrancasMethods extends ExtratosMethods {
    * 
    * 
    */
-  getNotification(params) {}
+  getNotification(params) { }
 
   /**
    * **POST /v2/charge/card**
@@ -3249,7 +3249,7 @@ class CobrancasMethods extends ExtratosMethods {
    *   }
    * }>}
    */
-  createChargeCard(params, body) {}
+  createChargeCard(params, body) { }
 }
 
 // @ts-nocheck
@@ -3312,7 +3312,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixCreateImmediateCharge(params, body) {}
+  pixCreateImmediateCharge(params, body) { }
 
   /**
    * **PUT /v2/cob/:txid**
@@ -3372,7 +3372,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixCreateCharge(params, body) {}
+  pixCreateCharge(params, body) { }
 
   /**
    * PATCH /v2/cob/:txid
@@ -3427,7 +3427,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixUpdateCharge(params, body) {}
+  pixUpdateCharge(params, body) { }
 
   /**
    * GET /v2/cob/:txid
@@ -3481,7 +3481,7 @@ class PixMethods extends CobrancasMethods {
    * }
    * >}
    */
-  pixDetailCharge(params) {}
+  pixDetailCharge(params) { }
 
   /**
    * **GET /v2/cob**
@@ -3554,7 +3554,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixListCharges(params) {}
+  pixListCharges(params) { }
 
   /**
    * **PUT /v2/cobv/:txid**
@@ -3704,7 +3704,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixCreateDueCharge(params, body) {}
+  pixCreateDueCharge(params, body) { }
 
   /**
    * **PATCH /v2/cobv/:txid**
@@ -3842,7 +3842,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixUpdateDueCharge(params, body) {}
+  pixUpdateDueCharge(params, body) { }
 
   /**
    * **GET /v2/cobv/:txid**
@@ -3918,7 +3918,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixDetailDueCharge(params) {}
+  pixDetailDueCharge(params) { }
 
   /**
    * **GET /v2/cobv**
@@ -4016,7 +4016,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixListDueCharges(params) {}
+  pixListDueCharges(params) { }
 
   /**
    * **PUT /v3/gn/pix/:idEnvio**
@@ -4058,7 +4058,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string
    * }>}
    */
-  pixSend(params, body) {}
+  pixSend(params, body) { }
 
   /**
    * **GET /v2/gn/pix/enviados/:e2eid**
@@ -4096,7 +4096,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  pixSendDetail(params) {}
+  pixSendDetail(params) { }
 
   /**
    * **GET /v2/gn/pix/enviados/id-envio/:idEnvio**
@@ -4134,7 +4134,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  pixSendDetailId(params) {}
+  pixSendDetailId(params) { }
 
   /**
    * **GET /v2/gn/pix/enviados**
@@ -4181,7 +4181,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>>}
    */
-  pixSendList(params) {}
+  pixSendList(params) { }
 
   /**
    * Detalha localmente um QR Code Pix dinâmico a partir do BR Code copia e cola.
@@ -4233,7 +4233,7 @@ class PixMethods extends CobrancasMethods {
    * | 
    * string>}
    */
-  pixQrCodeDetail(params, body) {}
+  pixQrCodeDetail(params, body) { }
 
   /**
    * **PUT /v2/gn/pix/:idEnvio/qrcode**
@@ -4261,7 +4261,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string
    * }>}
    */
-  pixQrCodePay(params, body) {}
+  pixQrCodePay(params, body) { }
 
   /**
    * **GET /v2/pix/:e2eId**
@@ -4289,7 +4289,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixDetailReceived(params) {}
+  pixDetailReceived(params) { }
 
   /**
    * **GET /v2/pix**
@@ -4340,7 +4340,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixReceivedList(params) {}
+  pixReceivedList(params) { }
 
   /**
    * **PUT /v2/pix/:e2eId/devolucao/:id**
@@ -4364,7 +4364,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string
    * }>}
    */
-  pixDevolution(params, body) {}
+  pixDevolution(params, body) { }
 
   /**
    * **GET /v2/pix/:e2eId/devolucao/:id**
@@ -4385,7 +4385,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string
    * }>}
    */
-  pixDetailDevolution(params) {}
+  pixDetailDevolution(params) { }
 
   /**
    * **POST /v2/loc**
@@ -4406,7 +4406,7 @@ class PixMethods extends CobrancasMethods {
    *   criacao: string
    * }>}
    */
-  pixCreateLocation(params, body) {}
+  pixCreateLocation(params, body) { }
 
   /**
    * **GET /v2/loc**
@@ -4440,7 +4440,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixLocationList(params) {}
+  pixLocationList(params) { }
 
   /**
    * **GET /v2/loc/:id**
@@ -4459,7 +4459,7 @@ class PixMethods extends CobrancasMethods {
    *   criacao: string
    * }>}
    */
-  pixDetailLocation(params) {}
+  pixDetailLocation(params) { }
 
   /**
    * **GET /v2/loc/:id/qrcode**
@@ -4476,7 +4476,7 @@ class PixMethods extends CobrancasMethods {
    *   linkVisualizacao: string
    * }>}
    */
-  pixGenerateQRCode(params) {}
+  pixGenerateQRCode(params) { }
 
   /**
    * **DELETE /v2/loc/:id/txid**
@@ -4494,7 +4494,7 @@ class PixMethods extends CobrancasMethods {
    *   criacao: string
    * }>}
    */
-  pixUnlinkTxidLocation(params) {}
+  pixUnlinkTxidLocation(params) { }
 
   /**
    * **PUT /v2/lotecobv/:id**
@@ -4585,7 +4585,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixCreateDueChargeBatch(params, body) {}
+  pixCreateDueChargeBatch(params, body) { }
 
   /**
    * **PATCH /v2/lotecobv/:id**
@@ -4644,7 +4644,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixUpdateDueChargeBatch(params, body) {}
+  pixUpdateDueChargeBatch(params, body) { }
 
   /**
    * **GET /v2/lotecobv/:id**
@@ -4677,7 +4677,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * 
    */
-  pixDetailDueChargeBatch(params) {}
+  pixDetailDueChargeBatch(params) { }
 
   /**
    * **GET /v2/lotecobv**
@@ -4714,7 +4714,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixListDueChargeBatch(params) {}
+  pixListDueChargeBatch(params) { }
 
   /**
    * **POST /v2/gn/split/config**
@@ -4775,7 +4775,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  pixSplitConfig(params, body) {}
+  pixSplitConfig(params, body) { }
 
   /**
    * **PUT /v2/gn/split/config/:id**
@@ -4836,7 +4836,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  pixSplitConfigId(params, body) {}
+  pixSplitConfigId(params, body) { }
 
   /**
    * **GET /v2/gn/split/config/:id**
@@ -4874,7 +4874,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  pixSplitDetailConfig(params) {}
+  pixSplitDetailConfig(params) { }
 
   /**
    * **PUT /v2/gn/split/cob/:txid/vinculo/:splitConfigId**
@@ -4887,7 +4887,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }    
    */
-  pixSplitLinkCharge(params) {}
+  pixSplitLinkCharge(params) { }
 
   /**
    * **PUT /v2/gn/split/cobv/:txid/vinculo/:splitConfigId**
@@ -4900,7 +4900,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixSplitLinkDueCharge(params) {}
+  pixSplitLinkDueCharge(params) { }
 
   /**
    * **DELETE /v2/gn/split/cob/:txid/vinculo**
@@ -4913,7 +4913,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixSplitUnlinkCharge(params) {}
+  pixSplitUnlinkCharge(params) { }
 
   /**
    * **DELETE /v2/gn/split/cobv/:txid/vinculo**
@@ -4926,7 +4926,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixSplitUnlinkDueCharge(params) {}
+  pixSplitUnlinkDueCharge(params) { }
 
   /**
    * **GET /v2/gn/split/cob/:txid**
@@ -4972,7 +4972,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  pixSplitDetailCharge(params) {}
+  pixSplitDetailCharge(params) { }
 
   /**
    * **GET /v2/gn/split/cobv/:txid**
@@ -5027,7 +5027,7 @@ class PixMethods extends CobrancasMethods {
    *   pixCopiaECola: string
    * }>}
    */
-  pixSplitDetailDueCharge(params) {}
+  pixSplitDetailDueCharge(params) { }
 
   /**
    * **PUT /v2/webhook/:chave**
@@ -5045,7 +5045,7 @@ class PixMethods extends CobrancasMethods {
    *  webhookUrl: string,
    * }> }
    */
-  pixConfigWebhook(params, body) {}
+  pixConfigWebhook(params, body) { }
 
   /**
    * **GET /v2/webhook/:chave**
@@ -5062,7 +5062,7 @@ class PixMethods extends CobrancasMethods {
    *   criacao: string
    * }>}
    */
-  pixDetailWebhook(params) {}
+  pixDetailWebhook(params) { }
 
   /**
    * **GET /v2/webhook**
@@ -5094,7 +5094,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  pixListWebhook(params) {}
+  pixListWebhook(params) { }
 
   /**
    * **DELETE /v2/webhook/:chave**
@@ -5107,7 +5107,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixDeleteWebhook(params) {}
+  pixDeleteWebhook(params) { }
 
   /**
    * **POST /v2/gn/evp**
@@ -5120,7 +5120,7 @@ class PixMethods extends CobrancasMethods {
    *   chave: string
    * }>}
    */
-  pixCreateEvp() {}
+  pixCreateEvp() { }
 
   /**
    * **GET /v2/gn/evp**
@@ -5133,7 +5133,7 @@ class PixMethods extends CobrancasMethods {
    *   chaves: string[]
    * }>}
    */
-  pixListEvp() {}
+  pixListEvp() { }
 
   /**
    * **DELETE /v2/gn/evp/:chave**
@@ -5146,7 +5146,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<void> }
    */
-  pixDeleteEvp(params) {}
+  pixDeleteEvp(params) { }
 
   /**
    * **GET /v2/gn/saldo**
@@ -5164,7 +5164,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  getAccountBalance() {}
+  getAccountBalance() { }
 
   /**
    * **PUT /v2/gn/config**
@@ -5208,7 +5208,7 @@ class PixMethods extends CobrancasMethods {
    * 
    *  @returns { Promise<void> }
    */
-  updateAccountConfig(params, body) {}
+  updateAccountConfig(params, body) { }
 
   /**
    * **GET /v2/gn/config**
@@ -5249,7 +5249,7 @@ class PixMethods extends CobrancasMethods {
    *   }
    * }>}
    */
-  listAccountConfig() {}
+  listAccountConfig() { }
 
   /**
    * **GET /v2/gn/infracoes**
@@ -5312,7 +5312,7 @@ class PixMethods extends CobrancasMethods {
    *   }>
    * }>}
    */
-  medList(params) {}
+  medList(params) { }
 
   /**
    * **POST /v2/gn/infracoes/:idInfracao/defesa**
@@ -5330,7 +5330,7 @@ class PixMethods extends CobrancasMethods {
    * @returns { Promise<void> }
    * 
    */
-  medDefense(params, body) {}
+  medDefense(params, body) { }
 
   /**
    * **POST /v2/gn/relatorios/extrato-conciliacao**
@@ -5369,7 +5369,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string,
    * }>}
    */
-  createReport(params, body) {}
+  createReport(params, body) { }
 
   /**
    * **GET /v2/gn/relatorios/:id**
@@ -5390,7 +5390,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string,
    * } | string>}
    */
-  detailReport(params) {}
+  detailReport(params) { }
 
   /**
    * **POST /v2/gn/webhook/reenviar**
@@ -5421,7 +5421,7 @@ class PixMethods extends CobrancasMethods {
    * @returns { Promise<void> }
    * 
    */
-  pixResendWebhook(params, body) {}
+  pixResendWebhook(params, body) { }
 
   /**
    * **GET /v2/gn/pix/comprovantes**
@@ -5441,7 +5441,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns { Promise<Buffer> }
    */
-  pixGetReceipt(params) {}
+  pixGetReceipt(params) { }
 
   /**
    * **GET /v2/rec/:idRec**
@@ -5512,7 +5512,7 @@ class PixMethods extends CobrancasMethods {
    * }> 
    * }
    */
-  pixDetailRecurrenceAutomatic(params) {}
+  pixDetailRecurrenceAutomatic(params) { }
 
   /**
    * ** PATCH /v2/rec/:idRec**
@@ -5598,7 +5598,7 @@ class PixMethods extends CobrancasMethods {
    * }>}> 
    * }
    */
-  pixUpdateRecurrenceAutomatic(params, body) {}
+  pixUpdateRecurrenceAutomatic(params, body) { }
 
   /**
    * **GET /v2/rec**
@@ -5687,7 +5687,7 @@ class PixMethods extends CobrancasMethods {
    * }> 
    * }>}
    */
-  pixListRecurrenceAutomatic(params) {}
+  pixListRecurrenceAutomatic(params) { }
 
   /**
    * **POST /v2/rec**
@@ -5773,7 +5773,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixCreateRecurrenceAutomatic(params, body) {}
+  pixCreateRecurrenceAutomatic(params, body) { }
 
   /**
    * **POST /v2/solicrec**
@@ -5848,7 +5848,7 @@ class PixMethods extends CobrancasMethods {
    * }
    * }>} 
    */
-  pixCreateRequestRecurrenceAutomatic(params, body) {}
+  pixCreateRequestRecurrenceAutomatic(params, body) { }
 
   /**
    * **GET /v2/solicrec/:idSolicRec**
@@ -5881,7 +5881,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixDetailRequestRecurrenceAutomatic(params) {}
+  pixDetailRequestRecurrenceAutomatic(params) { }
 
   /**
    * **PATCH /v2/solicrec/:idSolicRec**
@@ -5917,7 +5917,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixUpdateRequestRecurrenceAutomatic(params, body) {}
+  pixUpdateRequestRecurrenceAutomatic(params, body) { }
 
   /**
    * **PUT /v2/cobr/:txid**
@@ -5985,7 +5985,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>} 
    */
-  pixCreateAutomaticChargeTxid(params, body) {}
+  pixCreateAutomaticChargeTxid(params, body) { }
 
   /**
    * **PATCH /v2/cobr/:txid**
@@ -6047,7 +6047,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixUpdateAutomaticCharge(params, body) {}
+  pixUpdateAutomaticCharge(params, body) { }
 
   /**
    * **GET /v2/cobr/:txid**
@@ -6105,7 +6105,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixDetailAutomaticCharge(params) {}
+  pixDetailAutomaticCharge(params) { }
 
   /**
    * **POST /v2/cobr**
@@ -6170,7 +6170,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>} 
    */
-  pixCreateAutomaticCharge(params, body) {}
+  pixCreateAutomaticCharge(params, body) { }
 
   /**
    * **GET /v2/cobr**
@@ -6249,7 +6249,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixListAutomaticCharge(params) {}
+  pixListAutomaticCharge(params) { }
 
   /**
    * 
@@ -6303,7 +6303,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixRetryRequestAutomaticCharge(params) {}
+  pixRetryRequestAutomatic(params) { }
 
   /**
    * **POST /v2/locrec**
@@ -6319,7 +6319,7 @@ class PixMethods extends CobrancasMethods {
    *  criacao: string,
    * }>}
    */
-  pixCreateLocationRecurrenceAutomatic() {}
+  pixCreateLocationRecurrenceAutomatic() { }
 
   /**
    * **GET /v2/locrec**
@@ -6356,7 +6356,7 @@ class PixMethods extends CobrancasMethods {
    * }>
    * }>}
    */
-  pixListLocationRecurrenceAutomatic(params) {}
+  pixListLocationRecurrenceAutomatic(params) { }
 
   /**
    * **GET /v2/locrec/:id**
@@ -6376,7 +6376,7 @@ class PixMethods extends CobrancasMethods {
    *  idRec: string
    * }>}
    */
-  pixDetailLocationRecurrenceAutomatic(params) {}
+  pixDetailLocationRecurrenceAutomatic(params) { }
 
   /**
    * **DELETE /v2/locrec/:id/idRec**
@@ -6395,7 +6395,7 @@ class PixMethods extends CobrancasMethods {
    *  criacao: string,
    * }>}
    */
-  pixUnlinkLocationRecurrenceAutomatic(params) {}
+  pixUnlinkLocationRecurrenceAutomatic(params) { }
 
   /**
    * 
@@ -6412,7 +6412,7 @@ class PixMethods extends CobrancasMethods {
    * 
    * @returns {Promise<void>}
    */
-  pixConfigWebhookRecurrenceAutomatic(params, body) {}
+  pixConfigWebhookRecurrenceAutomatic(params, body) { }
 
   /**
    * **GET /v2/webhookrec**
@@ -6426,7 +6426,7 @@ class PixMethods extends CobrancasMethods {
    *  criacao: string,
    * }>}
    */
-  pixListWebhookRecurrenceAutomatic() {}
+  pixListWebhookRecurrenceAutomatic() { }
 
   /**
    * **DELETE /v2/webhookrec**
@@ -6436,7 +6436,7 @@ class PixMethods extends CobrancasMethods {
    * @returns {Promise<void>}
    * 
    */
-  pixDeleteWebhookRecurrenceAutomatic() {}
+  pixDeleteWebhookRecurrenceAutomatic() { }
 
   /**
    * **PUT /v2/webhookcobr**
@@ -6453,7 +6453,7 @@ class PixMethods extends CobrancasMethods {
    * @returns {Promise<void>}
    * 
    */
-  pixConfigWebhookAutomaticCharge(params, body) {}
+  pixConfigWebhookAutomaticCharge(params, body) { }
 
   /**
    * **GET /v2/webhookcobr**
@@ -6467,7 +6467,7 @@ class PixMethods extends CobrancasMethods {
    *  criacao: string,
    * }>}
    */
-  pixListWebhookAutomaticCharge() {}
+  pixListWebhookAutomaticCharge() { }
 
   /**
    * **DELETE /v2/webhookcobr**
@@ -6479,7 +6479,7 @@ class PixMethods extends CobrancasMethods {
    * @returns {Promise<void>}
    * 
    */
-  pixDeleteWebhookAutomaticCharge() {}
+  pixDeleteWebhookAutomaticCharge() { }
 
   /**
    * **PUT /v2/gn/split/pix/:e2eid/devolucao/:id**
@@ -6503,7 +6503,7 @@ class PixMethods extends CobrancasMethods {
    *   status: string
    * }>}
    */
-  pixSplitDevolution(params, body) {}
+  pixSplitDevolution(params, body) { }
 
   /**
   * **PUT /v2/gn/pix/:idEnvio/mesma-titularidade**
@@ -6545,7 +6545,7 @@ class PixMethods extends CobrancasMethods {
   *   status: string
   * }>}
   */
-  pixSendSameOwnership(params, body) {}
+  pixSendSameOwnership(params, body) { }
 
   /**
   * **GET /v2/gn/chaves/balde**
@@ -6569,7 +6569,7 @@ class PixMethods extends CobrancasMethods {
   *   }
   * }>}
   */
-  pixKeysBucket() {}
+  pixKeysBucket() { }
 }
 
 // @ts-nocheck
@@ -6589,7 +6589,7 @@ class OpenFinanceMethods extends PixMethods {
    *  },
    * }> }
    */
-  ofConfigDetail() {}
+  ofConfigDetail() { }
 
   /**
    * **PUT /v1/config**
@@ -6622,7 +6622,7 @@ class OpenFinanceMethods extends PixMethods {
    *  }
    * }> }
    */
-  ofConfigUpdate(params, body) {}
+  ofConfigUpdate(params, body) { }
 
   /**
    * **GET /v1/participantes**
@@ -6653,7 +6653,7 @@ class OpenFinanceMethods extends PixMethods {
    *  }>
    * >} }
    */
-  ofListParticipants(params) {}
+  ofListParticipants(params) { }
 
   /**
    * **GET /v1/pagamentos/pix**
@@ -6694,7 +6694,7 @@ class OpenFinanceMethods extends PixMethods {
    *  atual: string
    * }>}
    */
-  ofListPixPayment(params) {}
+  ofListPixPayment(params) { }
 
   /**
    * **POST /v1/pagamentos/pix**
@@ -6736,7 +6736,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string,
    * }> }
    */
-  ofStartPixPayment(params, body) {}
+  ofStartPixPayment(params, body) { }
 
   /**
    * **POST /v1/pagamentos/pix/:identificadorPagamento/devolver**
@@ -6760,7 +6760,7 @@ class OpenFinanceMethods extends PixMethods {
    *  status: string,
    * }>}
    */
-  ofDevolutionPix(params, body) {}
+  ofDevolutionPix(params, body) { }
 
   /**
    * **POST /v1/pagamentos-agendados/pix**
@@ -6803,7 +6803,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string,
    *  }>}
    */
-  ofStartSchedulePixPayment(params, body) {}
+  ofStartSchedulePixPayment(params, body) { }
 
   /**
    * **GET /v1/pagamentos-agendados/pix**
@@ -6845,7 +6845,7 @@ class OpenFinanceMethods extends PixMethods {
    *  atual: string
    * }>}
    */
-  ofListSchedulePixPayment(params) {}
+  ofListSchedulePixPayment(params) { }
 
   /**
    * **PATCH /v1/pagamentos-agendados/pix/:identificadorPagamento/cancelar**
@@ -6864,7 +6864,7 @@ class OpenFinanceMethods extends PixMethods {
    *  dataCancelamento: string,
    * }> }
    */
-  ofCancelSchedulePix(params) {}
+  ofCancelSchedulePix(params) { }
 
   /**
    * **POST /v1/pagamentos-agendados/pix/:identificadorPagamento/devolver**
@@ -6884,7 +6884,7 @@ class OpenFinanceMethods extends PixMethods {
    *  status: string,
    * }>}
    */
-  ofDevolutionSchedulePix(params, body) {}
+  ofDevolutionSchedulePix(params, body) { }
 
   /**
    * **POST /v1/pagamentos-recorrentes/pix**
@@ -6942,7 +6942,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string,
    *  }>}
    */
-  ofStartRecurrencyPixPayment(params, body) {}
+  ofStartRecurrencyPixPayment(params, body) { }
 
   /**
    * **GET /v1/pagamentos-recorrentes/pix**
@@ -6987,7 +6987,7 @@ class OpenFinanceMethods extends PixMethods {
    *  atual: string
    * }>}
    */
-  ofListRecurrencyPixPayment(params) {}
+  ofListRecurrencyPixPayment(params) { }
 
   /**
    * **PATCH /v1/pagamentos-recorrentes/pix/:identificadorPagamento/cancelar**
@@ -7006,7 +7006,7 @@ class OpenFinanceMethods extends PixMethods {
    *  dataCancelamento: string,
    * }> }
    */
-  ofCancelRecurrencyPix(params) {}
+  ofCancelRecurrencyPix(params) { }
 
   /**
    * **POST /v1/pagamentos-recorrentes/pix/:identificadorPagamento/devolver**
@@ -7031,7 +7031,7 @@ class OpenFinanceMethods extends PixMethods {
    *  status: string,
    * }>>}
    */
-  ofDevolutionRecurrencyPix(params, body) {}
+  ofDevolutionRecurrencyPix(params, body) { }
 
   /**
    * **PATCH /v1/pagamentos-recorrentes/pix/:identificadorPagamento/substituir/:endToEndId**
@@ -7053,7 +7053,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string,
    * }>}
    */
-  ofReplaceRecurrencyPixParcel(params, body) {}
+  ofReplaceRecurrencyPixParcel(params, body) { }
 
   /**
    * **POST /v1/pagamentos-biometria/vinculos**
@@ -7077,7 +7077,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string,
    * }>}
    */
-  ofCreateBiometricEnrollment(params, body) {}
+  ofCreateBiometricEnrollment(params, body) { }
 
   /**
    * **GET /v1/pagamentos-biometria/vinculos**
@@ -7114,7 +7114,7 @@ class OpenFinanceMethods extends PixMethods {
    *  }>
    * }>} 
    */
-  ofListBiometricEnrollment(params, body) {}
+  ofListBiometricEnrollment(params, body) { }
 
   /**
    * **POST /v1/pagamentos-biometria/pix**
@@ -7152,7 +7152,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string,
    * }>}
    */
-  ofCreateBiometricPixPayment(params, body) {}
+  ofCreateBiometricPixPayment(params, body) { }
 
   /**
    * **GET /v1/pagamentos-biometria/pix**
@@ -7186,7 +7186,7 @@ class OpenFinanceMethods extends PixMethods {
    *  }>
    * }>} 
    */
-  ofListBiometricPixPayment(params, body) {}
+  ofListBiometricPixPayment(params, body) { }
 
   /**
    * **PATCH /v1/pagamentos-biometria/vinculos**
@@ -7210,7 +7210,7 @@ class OpenFinanceMethods extends PixMethods {
    *  data: string
    * }>}
    */
-  ofRevokeBiometricEnrollment(params, body) {}
+  ofRevokeBiometricEnrollment(params, body) { }
 
   /**
    * **POST /v1/pagamentos-automaticos/adesao**
@@ -7264,7 +7264,7 @@ class OpenFinanceMethods extends PixMethods {
    *  redirectURI: string
    * }>}
    */
-  ofCreateAutomaticEnrollment(params, body) {}
+  ofCreateAutomaticEnrollment(params, body) { }
 
   /**
    * **GET /v1/pagamentos-automaticos/adesao**
@@ -7326,7 +7326,7 @@ class OpenFinanceMethods extends PixMethods {
    *  atual: string
    * }>}
    */
-  ofListAutomaticEnrollment(params) {}
+  ofListAutomaticEnrollment(params) { }
 
   /**
    * **PATCH /v1/pagamentos-automaticos/adesao**
@@ -7383,7 +7383,7 @@ class OpenFinanceMethods extends PixMethods {
    *  }
    * }>}
    */
-  ofUpdateAutomaticEnrollment(params, body) {}
+  ofUpdateAutomaticEnrollment(params, body) { }
 
   /**
    * **POST /v1/pagamentos-automaticos/pix**
@@ -7412,7 +7412,7 @@ class OpenFinanceMethods extends PixMethods {
    *  data: string
    * }>}
    */
-  ofCreateAutomaticPixPayment(params, body) {}
+  ofCreateAutomaticPixPayment(params, body) { }
 
   /**
    * **GET /v1/pagamentos-automaticos/pix**
@@ -7446,7 +7446,7 @@ class OpenFinanceMethods extends PixMethods {
    *  }>
    * }>}
    */
-  ofListAutomaticPixPayment(params) {}
+  ofListAutomaticPixPayment(params) { }
 
   /**
    * **PATCH /v1/pagamentos-automaticos/pix**
@@ -7471,7 +7471,7 @@ class OpenFinanceMethods extends PixMethods {
    *  dataCriacao: string
    * }>}
    */
-  ofCancelAutomaticPixPayment(params, body) {}
+  ofCancelAutomaticPixPayment(params, body) { }
 }
 
 // @ts-nocheck
@@ -7556,7 +7556,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    *  }
    * )> }
    */
-  payDetailBarCode(params) {}
+  payDetailBarCode(params) { }
 
   /**
    * **POST /v1/codBarras/:codBarras**
@@ -7586,7 +7586,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    *  }
    * }> }
    */
-  payRequestBarCode(params, body) {}
+  payRequestBarCode(params, body) { }
 
   /**
    * **GET /v1/:idPagamento**
@@ -7616,7 +7616,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    *  }
    * }> }
    */
-  payDetailPayment(params) {}
+  payDetailPayment(params) { }
 
   /**
    * **GET /v1/resumo**
@@ -7645,7 +7645,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    *  solicitacoesFalhas: Array<number>,
    * }> }
    */
-  payListPayments(params) {}
+  payListPayments(params) { }
 
   /**
    * **PUT /v1/webhook**
@@ -7661,7 +7661,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    *  url: string
    * }> }
    */
-  payConfigWebhook(params, body) {}
+  payConfigWebhook(params, body) { }
 
   /**
    * **GET /v1/webhook**
@@ -7692,7 +7692,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    *  }> 
    * }}
    */
-  payListWebhook(params) {}
+  payListWebhook(params) { }
 
   /**
    * **DELETE /v1/webhook**
@@ -7706,7 +7706,7 @@ class PagamentoDeContasMethods extends OpenFinanceMethods {
    * 
    * @returns { Promise<void> }
    */
-  payDeleteWebhook(params, body) {}
+  payDeleteWebhook(params, body) { }
 }
 
 // @ts-nocheck
@@ -7751,7 +7751,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    *   status: string
    * }>}
    */
-  createAccount(params, body) {}
+  createAccount(params, body) { }
 
   /**
    * **GET /v1/conta-simplificada/:idContaSimplificada/credenciais**
@@ -7773,7 +7773,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    *   ativo: boolean
    * }>}
    */
-  getAccountCredentials(params) {}
+  getAccountCredentials(params) { }
 
   /**
    * **POST /v1/conta-simplificada/:idContaSimplificada/certificado**
@@ -7788,7 +7788,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    *   certificado: string
    * }>}
    */
-  createAccountCertificate(params) {}
+  createAccountCertificate(params) { }
 
   /**
    * **POST /v1/webhook**
@@ -7808,7 +7808,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    *   identificadorWebhook: string
    * }>}
    */
-  accountConfigWebhook(params, body) {}
+  accountConfigWebhook(params, body) { }
 
   /**
    * **GET /v1/webhook/:identificadorWebhook**
@@ -7825,7 +7825,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    *   criacao: string
    * }>}
    */
-  accountDetailWebhook(params) {}
+  accountDetailWebhook(params) { }
 
   /**
    * **GET /v1/webhooks**
@@ -7857,7 +7857,7 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    *   }>
    * }>}
    */
-  accountListWebhook(params) {}
+  accountListWebhook(params) { }
 
   /**
    * **DELETE /v1/webhook/:identificadorWebhook**
@@ -7870,10 +7870,10 @@ class OpenAccountMethods extends PagamentoDeContasMethods {
    * 
    * @returns {Promise<void>}
    */
-  accountDeleteWebhook(params) {}
+  accountDeleteWebhook(params) { }
 }
 
-class AllMethods extends OpenAccountMethods {}
+class AllMethods extends OpenAccountMethods { }
 
 /**
  * Gerador de QR Code PIX Estático em Node.js
