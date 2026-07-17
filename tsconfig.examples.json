@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "sdk-node-apis-efi": ["./src/index.ts"]
+    }
+  },
+  "include": ["examples/ts/**/*.ts"]
+}

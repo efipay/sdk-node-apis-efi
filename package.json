@@ -1,70 +1,93 @@
 {
-	"name": "sdk-node-apis-efi",
-	"main": "./dist/cjs/index.cjs",
-	"module": "./dist/esm/index.mjs",
-	"types": "./dist/types/index.d.ts",
-	"exports": {
-		".": {
-			"types": "./dist/types/index.d.ts",
-			"import": "./dist/esm/index.mjs",
-			"require": "./dist/cjs/index.cjs",
-			"default": "./dist/esm/index.mjs"
-		},
-		"./package.json": "./package.json"
-	},
-	"files": [
-		"dist/",
-		"README.md",
-		"LICENSE"
-	],
-	"description": "Module for integration with Efi Bank API",
-	"version": "1.4.0",
-	"author": "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas",
-	"license": "MIT",
-	"repository": "efipay/sdk-node-apis-efi",
-	"homepage": "https://github.com/efipay/sdk-node-apis-efi",
-	"engines": {
-		"node": ">=18"
-	},
-	"keywords": [
-		"efi",
-		"efi pay",
-		"efi bank",
-		"pagamentos",
-		"payment",
-		"sdk",
-		"integração",
-		"integration",
-		"api",
-		"bank slip",
-		"boleto bancario",
-		"credit card",
-		"cartao de credito",
-		"pix",
-		"Open Finance"
-	],
-	"dependencies": {
-		"axios": "^1.18.1",
-		"pix-qr-code-detail": "1.2.0",
-		"qrcode": "^1.5.4"
-	},
-	"scripts": {
-		"start": "node app.js",
-		"build": "rollup -c && tsc --project tsconfig.json",
-		"test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-		"test-cov": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.14.6",
-		"@babel/preset-env": "^7.14.5",
-		"@rollup/plugin-babel": "^5.3.0",
-		"@rollup/plugin-json": "^6.1.0",
-		"@types/node": "^18.19.0",
-		"@types/qrcode": "^1.5.6",
-		"babel-jest": "^30.4.1",
-		"jest": "^30.4.2",
-		"prettier": "^3.0.3",
-		"rollup": "^2.52.3",
-		"typescript": "^5.9.3"
-	}
+    "name": "sdk-node-apis-efi",
+    "version": "2.0.0",
+    "description": "Module for integration with Efi Bank API",
+    "type": "module",
+    "main": "./dist/cjs/index.cjs",
+    "module": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/esm/index.js",
+            "require": "./dist/cjs/index.cjs",
+            "default": "./dist/esm/index.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist/",
+        "README.md",
+        "CHANGELOG.md",
+        "MIGRATION.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "node scripts/clean.mjs && node scripts/generate-version.mjs && npm run build:esm && npm run build:cjs && npm run build:types && node scripts/postbuild.mjs",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:types": "tsc -p tsconfig.types.json",
+        "test": "npm run build && npm run test:types-audit && npm run test:typecheck && npm run test:transport && npm run test:requests && npm run test:local && npm run test:examples && npm run test:smoke",
+        "test:typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+        "test:transport": "node tests/transport.mjs",
+        "test:requests": "node tests/request-contracts.mjs",
+        "test:local": "node tests/pix-local.mjs",
+        "test:smoke": "node tests/smoke-esm.mjs && node tests/smoke-cjs.cjs",
+        "test:package": "npm run build && node scripts/test-package.mjs",
+        "prepack": "npm run build",
+        "prepublishOnly": "npm test && npm audit --omit=dev && npm run test:package",
+        "generate:examples": "node scripts/generate-examples.mjs",
+        "test:types-audit": "node tests/wrapper-types-audit.cjs && node tests/endpoints-audit.cjs",
+        "test:ts": "npm run build && npm run test:types-audit && npm run test:typecheck",
+        "test:esm": "npm run build && node tests/smoke-esm.mjs",
+        "test:cjs": "npm run build && node tests/smoke-cjs.cjs",
+        "test:examples": "node tests/examples-coverage.cjs && npx tsc --noEmit -p tsconfig.examples.json && node tests/examples-cjs-check.cjs",
+        "test:both": "npm run test:ts && npm run test:esm && npm run test:cjs"
+    },
+    "keywords": [
+        "efi",
+        "efi pay",
+        "efi bank",
+        "pagamentos",
+        "payment",
+        "sdk",
+        "integração",
+        "integration",
+        "api",
+        "bank slip",
+        "boleto bancario",
+        "credit card",
+        "cartao de credito",
+        "pix",
+        "Open Finance"
+    ],
+    "author": "Efi Bank - Consultoria Técnica | João Vitor Oliveira | João Lucas",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/efipay/sdk-node-apis-efi.git"
+    },
+    "bugs": {
+        "url": "https://github.com/efipay/sdk-node-apis-efi/issues"
+    },
+    "homepage": "https://github.com/efipay/sdk-node-apis-efi#readme",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "engines": {
+        "node": ">=22"
+    },
+    "sideEffects": false,
+    "dependencies": {
+        "@types/node": "^22.20.1",
+        "axios": "^1.18.1",
+        "pix-qr-code-detail": "1.2.0",
+        "qrcode": "^1.5.4",
+        "zod": "4.4.3"
+    },
+    "devDependencies": {
+        "@types/qrcode": "^1.5.6",
+        "typescript": "^5.9.3"
+    }
 }
