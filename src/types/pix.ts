@@ -2406,7 +2406,11 @@ export const CreateReportBodySchema = z.object({
 		tarifaTransferenciaEnviada: z.boolean().optional(),
 		estornoTarifaTransferenciaEnviada: z.boolean().optional(),
 		estornoTarifaPixRecebido: z.boolean().optional(),
-	}).strict()
+	}).strict(),
+	dadosAdicionais: z.object({
+		pixRecebido: z.array(z.literal("nome")),
+		pixEnviadoChave: z.array(z.enum(["nome", "documento"])).min(1).max(2),
+	}).strict().optional()
 }).strict()
 
 export type CreateReportBody = z.infer<typeof CreateReportBodySchema>
