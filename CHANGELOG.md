@@ -2,6 +2,12 @@
 
 Todas as mudanças relevantes deste projeto serão registradas neste arquivo.
 
+## [2.0.1] - 2026-07-31
+
+### Corrigido
+
+- O campo `recebedor` da resposta de `pixQrCodeDetail` agora é opcional, acompanhando o contrato retornado pelo Pix Copia e Cola.
+
 ## [2.0.0] - 2026-07-15
 
 ### Adicionado

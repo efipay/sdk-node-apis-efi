@@ -1438,7 +1438,7 @@ const PixQrCodeDetailCommonShape = {
 				cpf: z.string(),
 			})
 			.loose(),
-	]),
+	]).optional(),
 	chave: z.string(),
 	solicitacaoPagador: z.string().optional(),
 	infoAdicionais: z.array(PixInfoAdicionalSchema).optional(),
