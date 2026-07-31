@@ -1,6 +1,6 @@
 {
     "name": "sdk-node-apis-efi",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Module for integration with Efi Bank API",
     "type": "module",
     "main": "./dist/cjs/index.cjs",
